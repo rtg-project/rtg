@@ -20,7 +20,7 @@
       "subcommand": "check",
       "problemMatcher": ["$rustc"],
       "group": "build",
-      "label": "Rust: cargo check - graph-rs"
+      "label": "Rust: cargo check - wasm"
     }
   ]
 }

@@ -124,10 +124,6 @@ const config = {
   },
   i18n: [
     { locale: "en-US", text: "English" },
-    // { locale: "es-ES", text: "Español" },
-    // { locale: "zh-CN", text: "简体中文" },
-    // { locale: "ja", text: "日本語" },
-    // { locale: "ko", text: "한국어" },
   ],
 };
 
