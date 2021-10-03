@@ -1198,6 +1198,7 @@ dependencies = [
  "scooby",
  "serde",
  "serde_json",
+ "thiserror",
 ]
 
 [[package]]

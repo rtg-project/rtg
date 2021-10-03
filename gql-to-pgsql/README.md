@@ -1,6 +1,15 @@
 # rtg Gql to Pgsql
 
-This module translates GraphQL queries and rtg indexed config to Postgres sql queries
+Given a rtg model cache, this module translates GraphQL queries to Postgres sql queries.
+
+
+## Contribute
+
+To run in TDD mode:
+
+```bash
+cargo watch -x test
+```
 
 ## Example
 
