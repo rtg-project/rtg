@@ -1,0 +1,13 @@
+{
+  "name": "@rtg-project/monorepo",
+  "version": "1.0.0",
+  "description": "Relational (SQL) to Graph (GraphQL) tranformation tool. Fast.",
+  "main": "index.js",
+  "repository": "https://github.com/rtg-project/rtg.git",
+  "author": "Vincent Lecrubier <vincent.lecrubier@gmail.com>",
+  "license": "Apache2",
+  "private": true,
+  "workspaces": [
+    "website"
+  ]
+}

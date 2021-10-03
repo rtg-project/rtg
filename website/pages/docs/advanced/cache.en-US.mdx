@@ -1,0 +1,199 @@
+import Callout from 'nextra-theme-docs/callout'
+
+# Cache
+
+<Callout>
+  Upgrade to the latest version (≥ 1.0.0) to use this feature.
+</Callout>
+
+<Callout emoji="⚠️">
+  In most cases, you shouldn't directly _write_ to the cache, which might cause undefined behaviors of rtg. If you need to manually mutate a key, please consider using the rtg APIs.<br/>
+  See also: [Mutation](/docs/mutation), [Reset Cache Between Test Cases](#reset-cache-between-test-cases).
+</Callout>
+
+By default, rtg uses a global cache to store and share data across all components. But you can also customize this behavior with the `provider` option of `rtgConfig`.
+
+Cache providers are intended to enable rtg with more customized storages.
+
+## Cache Provider
+
+A cache provider is Map-like object which matches the following TypeScript definition (which can be imported from `rtg`):
+
+```typescript
+interface Cache<Data> {
+  get(key: string): Data | undefined
+  set(key: string, value: Data): void
+  delete(key: string): void
+}
+```
+
+For example, a [JavaScript Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) instance can be directly used as the cache provider for rtg.
+
+## Create Cache Provider
+
+The `provider` option of `rtgConfig` receives a function that returns a [cache provider](#cache-provider). The provider will then be used by all rtg hooks inside that `rtgConfig` boundary. For example:
+
+```jsx
+import usertg, { rtgConfig } from 'rtg'
+
+function App() {
+  return (
+    <rtgConfig value={{ provider: () => new Map() }}>
+      <Page/>
+    </rtgConfig>
+  )
+}
+```
+
+All rtg hooks inside `<Page/>` will read and write from that Map instance. You can also use other cache provider implementations as well for your specific use case.
+
+<Callout>
+  In the example above, when the `<App/>` component is re-mounted, the provider will also be re-created. Cache providers should be put higher in the component tree, or outside of render.
+</Callout>
+
+import { Cache } from 'components/diagrams/cache'
+
+<div className="my-8">
+  <Cache/>
+</div>
+
+When nested, rtg hooks will use the upper-level cache provider. If there is no upper-level cache provider, it fallbacks to the default cache provider, which is an empty `Map`.
+
+<Callout emoji="⚠️">
+   If a cache provider is used, the global `mutate` will **not** work for rtg hooks under that `<rtgConfig>` boundary. Please use [this](#access-current-cache-provider) instead. 
+</Callout>
+
+## Access Current Cache Provider
+
+When inside a React component, you need to use the [`usertgConfig`](/docs/global-configuration#access-to-global-configurations) hook to get access to the current cache provider as well as other configurations including `mutate`:
+
+```jsx
+import { usertgConfig } from 'rtg'
+
+function Avatar() {
+  const { cache, mutate, ...extraConfig } = usertgConfig()
+  // ...
+}
+```
+
+If it's not under any `<rtgConfig>`, it will return the default configurations.
+
+## Experimental: Extend Cache Provider
+
+<Callout emoji="🧪">
+   This is an experimental feature, the behavior might change in future upgrades.
+</Callout>
+
+When multiple `<rtgConfig>` components are nested, cache provider can be extended.
+
+The first argument for the `provider` function is the cache provider of the upper-level `<rtgConfig>` (or the default cache if there's no parent `<rtgConfig>`), you can use it to extend the cache provider:
+
+```jsx
+<rtgConfig value={{ provider: (cache) => newCache }}>
+  ...
+</rtgConfig>
+```
+
+## Examples
+
+### Mutate Multiple Keys from RegEx
+
+With the flexibility of the cache provider API, you can even build a "partial mutation" helper.
+
+In the example below, `matchMutate` can receive a regex expression as key, and be used to mutate the ones who matched this pattern.
+
+```js
+function useMatchMutate() {
+  const { cache, mutate } = usertgConfig()
+  return (matcher, ...args) => {
+    if (!(cache instanceof Map)) {
+      throw new Error('matchMutate requires the cache provider to be a Map instance')
+    }
+
+    const keys = []
+
+    for (const key of cache.keys()) {
+      if (matcher.test(key)) {
+        keys.push(key)
+      }
+    }
+
+    const mutations = keys.map((key) => mutate(key, ...args))
+    return Promise.all(mutations)
+  }
+}
+```
+
+Then inside your component:
+
+```jsx
+function Button() {
+  const matchMutate = useMatchMutate()
+  return <button onClick={() => matchMutate(/^\/api\//)}>
+    Revalidate all keys start with "/api/"
+  </button>
+}
+```
+
+<Callout>
+  Note that this example requires the cache provider to be a Map instance.
+</Callout>
+
+### LocalStorage Based Persistent Cache
+
+You might want to sync your cache to `localStorage`. Here's an example implementation:
+
+```jsx
+function localStorageProvider() {
+  // When initializing, we restore the data from `localStorage` into a map.
+  const map = new Map(JSON.parse(localStorage.getItem('app-cache') || '[]'))
+
+  // Before unloading the app, we write back all the data into `localStorage`.
+  window.addEventListener('beforeunload', () => {
+    const appCache = JSON.stringify(Array.from(map.entries()))
+    localStorage.setItem('app-cache', appCache)
+  })
+
+  // We still use the map for write & read for performance.
+  return map
+}
+```
+
+Then use it as a provider:
+
+```jsx
+<rtgConfig value={{ provider: localStorageProvider }}>
+  <App/>
+</rtgConfig>
+```
+
+<Callout>
+  As an improvement, you can also use the memory cache as a buffer, and write to `localStorage` periodically. You can also implement a similar layered cache with IndexedDB or WebSQL.
+</Callout>
+
+### Reset Cache Between Test Cases
+
+When testing your application, you might want to reset the rtg cache between test cases. You can simply wrap you application with an empty cache provider. Here's an example with Jest:
+
+```jsx
+describe('test suite', async () => {
+  it('test case', async () => {
+    render(
+      <rtgConfig value={{ provider: () => new Map() }}>
+        <App/>
+      </rtgConfig>
+    )
+  })
+})
+```
+
+### Access to the Cache
+
+Alert: you should not write to the cache directly, it might cause undefined behavior.
+
+```jsx
+const { cache } = usertgConfig()
+
+cache.get(key) // Get the current data for a key.
+cache.clear()  // ⚠️ Clear all the cache. rtg will revalidate upon re-render.
+```
