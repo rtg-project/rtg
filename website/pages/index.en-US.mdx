@@ -1,9 +1,8 @@
 ---
-title: React Hooks for Data Fetching
+title: Relational to Graph transformation tool. Fast.
 ---
 
 import Callout from 'nextra-theme-docs/callout'
-import Features from 'components/features'
 import Bleed from 'nextra-theme-docs/bleed'
 
 <style jsx global>{`
@@ -22,17 +21,11 @@ body {
 {
 // wrapped with {} to mark it as javascript so mdx will not put it under a p tag
 }
-{<h1 className="text-center font-extrabold md:text-5xl mt-8">rtg</h1>}
+{<h1 className="text-center font-extrabold md:text-5xl mt-8">RTG</h1>}
 
-<Bleed full><Features/></Bleed>
+The name "rtg" is derived from `relational to graph`, since its main focus is to provide a bridge between relational databases (SQL) and graph API (GraphQL).
 
-The name “rtg” is derived from `stale-while-revalidate`, a HTTP cache invalidation strategy popularized by [HTTP RFC 5861](https://tools.ietf.org/html/rfc5861).
-rtg is a strategy to first return the data from cache (stale), then send the fetch request (revalidate), and finally come with the up-to-date data.
-
-<Callout emoji="✅">
-  With rtg, components will get a stream of data updates <strong>constantly</strong> and <strong>automatically</strong>.<br/>
-  And the UI will be always <strong>fast</strong> and <strong>reactive</strong>.
-</Callout>
+Rtg acts translate GraphQL requests to SQL queries.
 
 <div className="mt-16 mb-20 text-center">
   [Get Started](/docs/getting-started) · [Examples](/examples) · [Blog](/blog) · [GitHub Repository](https://github.com/rtg-project/rtg)
@@ -41,57 +34,37 @@ rtg is a strategy to first return the data from cache (stale), then send the fet
 ## Overview
 
 ```jsx
-import usertg from 'rtg'
+import { query } from '@rtg-project/client'
 
-function Profile() {
-  const { data, error } = usertg('/api/user', fetcher)
-
-  if (error) return <div>failed to load</div>
-  if (!data) return <div>loading...</div>
-  return <div>hello {data.name}!</div>
+export async function getServerSideProps() {
+  return {
+    props: {
+      users: await query(gql`{ users { id } }`)
+    }
+  }
 }
 ```
-
-In this example, the `usertg` hook accepts a `key` string and a `fetcher` function. `key` is a unique identifier of the data (normally the API URL)
-and will be passed to `fetcher`. `fetcher` can be any asynchronous function which returns the data, you can use the native fetch or tools like Axios.
-
-The hook returns 2 values: `data` and `error`, based on the status of the request.
 
 ## Features
 
 With just one single line of code, you can simplify the logic of data fetching in your project, and also have all these amazing features out-of-the-box:
 
-- **Fast**, **lightweight** and **reusable** data fetching
-- Built-in **cache** and request deduplication
-- **Real-time** experience
-- Transport and protocol agnostic
-- SSR / ISR / SSG support
+- **Fast**, **lightweight** and **reusable** queries
 - TypeScript ready
+- Rust ready
 - React Native
-
-rtg has you covered in all aspects of speed, correctness, and stability to help you build better experiences:
-
-- Fast page navigation
-- Polling on interval
-- Data dependency
-- Revalidation on focus
-- Revalidation on network recovery
-- Local mutation (Optimistic UI)
-- Smart error retry
-- Pagination and scroll position recovery
-- React Suspense
 
 And lot [more](/docs/getting-started).
 
 ## Community
 
 <p className="flex h-6">
-  <img alt="stars" src="https://badgen.net/github/stars/vercel/rtg" className="inline-block mr-2"/>
-  <img alt="downloads" src="https://badgen.net/npm/dt/rtg" className="inline-block mr-2"/>
-  <img alt="license" src="https://badgen.net/npm/license/rtg" className="inline-block mr-2"/>
+  <img alt="stars" src="https://badgen.net/github/stars/rtg-project/rtg" className="inline-block mr-2"/>
+  <img alt="downloads" src="https://badgen.net/npm/dt/@rtg-project/core" className="inline-block mr-2"/>
+  <img alt="license" src="https://badgen.net/npm/license/@rtg-project/core" className="inline-block mr-2"/>
 </p>
 
-rtg is created by the same team behind [Next.js](https://nextjs.org), the React framework.  
-Follow [@vercel](https://twitter.com/vercel) on Twitter for future project updates.
+rtg is created by [crubier](https://github.com/crubier)
+Follow [@VLecrubier](https://twitter.com/VLecrubier) on Twitter for future project updates.
 
 Feel free to join the [discussions on GitHub](https://github.com/rtg-project/rtg/discussions)!
