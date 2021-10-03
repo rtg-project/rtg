@@ -1,0 +1,28 @@
+[package]
+edition = "2018"
+license = "Apache-2.0/MIT"
+name = "rtg"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rtg_gql_to_pgsql = {version = "0.1.0", path = "./gql-to-pgsql"}
+rtg_model = {version = "0.1.0", path = "./model"}
+rtg_model_cache = {version = "0.1.0", path = "./model-cache"}
+rtg_server = {version = "0.1.0", path = "./server"}
+rtg_wasm = {version = "0.1.0", path = "./wasm"}
+
+[dev-dependencies]
+# cargo-insta = {version = "1.8.0"}
+# cargo-watch = {version = "8.1.1"}
+# wasm-pack = {version = "0.10.1"}
+
+[workspace]
+members = [
+  "gql-to-pgsql",
+  "server",
+  "model",
+  "model-cache",
+  "wasm",
+]

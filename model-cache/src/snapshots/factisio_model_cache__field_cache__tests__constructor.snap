@@ -1,0 +1,16 @@
+---
+source: model-cache/src/field_cache.rs
+expression: "FieldCache::new(Rc::clone(&value))"
+
+---
+ScalarDatabaseColumn {
+    field: ScalarDatabaseColumn {
+        name: "id",
+        sql_type: Text,
+        sql_column_name: "id_col",
+        graphql_field_name: "id",
+        graphql_type_name: "String",
+        graphql_order_by_asc: "id_ASC",
+        graphql_order_by_desc: "id_DESC",
+    },
+}

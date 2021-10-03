@@ -1,0 +1,1747 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Field",
+  "oneOf": [
+    {
+      "type": "object",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["bool"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["bytea"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["char"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["name"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["int8"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["int2"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["int2Vector"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["int4"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regproc"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["text"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["oid"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["tid"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["xid"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["cid"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["oidVector"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["pgDdlCommand"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["json"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["xml"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["xmlArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["pgNodeTree"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["jsonArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["tableAmHandler"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["xid8Array"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["indexAmHandler"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["point"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["lseg"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["path"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["box"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["polygon"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["line"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["lineArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["cidr"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["cidrArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["float4"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["float8"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["unknown"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["circle"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["circleArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["macaddr8"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["macaddr8Array"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["money"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["moneyArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["macaddr"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["inet"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["boolArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["byteaArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["charArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["nameArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["int2Array"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["int2VectorArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["int4Array"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regprocArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["textArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["tidArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["xidArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["cidArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["oidVectorArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["bpcharArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["varcharArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["int8Array"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["pointArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["lsegArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["pathArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["boxArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["float4Array"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["float8Array"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["polygonArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["oidArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["aclitem"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["aclitemArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["macaddrArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["inetArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["bpchar"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["varchar"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["date"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["time"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["timestamp"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["timestampArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["dateArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["timeArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["timestamptz"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["timestamptzArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["interval"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["intervalArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["numericArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["cstringArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["timetz"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["timetzArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["bit"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["bitArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["varbit"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["varbitArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["numeric"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["refcursor"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["refcursorArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regprocedure"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regoper"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regoperator"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regclass"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regtype"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regprocedureArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regoperArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regoperatorArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regclassArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regtypeArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["record"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["cstring"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["any"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["anyarray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["void"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["trigger"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["languageHandler"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["internal"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["anyelement"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["recordArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["anynonarray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["txidSnapshotArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["uuid"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["uuidArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["txidSnapshot"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["fdwHandler"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["pgLsn"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["pgLsnArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["tsmHandler"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["pgNdistinct"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["pgDependencies"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["anyenum"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["tsVector"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["tsquery"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["gtsVector"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["tsVectorArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["gtsVectorArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["tsqueryArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regconfig"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regconfigArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regdictionary"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regdictionaryArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["jsonb"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["jsonbArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["anyRange"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["eventTrigger"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["int4Range"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["int4RangeArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["numRange"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["numRangeArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["tsRange"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["tsRangeArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["tstzRange"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["tstzRangeArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["dateRange"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["dateRangeArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["int8Range"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["int8RangeArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["jsonpath"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["jsonpathArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regnamespace"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regnamespaceArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regrole"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regroleArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regcollation"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["regcollationArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["pgMcvList"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["pgSnapshot"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["pgSnapshotArray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["xid8"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["anycompatible"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["anycompatiblearray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["anycompatiblenonarray"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["anycompatibleRange"]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["sqlType", "sqlTypeName"],
+          "properties": {
+            "sqlType": {
+              "type": "string",
+              "enum": ["other"]
+            },
+            "sqlTypeName": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "required": [
+        "graphqlFieldName",
+        "graphqlOrderByAsc",
+        "graphqlOrderByDesc",
+        "graphqlTypeName",
+        "name",
+        "sqlColumnName",
+        "type"
+      ],
+      "properties": {
+        "graphqlFieldName": {
+          "type": "string"
+        },
+        "graphqlOrderByAsc": {
+          "type": "string"
+        },
+        "graphqlOrderByDesc": {
+          "type": "string"
+        },
+        "graphqlTypeName": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "sqlColumnName": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["scalarDatabaseColumn"]
+        }
+      }
+    }
+  ]
+}

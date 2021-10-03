@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "lib",
+    "downlevelIteration": true,
+    "strict": false,
+    "types": ["jest"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "jsx": "react"
+  },
+  "compileOnSave": true,
+  "include": ["src/**/*"],
+  "exclude": ["**/__tests__"],
+  "references": [
+    {
+      "path": "../../development/babel-preset"
+    },
+    {
+      "path": "../../development/rollup-config"
+    }
+  ]
+}

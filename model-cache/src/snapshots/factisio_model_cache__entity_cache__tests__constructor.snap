@@ -1,0 +1,88 @@
+---
+source: model-cache/src/entity_cache.rs
+expression: "EntityCache::new(value)"
+
+---
+DatabaseTable {
+    entity: DatabaseTable {
+        name: "person",
+        sql_schema_name: "public",
+        sql_table_name: "person_table",
+        graphql_entity_type_name: "Person",
+        graphql_filter_type_name: "PersonWhereFilter",
+        graphql_get_single_operation_name: "person",
+        graphql_get_list_operation_name: "persons",
+        graphql_get_connection_operation_name: "personConnection",
+        graphql_default_order_by: "id_ASC",
+        graphql_default_first: 10,
+        graphql_default_offset: 0,
+        fields: [
+            ScalarDatabaseColumn {
+                name: "id",
+                sql_type: Text,
+                sql_column_name: "id_col",
+                graphql_field_name: "id",
+                graphql_type_name: "String",
+                graphql_order_by_asc: "id_ASC",
+                graphql_order_by_desc: "id_DESC",
+            },
+            ScalarDatabaseColumn {
+                name: "drone",
+                sql_type: Text,
+                sql_column_name: "drone_col",
+                graphql_field_name: "drone",
+                graphql_type_name: "String",
+                graphql_order_by_asc: "drone_ASC",
+                graphql_order_by_desc: "drone_DESC",
+            },
+        ],
+    },
+    fields_by_sql_column_name: {
+        "id_col": ScalarDatabaseColumn {
+            field: ScalarDatabaseColumn {
+                name: "id",
+                sql_type: Text,
+                sql_column_name: "id_col",
+                graphql_field_name: "id",
+                graphql_type_name: "String",
+                graphql_order_by_asc: "id_ASC",
+                graphql_order_by_desc: "id_DESC",
+            },
+        },
+        "drone_col": ScalarDatabaseColumn {
+            field: ScalarDatabaseColumn {
+                name: "drone",
+                sql_type: Text,
+                sql_column_name: "drone_col",
+                graphql_field_name: "drone",
+                graphql_type_name: "String",
+                graphql_order_by_asc: "drone_ASC",
+                graphql_order_by_desc: "drone_DESC",
+            },
+        },
+    },
+    fields_by_graphql_field_name: {
+        "drone": ScalarDatabaseColumn {
+            field: ScalarDatabaseColumn {
+                name: "drone",
+                sql_type: Text,
+                sql_column_name: "drone_col",
+                graphql_field_name: "drone",
+                graphql_type_name: "String",
+                graphql_order_by_asc: "drone_ASC",
+                graphql_order_by_desc: "drone_DESC",
+            },
+        },
+        "id": ScalarDatabaseColumn {
+            field: ScalarDatabaseColumn {
+                name: "id",
+                sql_type: Text,
+                sql_column_name: "id_col",
+                graphql_field_name: "id",
+                graphql_type_name: "String",
+                graphql_order_by_asc: "id_ASC",
+                graphql_order_by_desc: "id_DESC",
+            },
+        },
+    },
+}

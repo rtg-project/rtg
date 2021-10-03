@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "command": "wasm-pack build --target web",
+      "options": {
+        "cwd": "${workspaceFolder}/wasm"
+      }
+    },
+    {
+      "type": "cargo",
+      "subcommand": "build",
+      "problemMatcher": ["$rustc"],
+      "group": "build",
+      "label": "Rust: cargo build - wasm"
+    },
+    {
+      "type": "cargo",
+      "subcommand": "check",
+      "problemMatcher": ["$rustc"],
+      "group": "build",
+      "label": "Rust: cargo check - graph-rs"
+    }
+  ]
+}

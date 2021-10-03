@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Graph_rs example</title>
+  </head>
+  <body>
+    <script type="module">
+      import init, { greet } from "./pkg/graph_rs.js";
+      init().then(() => {
+        greet("WebAssembly");
+      });
+    </script>
+  </body>
+</html>

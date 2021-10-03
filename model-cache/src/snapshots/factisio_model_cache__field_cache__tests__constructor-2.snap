@@ -1,0 +1,6 @@
+---
+source: model-cache/src/field_cache.rs
+expression: "serde_json::to_string_pretty(&FieldCache::new(Rc::clone(&value))).unwrap()"
+
+---
+"{\n  \"type\": \"scalarDatabaseColumn\",\n  \"field\": {\n    \"type\": \"scalarDatabaseColumn\",\n    \"name\": \"id\",\n    \"sqlType\": \"text\",\n    \"sqlColumnName\": \"id_col\",\n    \"graphqlFieldName\": \"id\",\n    \"graphqlTypeName\": \"String\",\n    \"graphqlOrderByAsc\": \"id_ASC\",\n    \"graphqlOrderByDesc\": \"id_DESC\"\n  }\n}"
