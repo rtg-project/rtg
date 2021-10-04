@@ -1195,6 +1195,8 @@ version = "0.1.0"
 dependencies = [
  "graphql-parser",
  "handlebars",
+ "rtg_model",
+ "rtg_model_cache",
  "scooby",
  "serde",
  "serde_json",

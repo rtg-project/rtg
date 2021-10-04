@@ -1,28 +1,21 @@
-pub mod conversion_error;
-pub mod convert_document;
-pub mod convert_selection;
-pub mod convert_selection_set;
-use conversion_error::ConversionError;
+use super::conversion_error::ConversionError;
+use super::convert_selection_set::convert_selection_set;
 use graphql_parser::query::{parse_query, Definition, OperationDefinition};
-use scooby::postgres::{select, Aliasable, Joinable, Orderable, Parameters};
 
-pub fn convert_gql_to_sql(query: &str) -> Result<String, ConversionError> {
+pub fn convert_document(query: &str) -> Result<String, ConversionError> {
   let ast = parse_query::<&str>(query)?;
 
   if ast.definitions.len() != 1 {
     return Err(ConversionError::DefinitionNumber);
   }
 
-  let graphql_query_name = match ast.definitions.first() {
+  match ast.definitions.first() {
     Some(def) => match *def {
       Definition::Operation(ref op) => match *op {
-        OperationDefinition::SelectionSet(ref _set) => {
-          return Err(ConversionError::Unsupported("SelectionSet".to_string()))
+        OperationDefinition::SelectionSet(ref set) => {
+          return convert_selection_set(*set);
         }
-        OperationDefinition::Query(ref q) => match (*q).name {
-          Some(ref name) => name.clone(),
-          None => return Err(ConversionError::Unsupported("No".to_string())),
-        },
+        OperationDefinition::Query(ref q) => return convert_selection_set((*q).selection_set),
         OperationDefinition::Mutation(ref _mut) => {
           return Err(ConversionError::Unsupported("Mutation".to_string()))
         }
@@ -36,32 +29,6 @@ pub fn convert_gql_to_sql(query: &str) -> Result<String, ConversionError> {
     },
     None => return Err(ConversionError::DefinitionNumber),
   };
-
-  // write sql query
-  let mut sql_params = Parameters::new();
-
-  let local0 = "__local0__".to_string();
-  let schema_name = "public".to_string();
-  let table_name = "User".to_string();
-  let condition = "true".to_string();
-  let field0_sql_column_name = "id".to_string();
-  let field0_graphql_aliased_name = "the_id".to_string();
-
-  let sql_query = select(
-    format!("to_json({}.\"{}\")", local0, field0_sql_column_name)
-      .as_(&format!("\"{}\"", field0_graphql_aliased_name)[..]),
-  )
-  .from(
-    select(format!("{}.*", local0))
-      .from(format!("\"{}\".\"{}\"", schema_name, table_name).as_(&format!("{}", local0)[..]))
-      .where_(condition)
-      .limit(10)
-      .offset(0)
-      .to_string(),
-  )
-  .to_string();
-
-  Ok(format!("{} {}", graphql_query_name, sql_query))
 }
 
 // Tests
@@ -72,7 +39,7 @@ mod tests {
 
   #[test]
   fn it_works() {
-    let sql_query = convert_gql_to_sql(
+    let sql_query = convert_document(
       r#"
       query toto {
         countries {
