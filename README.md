@@ -4,6 +4,10 @@
   </a>
 </p>
 
+<h1 align="center">
+  RTG
+</h1>
+
 <p align="center">
   Relational (SQL) to Graph (GraphQL) tranformation tool. Fast.
 </p>
