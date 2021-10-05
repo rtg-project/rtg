@@ -8,10 +8,13 @@
   RTG
 </h1>
 
-<p align="center">
+<h2 align="center">
   Relational (SQL) to Graph (GraphQL) tranformation tool. Fast.
-</p>
+</h2>
 
+<br/>
+
+<br/>
 
 rtg is a versatile relational (SQL) to graph (GraphQL) transformation tool in rust, for rust, javascript, typescript, and maybe python.
 
