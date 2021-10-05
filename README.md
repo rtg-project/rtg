@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/rtg-project/rtg/">
-    <img alt="babel" src="https://github.com/rtg-project/rtg/raw/main/website/public/img/logo.png" width="320">
+    <img alt="babel" src="https://github.com/rtg-project/rtg/raw/main/website/public/img/logo.png" width="160">
   </a>
 </p>
 
