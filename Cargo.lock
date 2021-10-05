@@ -1197,6 +1197,7 @@ dependencies = [
  "handlebars",
  "rtg_model",
  "rtg_model_cache",
+ "rustc-hash",
  "scooby",
  "serde",
  "serde_json",

@@ -1,40 +1,47 @@
 use super::conversion_error::ConversionError;
 use super::convert_selection::convert_selection;
-use graphql_parser::query::{parse_query, Definition, OperationDefinition, SelectionSet, Text};
-use scooby::postgres::{select, Aliasable, Joinable, Orderable, Parameters};
+use graphql_parser::query::{SelectionSet, Text};
+use rtg_model::entity::Entity;
+use rtg_model_cache::entity_cache::EntityCache;
+
+use std::ops::Deref;
 
 pub fn convert_selection_set<'a, T: Text<'a>>(
-  selection_set: SelectionSet<'a, T>,
+  selection_set: &SelectionSet<'a, T>,
+  context: &EntityCache,
+  sql_parent_name: &str,
 ) -> Result<String, ConversionError> {
-  selection_set
+  let sql_alias_main_table = "__rtg_11__".to_string();
+  let sql_limit = 10;
+
+  let sql_table_name = match &*context {
+    EntityCache::DatabaseTable { entity, .. } => match entity.deref() {
+      Entity::DatabaseTable { sql_table_name, .. } => sql_table_name.to_string(),
+    },
+  };
+
+  let sql_field_sequence = match selection_set
     .items
     .iter()
-    .map(|item| convert_selection_item(item))
+    .map(|item| convert_selection(item, context, &sql_alias_main_table))
     .collect::<Result<Vec<String>, ConversionError>>()
-    .map(|items| items.join(" "));
-  Ok(format!("Ok"))
+  {
+    Ok(sql_field_items) => sql_field_items.join(","),
+    Err(err) => return Err(err),
+  };
+
+  return Ok(format!(
+    "select json_build_object({}) as {} from \"{}\" as {} limit {}",
+    sql_field_sequence, sql_parent_name, sql_table_name, sql_alias_main_table, sql_limit
+  ));
 }
 
 // Tests
 #[cfg(test)]
 mod tests {
-  use super::*;
+  // use super::*;
   #[test]
   fn it_works() {
     assert_eq!(1, 1);
   }
-}
-
-// Test the code in the readme file
-// See https://github.com/rust-lang/cargo/issues/383#issuecomment-720873790
-#[cfg(doctest)]
-mod test_readme {
-  macro_rules! external_doc_test {
-    ($x:expr) => {
-      #[doc = $x]
-      extern "C" {}
-    };
-  }
-
-  external_doc_test!(include_str!("../README.md"));
 }

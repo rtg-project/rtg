@@ -8,9 +8,13 @@ pub enum ConversionError {
   #[error("Document must contain one and only one definition")]
   DefinitionNumber,
   #[error("GraphQL syntax `{0}` is not supported yet")]
-  Unsupported(String),
+  UnsupportedSyntax(String),
+  #[error("GraphQL operation `{0}` of kind `{1}` is not supported yet")]
+  UnsupportedOperation(String, String),
   #[error("Field with GraphQL field name `{0} not found in model")]
   FieldNotFound(String),
+  #[error("Generic error: `{0}`")]
+  Generic(String),
   #[error("Unknown convert error")]
   Unknown,
 }

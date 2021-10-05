@@ -3,7 +3,6 @@ use graphql_parser::query::{Selection, Text};
 use rtg_model::field::Field;
 use rtg_model_cache::entity_cache::EntityCache;
 use rtg_model_cache::field_cache::FieldCache;
-use scooby::postgres::Aliasable;
 use std::ops::Deref;
 
 pub fn convert_selection<'a, T: Text<'a>>(
@@ -13,40 +12,62 @@ pub fn convert_selection<'a, T: Text<'a>>(
 ) -> Result<String, ConversionError> {
   match selection {
     Selection::Field(field) => {
-      let graphql_aliased_name = match field.alias {
+      let graphql_aliased_name = match &field.alias {
         Some(alias) => alias,
-        None => field.name,
+        None => &field.name,
       };
-      let sql_column_name = match context {
-        EntityCache::DatabaseTable {
-          fields_by_graphql_field_name,
-          ..
-        } => match (*fields_by_graphql_field_name).get(field.name.as_ref()) {
-          Some(field_cache) => match (*field_cache).deref() {
-            FieldCache::ScalarDatabaseColumn { field } => match *field.deref() {
-              Field::ScalarDatabaseColumn {
-                sql_column_name, ..
-              } => sql_column_name,
+
+      if field.selection_set.items.len() == 0 {
+        let sql_column_name = match context {
+          EntityCache::DatabaseTable {
+            fields_by_graphql_field_name,
+            ..
+          } => match (*fields_by_graphql_field_name).get(field.name.as_ref()) {
+            Some(field_cache) => match (*field_cache).deref() {
+              FieldCache::ScalarDatabaseColumn { field } => match &*field.deref() {
+                Field::ScalarDatabaseColumn {
+                  sql_column_name, ..
+                } => sql_column_name,
+              },
             },
+            None => {
+              return Err(ConversionError::FieldNotFound(
+                field.name.as_ref().to_string(),
+              ))
+            }
           },
-          None => {
-            return Err(ConversionError::FieldNotFound(
-              field.name.as_ref().to_string(),
-            ))
-          }
-        },
-      };
-      return Ok(
-        format!("to_json({}.\"{}\")", sql_parent_name, sql_column_name)
-          .as_(&format!("\"{}\"", graphql_aliased_name.as_ref())[..])
+        };
+        // // For root objects in Graphile it's done this way:
+        // return Ok(
+        //   format!("to_json({}.\"{}\")", sql_parent_name, sql_column_name)
+        //     .as_(&format!("\"{}\"", graphql_aliased_name.as_ref())[..])
+        //     .to_string(),
+        // );
+        // Generally it's done this way:
+        return Ok(
+          format!(
+            "'{}',{}.\"{}\"",
+            graphql_aliased_name.as_ref(),
+            sql_parent_name,
+            sql_column_name
+          )
           .to_string(),
-      );
+        );
+      } else {
+        return Err(ConversionError::Generic(
+          "Deeply nest fields are not supported yet".to_string(),
+        ));
+      }
     }
-    Selection::FragmentSpread(fragment_spread) => {
-      return Err(ConversionError::Unsupported("FragmentSpread".to_string()))
+    Selection::FragmentSpread(_fragment_spread) => {
+      return Err(ConversionError::UnsupportedSyntax(
+        "FragmentSpread".to_string(),
+      ))
     }
-    Selection::InlineFragment(inline_fragment) => {
-      return Err(ConversionError::Unsupported("InlineFragment".to_string()))
+    Selection::InlineFragment(_inline_fragment) => {
+      return Err(ConversionError::UnsupportedSyntax(
+        "InlineFragment".to_string(),
+      ))
     }
   }
 }

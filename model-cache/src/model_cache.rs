@@ -16,8 +16,8 @@ pub enum OperationKind {
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct EntityOperationCache {
-  entity_cache: Rc<EntityCache>,
-  operation_kind: OperationKind,
+  pub entity_cache: Rc<EntityCache>,
+  pub operation_kind: OperationKind,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
