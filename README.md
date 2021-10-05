@@ -76,10 +76,28 @@ This is an example of how to list things you need to use the software and how to
 
 See the project road map on Github https://github.com/rtg-project/rtg/projects/1
 
-- [x] Basic GraphQL to SQL transformer
-- [ ] Generate model from GraphQL Schema Definition Language files
-- [ ] Add support for relation filters
-- [ ] Add support for aggregations
+- [x] Generate SQL Data Manipulation Language (DML) queries from GraphQL:
+  - [x] Support Basic graphQL queries
+  - [ ] Support argument in queries (Limit, offset)
+  - [ ] Support GraphQL Mutations 
+  - [ ] Support Relations 
+  - [ ] Support Relations filters
+  - [ ] Support Aggregations 
+  - [ ] Support Aggregations filters
+- [ ] Generate GraphQL SDL Schema from Rtg Model:
+  - [ ] Generate GraphQL SDL introspection schema from Rtg Model
+  - [ ] Validate GraphQL queries against the generated GraphQL SDL introspection schema
+- [ ] Integrate Rtg Model and GraphQL Schema Definition Language (SDL):
+  - [ ] Generate Rtg Model from a GraphQL SDL
+  - [ ] Generate GraphQL SDL from a Rtg Model
+- [ ] Integrate Rtg Model and SQL Data Definition Language (DDL) schemas:
+  - [ ] Generate Rtg Model from a Database DDL schema
+  - [ ] Generate Database DDL schema from a Rtg Model
+- [ ] Automatically generate Typescript client SDK using GraphQL codegen
+  - [ ] Generate basic client SDK
+  - [ ] Add features such as pagination streaming
+- [ ] Real time features
+  - [ ] Support GraphQL Subscriptions 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
