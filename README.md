@@ -74,7 +74,7 @@ This is an example of how to list things you need to use the software and how to
 
 ## Roadmap
 
-See the project road map https://github.com/rtg-project/rtg/projects/1
+See the project road map on Github https://github.com/rtg-project/rtg/projects/1
 
 - [x] Basic GraphQL to SQL transformer
 - [ ] Generate model from GraphQL Schema Definition Language files
@@ -109,9 +109,9 @@ Project Link: [https://github.com/rtg-project/rtg/](https://github.com/rtg-proje
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
-* [https://vercel.com/](Vercel for hosting)
-* [https://nextjs.org/](NextJS for the website)
-* [https://swc.rs/](SWC for the inspiration of a brilliant rust/typescript tool)
-* [https://github.com/othneildrew/Best-README-Template](othneildrew for the Best-README-Template)
+* [Vercel for hosting](https://vercel.com/)
+* [NextJS for the website](https://nextjs.org/)
+* [SWC for the inspiration of a brilliant rust/typescript tool](https://swc.rs/)
+* [othneildrew for the Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
