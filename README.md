@@ -93,7 +93,7 @@ Not taking external contributions at this point
 
 rtg is primarily distributed under the terms of both the MIT license and the Apache License (Version 2.0).
 
-See LICENSE for details.
+See [LICENSE](https://github.com/rtg-project/rtg/blob/main/LICENSE) for details.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
