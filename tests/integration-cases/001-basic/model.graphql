@@ -1,0 +1,4 @@
+type toto @table(name: "toto_table") {
+  a: ID @id @db(type: "uuid")
+  b: int @default(value: "now()") @db(type: "bigint")
+}

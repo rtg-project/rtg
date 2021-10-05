@@ -21,6 +21,8 @@ mod tests {
       let dir_path = path.parent().unwrap();
       // println!("{:?}", dir_path.display());
 
+      // TODO read model from model.graphql and convert it using gql-sdl-to-model
+
       // Read the model from file
       let model_path = dir_path.join("model.json");
       let model_file = File::open(model_path).unwrap();
@@ -63,7 +65,7 @@ mod tests {
       assert_eq!(model_cache_truth_string, model_cache_inferred_string);
 
       // Read and test all GraphQL queries on this model
-      for entry in glob(dir_path.join("*.graphql").to_str().unwrap())
+      for entry in glob(dir_path.join("query-*.graphql").to_str().unwrap())
         .expect("Failed to read glob pattern for test queries")
       {
         // Read GraphQL query file
