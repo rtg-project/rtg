@@ -1,6 +1,6 @@
 # rtg Gql to Pgsql
 
-Given a rtg model cache, this module translates GraphQL queries to Postgres sql queries.
+Given a rtg model cache, this module translates GraphQL queries to Postgres SQL queries.
 
 
 ## Contribute

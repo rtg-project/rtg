@@ -1207,7 +1207,7 @@ version = "0.1.0"
 dependencies = [
  "glob",
  "graphql-parser",
- "handlebars",
+ "rtg_gql_sdl_to_model",
  "rtg_gql_to_pgsql",
  "rtg_model",
  "rtg_model_cache",
@@ -1223,11 +1223,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "rtg_gql_sdl_to_model"
+version = "0.1.0"
+dependencies = [
+ "graphql-parser",
+ "insta",
+ "rtg_model",
+ "rustc-hash",
+ "schemars",
+ "serde",
+ "serde_json",
+ "similar-asserts",
+ "thiserror",
+]
+
+[[package]]
 name = "rtg_gql_to_pgsql"
 version = "0.1.0"
 dependencies = [
  "graphql-parser",
- "handlebars",
  "rtg_model",
  "rtg_model_cache",
  "rustc-hash",
