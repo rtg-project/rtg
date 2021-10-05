@@ -1,6 +1,4 @@
-
-
-
+<div id="top"></div>
 
 <br />
 <div align="center">
@@ -26,6 +24,8 @@
 <br />
 <br />
 
+
+
 ## About
 
 rtg is a versatile relational (SQL) to graph (GraphQL) transformation tool in rust, for rust, javascript, typescript, and maybe python.
@@ -36,6 +36,8 @@ rtg is a versatile relational (SQL) to graph (GraphQL) transformation tool in ru
 
 * [Rust](https://www.rust-lang.org/)
 * [NodeJS](https://nodejs.org/en/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Getting Started
 
@@ -60,11 +62,15 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm install
    ```
+   
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Usage
 
 - Create a Model
 - Process a graphql document using this model
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Roadmap
 
@@ -75,9 +81,13 @@ See the project road map https://github.com/rtg-project/rtg/projects/1
 - [ ] Add support for relation filters
 - [ ] Add support for aggregations
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ## Contributing
 
 Not taking external contributions at this point
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## License
 
@@ -85,11 +95,15 @@ rtg is primarily distributed under the terms of both the MIT license and the Apa
 
 See LICENSE for details.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ## Contact
 
 Vincent Lecrubier - [@VLecrubier](https://twitter.com/VLecrubier)
 
 Project Link: [https://github.com/rtg-project/rtg/](https://github.com/rtg-project/rtg/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Acknowledgments
 
@@ -98,3 +112,6 @@ Use this space to list resources you find helpful and would like to give credit 
 * [https://vercel.com/](Vercel for hosting)
 * [https://nextjs.org/](NextJS for the website)
 * [https://swc.rs/](SWC for the inspiration of a brilliant rust/typescript tool)
+* [https://github.com/othneildrew/Best-README-Template](othneildrew for the Best-README-Template)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
