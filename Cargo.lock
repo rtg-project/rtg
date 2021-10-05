@@ -1205,12 +1205,21 @@ dependencies = [
 name = "rtg"
 version = "0.1.0"
 dependencies = [
+ "glob",
+ "graphql-parser",
+ "handlebars",
  "rtg_gql_to_pgsql",
  "rtg_model",
  "rtg_model_cache",
  "rtg_server",
- "rtg_testing",
  "rtg_wasm",
+ "rustc-hash",
+ "scooby",
+ "serde",
+ "serde_json",
+ "similar 2.1.0",
+ "similar-asserts",
+ "thiserror",
 ]
 
 [[package]]
@@ -1274,25 +1283,6 @@ dependencies = [
  "thiserror",
  "tokio",
  "warp",
-]
-
-[[package]]
-name = "rtg_testing"
-version = "0.1.0"
-dependencies = [
- "glob",
- "graphql-parser",
- "handlebars",
- "rtg_gql_to_pgsql",
- "rtg_model",
- "rtg_model_cache",
- "rustc-hash",
- "scooby",
- "serde",
- "serde_json",
- "similar 2.1.0",
- "similar-asserts",
- "thiserror",
 ]
 
 [[package]]

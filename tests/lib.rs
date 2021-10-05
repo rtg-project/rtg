@@ -6,19 +6,17 @@ mod tests {
   use rtg_gql_to_pgsql::convert_graphql_string::convert_graphql_string;
   use rtg_model::model::Model;
   use rtg_model_cache::model_cache::ModelCache;
-  use serde::Deserialize;
-  use similar::{ChangeTag, TextDiff};
   use similar_asserts::assert_eq;
-  use std::error::Error;
   use std::fs;
   use std::fs::{File, OpenOptions};
   use std::io::{BufReader, BufWriter};
-  use std::path::Path;
   use std::rc::Rc;
 
   #[test]
-  fn run_suites() {
-    for entry in glob("../tests/*/model.json").expect("Failed to read glob for test cases") {
+  fn run_integration_tests() {
+    for entry in
+      glob("./tests/integration-cases/*/model.json").expect("Failed to read glob for test cases")
+    {
       let path = entry.unwrap();
       let dir_path = path.parent().unwrap();
       // println!("{:?}", dir_path.display());
@@ -92,7 +90,6 @@ mod tests {
         assert_eq!(sql_query_string_truth, sql_query_string_inferred);
       }
     }
-    assert_eq!(1, 1);
   }
 }
 
