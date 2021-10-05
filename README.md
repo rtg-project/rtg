@@ -8,9 +8,9 @@
   RTG
 </h1>
 
-<h2 align="center">
+<h4 align="center">
   Relational (SQL) to Graph (GraphQL) tranformation tool. Fast.
-</h2>
+</h4>
 
 <br/>
 
