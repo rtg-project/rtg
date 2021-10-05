@@ -34,21 +34,19 @@ mod tests {
       let model_cache_inferred = ModelCache::new(Rc::clone(&model_rc));
 
       // Serialize the model cache (inferred)
-      let model_cache_inferred_str = serde_json::to_string(&model_cache_inferred).unwrap();
+      let model_cache_inferred_string = serde_json::to_string(&model_cache_inferred).unwrap();
 
-      // Read existing model cache (truth) from disk
+      // Retrieve the model cache (truth) from file (if it exists, else write it)
       let model_cache_truth_path = dir_path.join("model-cache.json");
       let model_cache_truth_file = File::open(model_cache_truth_path.clone());
-
-      // Retrieve the model cache from file (if it exists, else write it)
-      let model_cache_truth_str = match model_cache_truth_file {
+      let model_cache_truth_string = match model_cache_truth_file {
         Result::Ok(model_cache_truth_file) => {
           // The model file exists already, read it for later comparison
           let model_cache_truth_reader = BufReader::new(model_cache_truth_file);
           let model_cache_truth: ModelCache =
             serde_json::from_reader(model_cache_truth_reader).unwrap();
-          let model_cache_truth_str = serde_json::to_string(&model_cache_truth).unwrap();
-          model_cache_truth_str
+          let model_cache_truth_string = serde_json::to_string(&model_cache_truth).unwrap();
+          model_cache_truth_string
         }
         Result::Err(_e) => {
           // The model file does not exist, write it, the later comparison will be trivial
@@ -59,12 +57,12 @@ mod tests {
             .unwrap();
           let model_cache_inferred_writer = BufWriter::new(model_cache_inferred_file);
           serde_json::to_writer_pretty(model_cache_inferred_writer, &model_cache_inferred).unwrap();
-          model_cache_inferred_str.clone()
+          model_cache_inferred_string.clone()
         }
       };
 
       // Compare the model cache (inferred) to the model cache (truth)
-      assert_eq!(model_cache_truth_str, model_cache_inferred_str);
+      assert_eq!(model_cache_truth_string, model_cache_inferred_string);
 
       // Read and test all GraphQL queries on this model
       for entry in glob(dir_path.join("*.graphql").to_str().unwrap())
@@ -75,12 +73,23 @@ mod tests {
         let graphql_query_string = fs::read_to_string(graphql_query_path.clone()).unwrap();
 
         // Convert the GraphQL query to a SQL query, using the model cache
-        let sql_query_string =
+        let sql_query_string_inferred =
           convert_graphql_string(&graphql_query_string[..], &model_cache_inferred).unwrap();
 
-        // Wite SQL query file result
+        // Retrieve the query from file (if it exists, else write it)
         let sql_query_path = graphql_query_path.with_extension("sql");
-        fs::write(sql_query_path, sql_query_string).expect("Unable to write resulting sql file");
+        let sql_query_string_truth = match fs::read_to_string(sql_query_path.clone()) {
+          Result::Ok(sql_query_string_truth) => sql_query_string_truth,
+          Result::Err(_e) => {
+            // Write SQL query file result
+            fs::write(sql_query_path, sql_query_string_inferred.clone())
+              .expect("Unable to write resulting sql file");
+            sql_query_string_inferred.clone()
+          }
+        };
+
+        // Compare the model cache (inferred) to the model cache (truth)
+        assert_eq!(sql_query_string_truth, sql_query_string_inferred);
       }
     }
     assert_eq!(1, 1);
