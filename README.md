@@ -105,6 +105,18 @@ See the project road map on Github https://github.com/rtg-project/rtg/projects/1
 
 Not taking external contributions at this point
 
+To test all packages, run:
+
+```bash
+cargo test --workspace -- --color always --nocapture
+```
+
+To run all tests in watch mode, run:
+
+```bash
+cargo watch -x 'test --workspace -- --color always --nocapture' 
+```
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## License

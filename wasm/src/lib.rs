@@ -1,14 +1,8 @@
 #![allow(missing_docs)]
 #![allow(unused_variables)]
 
-use graphql_parser::query::{parse_query, Definition, OperationDefinition, ParseError};
-use handlebars::Handlebars;
-
+use graphql_parser::query::{parse_query, Definition, OperationDefinition};
 use scooby::postgres::{select, Aliasable, Joinable, Orderable, Parameters};
-use serde::Serialize;
-// use serde_json::json;
-use std::env;
-
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]

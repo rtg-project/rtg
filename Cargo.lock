@@ -1290,7 +1290,6 @@ name = "rtg_wasm"
 version = "0.1.0"
 dependencies = [
  "graphql-parser",
- "handlebars",
  "scooby",
  "serde",
  "serde_json",
