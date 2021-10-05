@@ -26,9 +26,75 @@
 <br />
 <br />
 
+## About
 
 rtg is a versatile relational (SQL) to graph (GraphQL) transformation tool in rust, for rust, javascript, typescript, and maybe python.
 
+![Overview](./overview.png)
+
+### Built With
+
+* [Rust](https://www.rust-lang.org/)
+* [NodeJS](https://nodejs.org/en/)
+
+## Getting Started
+
+To get started using rtg,
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/rtg-project/rtg.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+
+## Usage
+
+- Create a Model
+- Process a graphql document using this model
+
+## Roadmap
+
 See the project road map https://github.com/rtg-project/rtg/projects/1
 
-![Overview](./overview.png)
+- [x] Basic GraphQL to SQL transformer
+- [ ] Generate model from GraphQL Schema Definition Language files
+- [ ] Add support for relation filters
+- [ ] Add support for aggregations
+
+## Contributing
+
+Not taking external contributions at this point
+
+## License
+
+rtg is primarily distributed under the terms of both the MIT license and the Apache License (Version 2.0).
+
+See LICENSE for details.
+
+## Contact
+
+Vincent Lecrubier - [@VLecrubier](https://twitter.com/VLecrubier)
+
+Project Link: [https://github.com/rtg-project/rtg/](https://github.com/rtg-project/rtg/)
+
+## Acknowledgments
+
+Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+
+* [https://vercel.com/](Vercel for hosting)
+* [https://nextjs.org/](NextJS for the website)
+* [https://swc.rs/](SWC for the inspiration of a brilliant rust/typescript tool)
