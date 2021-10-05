@@ -20,8 +20,9 @@ pub fn convert_query_selection_set<'a, T: Text<'a>>(
   };
 
   return Ok(format!(
-    "select json_build_object({}) as {}",
-    sql_field_sequence, sql_alias_main_result
+    "select json_build_object({sql_field_sequence}) as {sql_alias_main_result}",
+    sql_field_sequence = sql_field_sequence,
+    sql_alias_main_result = sql_alias_main_result
   ));
 }
 

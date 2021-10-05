@@ -7,8 +7,8 @@ use std::ops::Deref;
 
 pub fn convert_selection<'a, T: Text<'a>>(
   selection: &Selection<'a, T>,
-  sql_parent_name: &str,
   context: &EntityCache,
+  sql_parent_name: &str,
 ) -> Result<String, ConversionError> {
   match selection {
     Selection::Field(field) => {
@@ -46,10 +46,10 @@ pub fn convert_selection<'a, T: Text<'a>>(
         // Generally it's done this way:
         return Ok(
           format!(
-            "'{}',{}.\"{}\"",
-            graphql_aliased_name.as_ref(),
-            sql_parent_name,
-            sql_column_name
+            "'{graphql_aliased_name}',{sql_parent_name}.\"{sql_column_name}\"",
+            graphql_aliased_name = graphql_aliased_name.as_ref(),
+            sql_parent_name = sql_parent_name,
+            sql_column_name = sql_column_name
           )
           .to_string(),
         );

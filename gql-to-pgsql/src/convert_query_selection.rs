@@ -33,11 +33,10 @@ pub fn convert_query_selection<'a, T: Text<'a>>(
                   &sql_local_result_name_field,
                 ) {
                   Ok(sql_selection_set_query) => format!(
-                    "(select coalesce((select json_agg({}.\"{}\") from ({}) as {}),'[]'::json))",
-                    sql_local_result_name,
-                    sql_local_result_name_field,
-                    sql_selection_set_query,
-                    sql_local_result_name
+                    "(select coalesce((select json_agg({sql_local_result_name}.\"{sql_local_result_name_field}\") from ({sql_selection_set_query}) as {sql_local_result_name}),'[]'::json))",
+                    sql_local_result_name=sql_local_result_name,
+                    sql_local_result_name_field=sql_local_result_name_field,
+                    sql_selection_set_query=sql_selection_set_query,
                   )
                   .to_string(),
                   Err(error) => return Err(error),
@@ -71,7 +70,14 @@ pub fn convert_query_selection<'a, T: Text<'a>>(
       //     .to_string(),
       // );
       // Generally it's done this way:
-      return Ok(format!("'{}',{}", graphql_aliased_name.as_ref(), sql_sub_query).to_string());
+      return Ok(
+        format!(
+          "'{graphql_aliased_name}',{sql_sub_query}",
+          graphql_aliased_name = graphql_aliased_name.as_ref(),
+          sql_sub_query = sql_sub_query
+        )
+        .to_string(),
+      );
     }
     Selection::FragmentSpread(_fragment_spread) => {
       return Err(ConversionError::UnsupportedSyntax(
