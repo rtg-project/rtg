@@ -12,24 +12,70 @@ pub mod convert_selection_set;
 mod tests {
 
   use super::*;
+  use rtg_model_cache::model_cache::ModelCache;
+  use std::rc::Rc;
 
   #[test]
   fn it_works() {
+    let data = r#"
+    {
+      "version": "v1",
+      "entities": [
+        {
+          "type": "databaseTable",
+          "name": "person",
+          "sqlSchemaName": "public",
+          "sqlTableName": "person_table",
+          "graphqlEntityTypeName": "Person",
+          "graphqlFilterTypeName": "PersonWhereFilter",
+          "graphqlGetSingleOperationName": "person",
+          "graphqlGetListOperationName": "persons",
+          "graphqlGetConnectionOperationName": "personConnection",
+          "graphqlDefaultOrderBy": "id_ASC",
+          "graphqlDefaultFirst": 10,
+          "graphqlDefaultOffset": 0,
+          "fields": [
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "sqlType": "text",
+              "sqlColumnName": "id_col",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "id_ASC",
+              "graphqlOrderByDesc": "id_DESC"
+            },
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "drone",
+              "sqlType": "text",
+              "sqlColumnName": "drone_col",
+              "graphqlFieldName": "drone",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "drone_ASC",
+              "graphqlOrderByDesc": "drone_DESC"
+            }
+          ]
+        }
+      ]
+    }
+    "#;
+
+    let model = Rc::new(serde_json::from_str(&data).unwrap());
+    let model_cache = ModelCache::new(Rc::clone(&model));
     let sql_query = convert_graphql_string::convert_graphql_string(
       r#"
       query toto {
-        countries {
-          name
-          cities {
-            name
-            population
-          }
+        yoyi: persons {
+          a: id
+          b: drone
         }
       }
       "#,
+      &model_cache,
     )
     .unwrap();
-    assert_eq!(sql_query, "toto SELECT to_json(__local0__.\"id\") AS \"the_id\" FROM SELECT __local0__.* FROM \"public\".\"User\" AS __local0__ WHERE true LIMIT 10 OFFSET 0");
+    assert_eq!(sql_query, "select json_build_object('yoyi',(select coalesce((select json_agg(__rtg_9__.\"__rtg_10__\") from (select json_build_object('a',__rtg_11__.\"id_col\",'b',__rtg_11__.\"drone_col\") as __rtg_10__ from \"person_table\" as __rtg_11__ limit 10) as __rtg_9__),'[]'::json))) as __rtg_0__");
   }
 }
 
