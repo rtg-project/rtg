@@ -1,0 +1,42 @@
+---
+source: gql-sdl-to-model/src/lib.rs
+expression: model
+
+---
+V1 {
+    entities: [
+        DatabaseTable {
+            name: "toto",
+            sql_schema_name: "toto",
+            sql_table_name: "toto",
+            graphql_entity_type_name: "toto",
+            graphql_filter_type_name: "toto",
+            graphql_get_single_operation_name: "toto",
+            graphql_get_list_operation_name: "toto",
+            graphql_get_connection_operation_name: "toto",
+            graphql_default_order_by: "toto",
+            graphql_default_first: 0,
+            graphql_default_offset: 10,
+            fields: [
+                ScalarDatabaseColumn {
+                    name: "a",
+                    sql_type: Text,
+                    sql_column_name: "a",
+                    graphql_field_name: "a",
+                    graphql_type_name: "a",
+                    graphql_order_by_asc: "a",
+                    graphql_order_by_desc: "a",
+                },
+                ScalarDatabaseColumn {
+                    name: "b",
+                    sql_type: Text,
+                    sql_column_name: "b",
+                    graphql_field_name: "b",
+                    graphql_type_name: "b",
+                    graphql_order_by_asc: "b",
+                    graphql_order_by_desc: "b",
+                },
+            ],
+        },
+    ],
+}

@@ -1,16 +1,17 @@
 use super::conversion_error::ConversionError;
+use super::convert_type_definition::convert_type_definition;
 use graphql_parser::schema::{Definition, Document, Text};
 use rtg_model::entity::Entity;
 use rtg_model::model::Model;
-use rustc_hash::FxHashMap;
+// use rustc_hash::FxHashMap;
 use std::rc::Rc;
 
 pub fn convert_document<'a, T: Text<'a>>(
   document: &Document<'a, T>,
 ) -> Result<Model, ConversionError> {
-  let mut relations_by_name = FxHashMap::default();
+  // let mut relations_by_name = FxHashMap::default();
 
-  relations_by_name.insert("s", "s");
+  // relations_by_name.insert("s", "s");
 
   let entities = match document
     .definitions
@@ -26,10 +27,11 @@ pub fn convert_document<'a, T: Text<'a>>(
           "SchemaDefinition".to_string(),
         ))
       }
-      Definition::TypeDefinition(ref _td) => {
-        return Err(ConversionError::UnsupportedSyntax(
-          "TypeDefinition".to_string(),
-        ))
+      Definition::TypeDefinition(ref type_definition) => {
+        return Ok(Rc::new(convert_type_definition(type_definition).unwrap()));
+        // return Err(ConversionError::UnsupportedSyntax(
+        //   "TypeDefinition".to_string(),
+        // ))
       }
       Definition::TypeExtension(ref _te) => {
         return Err(ConversionError::UnsupportedSyntax(
