@@ -1,0 +1,340 @@
+{
+  "version": "v1",
+  "model": {
+    "version": "v1",
+    "entities": [
+      {
+        "type": "databaseTable",
+        "name": "person",
+        "sqlSchemaName": "public",
+        "sqlTableName": "person_table",
+        "graphqlEntityTypeName": "Person",
+        "graphqlFilterTypeName": "PersonWhereFilter",
+        "graphqlGetSingleOperationName": "person",
+        "graphqlGetListOperationName": "persons",
+        "graphqlGetConnectionOperationName": "personConnection",
+        "graphqlDefaultOrderBy": "id_ASC",
+        "graphqlDefaultFirst": 10,
+        "graphqlDefaultOffset": 0,
+        "fields": [
+          {
+            "type": "scalarDatabaseColumn",
+            "name": "id",
+            "sqlType": "text",
+            "sqlColumnName": "id_col",
+            "graphqlFieldName": "id",
+            "graphqlTypeName": "String",
+            "graphqlOrderByAsc": "id_ASC",
+            "graphqlOrderByDesc": "id_DESC"
+          },
+          {
+            "type": "scalarDatabaseColumn",
+            "name": "drone",
+            "sqlType": "text",
+            "sqlColumnName": "drone_col",
+            "graphqlFieldName": "drone",
+            "graphqlTypeName": "String",
+            "graphqlOrderByAsc": "drone_ASC",
+            "graphqlOrderByDesc": "drone_DESC"
+          }
+        ]
+      }
+    ]
+  },
+  "entitiesByOperationName": {
+    "person": {
+      "entityCache": {
+        "type": "databaseTable",
+        "entity": {
+          "type": "databaseTable",
+          "name": "person",
+          "sqlSchemaName": "public",
+          "sqlTableName": "person_table",
+          "graphqlEntityTypeName": "Person",
+          "graphqlFilterTypeName": "PersonWhereFilter",
+          "graphqlGetSingleOperationName": "person",
+          "graphqlGetListOperationName": "persons",
+          "graphqlGetConnectionOperationName": "personConnection",
+          "graphqlDefaultOrderBy": "id_ASC",
+          "graphqlDefaultFirst": 10,
+          "graphqlDefaultOffset": 0,
+          "fields": [
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "sqlType": "text",
+              "sqlColumnName": "id_col",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "id_ASC",
+              "graphqlOrderByDesc": "id_DESC"
+            },
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "drone",
+              "sqlType": "text",
+              "sqlColumnName": "drone_col",
+              "graphqlFieldName": "drone",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "drone_ASC",
+              "graphqlOrderByDesc": "drone_DESC"
+            }
+          ]
+        },
+        "fieldsBySqlColumnName": {
+          "id_col": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "sqlType": "text",
+              "sqlColumnName": "id_col",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "id_ASC",
+              "graphqlOrderByDesc": "id_DESC"
+            }
+          },
+          "drone_col": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "drone",
+              "sqlType": "text",
+              "sqlColumnName": "drone_col",
+              "graphqlFieldName": "drone",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "drone_ASC",
+              "graphqlOrderByDesc": "drone_DESC"
+            }
+          }
+        },
+        "fieldsByGraphqlFieldName": {
+          "drone": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "drone",
+              "sqlType": "text",
+              "sqlColumnName": "drone_col",
+              "graphqlFieldName": "drone",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "drone_ASC",
+              "graphqlOrderByDesc": "drone_DESC"
+            }
+          },
+          "id": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "sqlType": "text",
+              "sqlColumnName": "id_col",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "id_ASC",
+              "graphqlOrderByDesc": "id_DESC"
+            }
+          }
+        }
+      },
+      "operationKind": "getSingle"
+    },
+    "personConnection": {
+      "entityCache": {
+        "type": "databaseTable",
+        "entity": {
+          "type": "databaseTable",
+          "name": "person",
+          "sqlSchemaName": "public",
+          "sqlTableName": "person_table",
+          "graphqlEntityTypeName": "Person",
+          "graphqlFilterTypeName": "PersonWhereFilter",
+          "graphqlGetSingleOperationName": "person",
+          "graphqlGetListOperationName": "persons",
+          "graphqlGetConnectionOperationName": "personConnection",
+          "graphqlDefaultOrderBy": "id_ASC",
+          "graphqlDefaultFirst": 10,
+          "graphqlDefaultOffset": 0,
+          "fields": [
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "sqlType": "text",
+              "sqlColumnName": "id_col",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "id_ASC",
+              "graphqlOrderByDesc": "id_DESC"
+            },
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "drone",
+              "sqlType": "text",
+              "sqlColumnName": "drone_col",
+              "graphqlFieldName": "drone",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "drone_ASC",
+              "graphqlOrderByDesc": "drone_DESC"
+            }
+          ]
+        },
+        "fieldsBySqlColumnName": {
+          "id_col": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "sqlType": "text",
+              "sqlColumnName": "id_col",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "id_ASC",
+              "graphqlOrderByDesc": "id_DESC"
+            }
+          },
+          "drone_col": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "drone",
+              "sqlType": "text",
+              "sqlColumnName": "drone_col",
+              "graphqlFieldName": "drone",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "drone_ASC",
+              "graphqlOrderByDesc": "drone_DESC"
+            }
+          }
+        },
+        "fieldsByGraphqlFieldName": {
+          "drone": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "drone",
+              "sqlType": "text",
+              "sqlColumnName": "drone_col",
+              "graphqlFieldName": "drone",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "drone_ASC",
+              "graphqlOrderByDesc": "drone_DESC"
+            }
+          },
+          "id": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "sqlType": "text",
+              "sqlColumnName": "id_col",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "id_ASC",
+              "graphqlOrderByDesc": "id_DESC"
+            }
+          }
+        }
+      },
+      "operationKind": "getConnection"
+    },
+    "persons": {
+      "entityCache": {
+        "type": "databaseTable",
+        "entity": {
+          "type": "databaseTable",
+          "name": "person",
+          "sqlSchemaName": "public",
+          "sqlTableName": "person_table",
+          "graphqlEntityTypeName": "Person",
+          "graphqlFilterTypeName": "PersonWhereFilter",
+          "graphqlGetSingleOperationName": "person",
+          "graphqlGetListOperationName": "persons",
+          "graphqlGetConnectionOperationName": "personConnection",
+          "graphqlDefaultOrderBy": "id_ASC",
+          "graphqlDefaultFirst": 10,
+          "graphqlDefaultOffset": 0,
+          "fields": [
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "sqlType": "text",
+              "sqlColumnName": "id_col",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "id_ASC",
+              "graphqlOrderByDesc": "id_DESC"
+            },
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "drone",
+              "sqlType": "text",
+              "sqlColumnName": "drone_col",
+              "graphqlFieldName": "drone",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "drone_ASC",
+              "graphqlOrderByDesc": "drone_DESC"
+            }
+          ]
+        },
+        "fieldsBySqlColumnName": {
+          "id_col": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "sqlType": "text",
+              "sqlColumnName": "id_col",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "id_ASC",
+              "graphqlOrderByDesc": "id_DESC"
+            }
+          },
+          "drone_col": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "drone",
+              "sqlType": "text",
+              "sqlColumnName": "drone_col",
+              "graphqlFieldName": "drone",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "drone_ASC",
+              "graphqlOrderByDesc": "drone_DESC"
+            }
+          }
+        },
+        "fieldsByGraphqlFieldName": {
+          "drone": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "drone",
+              "sqlType": "text",
+              "sqlColumnName": "drone_col",
+              "graphqlFieldName": "drone",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "drone_ASC",
+              "graphqlOrderByDesc": "drone_DESC"
+            }
+          },
+          "id": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "sqlType": "text",
+              "sqlColumnName": "id_col",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "String",
+              "graphqlOrderByAsc": "id_ASC",
+              "graphqlOrderByDesc": "id_DESC"
+            }
+          }
+        }
+      },
+      "operationKind": "getList"
+    }
+  }
+}

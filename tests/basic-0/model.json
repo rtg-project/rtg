@@ -1,0 +1,41 @@
+{
+  "version": "v1",
+  "entities": [
+    {
+      "type": "databaseTable",
+      "name": "person",
+      "sqlSchemaName": "public",
+      "sqlTableName": "person_table",
+      "graphqlEntityTypeName": "Person",
+      "graphqlFilterTypeName": "PersonWhereFilter",
+      "graphqlGetSingleOperationName": "person",
+      "graphqlGetListOperationName": "persons",
+      "graphqlGetConnectionOperationName": "personConnection",
+      "graphqlDefaultOrderBy": "id_ASC",
+      "graphqlDefaultFirst": 10,
+      "graphqlDefaultOffset": 0,
+      "fields": [
+        {
+          "type": "scalarDatabaseColumn",
+          "name": "id",
+          "sqlType": "text",
+          "sqlColumnName": "id_col",
+          "graphqlFieldName": "id",
+          "graphqlTypeName": "String",
+          "graphqlOrderByAsc": "id_ASC",
+          "graphqlOrderByDesc": "id_DESC"
+        },
+        {
+          "type": "scalarDatabaseColumn",
+          "name": "drone",
+          "sqlType": "text",
+          "sqlColumnName": "drone_col",
+          "graphqlFieldName": "drone",
+          "graphqlTypeName": "String",
+          "graphqlOrderByAsc": "drone_ASC",
+          "graphqlOrderByDesc": "drone_DESC"
+        }
+      ]
+    }
+  ]
+}
