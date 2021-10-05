@@ -1,6 +1,6 @@
 ---
 source: model-cache/src/entity_cache.rs
-expression: "EntityCache::new(value)"
+expression: "EntityCache::new(Rc::clone(&value))"
 
 ---
 DatabaseTable {
