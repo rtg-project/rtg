@@ -1,6 +1,6 @@
 use super::conversion_error::ConversionError;
 use super::convert_document::convert_document;
-use graphql_parser::query::{parse_query, Text};
+use graphql_parser::query::parse_query;
 use rtg_model_cache::model_cache::ModelCache;
 
 pub fn convert_graphql_string<'a>(
@@ -14,7 +14,7 @@ pub fn convert_graphql_string<'a>(
 // Tests
 #[cfg(test)]
 mod tests {
-  // use super::*;
+  use similar_asserts::assert_eq;
   #[test]
   fn it_works() {
     assert_eq!(1, 1);

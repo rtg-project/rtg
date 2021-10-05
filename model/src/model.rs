@@ -16,6 +16,7 @@ mod tests {
   use super::*;
   use crate::field::Field;
   use crate::sql_type;
+  use insta::assert_json_snapshot;
 
   #[test]
   fn serialize() {
@@ -55,6 +56,6 @@ mod tests {
       })],
     };
 
-    insta::assert_debug_snapshot!(serde_json::to_string_pretty(&value).unwrap());
+    assert_json_snapshot!(serde_json::to_string_pretty(&value).unwrap());
   }
 }

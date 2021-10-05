@@ -28,6 +28,7 @@ pub enum Entity {
 mod tests {
   use super::*;
   use crate::sql_type;
+  use similar_asserts::assert_eq;
 
   #[test]
   fn serialize() {

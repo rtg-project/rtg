@@ -9,11 +9,12 @@ pub fn generate_json_schema() -> RootSchema {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use insta::assert_json_snapshot;
 
   #[test]
   fn json_schema_ok() {
     let schema = generate_json_schema();
     // The json schema is too long to check here, so we check it with insta
-    insta::assert_debug_snapshot!(serde_json::to_string_pretty(&schema).unwrap());
+    assert_json_snapshot!(serde_json::to_string_pretty(&schema).unwrap());
   }
 }

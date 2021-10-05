@@ -14,6 +14,7 @@ rtg_server = {version = "0.1.0", path = "./server"}
 rtg_wasm = {version = "0.1.0", path = "./wasm"}
 
 [dev-dependencies]
+rtg_testing = {version = "0.1.0", path = "./testing"}
 # cargo-insta = {version = "1.8.0"}
 # cargo-watch = {version = "8.1.1"}
 # wasm-pack = {version = "0.10.1"}

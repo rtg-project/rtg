@@ -13,6 +13,7 @@ mod tests {
 
   use super::*;
   use rtg_model_cache::model_cache::ModelCache;
+  use similar_asserts::assert_eq;
   use std::rc::Rc;
 
   #[test]

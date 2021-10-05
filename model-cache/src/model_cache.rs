@@ -82,9 +82,12 @@ impl ModelCache {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use insta::{assert_debug_snapshot, assert_json_snapshot};
   use rtg_model::entity::Entity;
   use rtg_model::field::Field;
   use rtg_model::sql_type;
+  use similar_asserts::assert_eq;
+
   #[test]
   fn constructor() {
     let value = Rc::new(Model::V1 {
@@ -123,11 +126,10 @@ mod tests {
       })],
     });
 
-    insta::assert_debug_snapshot!(ModelCache::new(Rc::clone(&value)));
-    insta::assert_debug_snapshot!(serde_json::to_string_pretty(&ModelCache::new(Rc::clone(
-      &value
-    )))
-    .unwrap());
+    assert_debug_snapshot!(ModelCache::new(Rc::clone(&value)));
+    assert_json_snapshot!(
+      serde_json::to_string_pretty(&ModelCache::new(Rc::clone(&value))).unwrap()
+    );
   }
 
   #[test]

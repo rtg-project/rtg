@@ -26,6 +26,7 @@ impl FieldCache {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use insta::{assert_debug_snapshot, assert_json_snapshot};
   use rtg_model::sql_type;
 
   #[test]
@@ -40,10 +41,9 @@ mod tests {
       graphql_order_by_desc: "id_DESC".to_string(),
     });
 
-    insta::assert_debug_snapshot!(FieldCache::new(Rc::clone(&value)));
-    insta::assert_debug_snapshot!(serde_json::to_string_pretty(&FieldCache::new(Rc::clone(
-      &value
-    )))
-    .unwrap());
+    assert_debug_snapshot!(FieldCache::new(Rc::clone(&value)));
+    assert_json_snapshot!(
+      serde_json::to_string_pretty(&FieldCache::new(Rc::clone(&value))).unwrap()
+    );
   }
 }

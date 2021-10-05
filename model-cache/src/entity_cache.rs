@@ -51,6 +51,7 @@ impl EntityCache {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use insta::{assert_debug_snapshot, assert_json_snapshot};
   use rtg_model::sql_type;
 
   #[test]
@@ -89,10 +90,9 @@ mod tests {
       ],
     });
 
-    insta::assert_debug_snapshot!(EntityCache::new(Rc::clone(&value)));
-    insta::assert_debug_snapshot!(serde_json::to_string_pretty(&EntityCache::new(Rc::clone(
-      &value
-    )))
-    .unwrap());
+    assert_debug_snapshot!(EntityCache::new(Rc::clone(&value)));
+    assert_json_snapshot!(
+      serde_json::to_string_pretty(&EntityCache::new(Rc::clone(&value))).unwrap()
+    );
   }
 }

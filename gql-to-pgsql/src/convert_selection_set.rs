@@ -46,7 +46,7 @@ pub fn convert_selection_set<'a, T: Text<'a>>(
 // Tests
 #[cfg(test)]
 mod tests {
-  // use super::*;
+  use similar_asserts::assert_eq;
   #[test]
   fn it_works() {
     assert_eq!(1, 1);
