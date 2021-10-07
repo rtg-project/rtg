@@ -93,7 +93,10 @@ See the project road map on Github https://github.com/rtg-project/rtg/projects/1
 - [ ] Integrate Rtg Model and SQL Data Definition Language (DDL) schemas:
   - [ ] Generate Rtg Model from a Database DDL schema
   - [ ] Generate Database DDL schema from a Rtg Model
-- [ ] Automatically generate Typescript client SDK using GraphQL codegen
+- [ ] Automatically generate Typescript client SDK using [GraphQL codegen](graphql codegen)
+  - [ ] Generate basic client SDK
+  - [ ] Add features such as pagination streaming
+- [ ] Automatically generate Python client SDK using [Sgqlc](https://github.com/profusion/sgqlc)
   - [ ] Generate basic client SDK
   - [ ] Add features such as pagination streaming
 - [ ] Real time features
