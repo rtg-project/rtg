@@ -40,7 +40,7 @@ fn generate_partial_struct(ast: &syn::DeriveInput) -> Tokens {
 }
 
 struct Data {
-  orignal_struct_name: Ident,
+  original_struct_name: Ident,
   partial_struct_name: Ident,
   derives: Tokens,
   nested_names: HashMap<String, String>,
@@ -49,7 +49,7 @@ struct Data {
 impl Data {
   fn explode(self) -> (Ident, Ident, Tokens, HashMap<String, String>) {
     (
-      self.orignal_struct_name,
+      self.original_struct_name,
       self.partial_struct_name,
       self.derives,
       self.nested_names,
@@ -131,7 +131,7 @@ fn handle_name_value(name: &Ident, value: &Lit, struct_name: &mut Ident) {
 }
 
 fn parse_attributes(ast: &syn::DeriveInput) -> Data {
-  let orignal_struct_name = ast.ident.clone();
+  let original_struct_name = ast.ident.clone();
   let mut struct_name = String::from("Partial");
   struct_name.push_str(&ast.ident.to_string());
   let mut struct_name = Ident::new(struct_name);
@@ -163,7 +163,7 @@ fn parse_attributes(ast: &syn::DeriveInput) -> Data {
   };
 
   Data {
-    orignal_struct_name: orignal_struct_name,
+    original_struct_name: original_struct_name,
     partial_struct_name: struct_name,
     derives: derives,
     nested_names: create_nested_names_map(nested_original, nested_generated),
@@ -171,7 +171,7 @@ fn parse_attributes(ast: &syn::DeriveInput) -> Data {
 }
 
 fn create_struct(fields: &Vec<Field>, data: Data, generics: &Generics) -> Tokens {
-  let (orignal_struct_name, partial_struct_name, derives, nested_names) = data.explode();
+  let (original_struct_name, partial_struct_name, derives, nested_names) = data.explode();
   let (assigners, attributes, empty) = create_fields(&fields, nested_names);
 
   let (_, generics_no_where, _) = generics.split_for_impl();
@@ -182,7 +182,7 @@ fn create_struct(fields: &Vec<Field>, data: Data, generics: &Generics) -> Tokens
           #attributes
       }
 
-      impl #generics #orignal_struct_name #generics_no_where {
+      impl #generics #original_struct_name #generics_no_where {
           pub fn apply_partials(&mut self, partial_struct: #partial_struct_name #generics_no_where) {
               #assigners
           }
