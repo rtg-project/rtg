@@ -3,14 +3,14 @@
   "entities": [
     {
       "type": "databaseTable",
-      "name": "Person",
+      "name": "person",
       "sqlSchemaName": "public",
-      "sqlTableName": "person",
+      "sqlTableName": "person_table",
       "graphqlEntityTypeName": "Person",
       "graphqlFilterTypeName": "PersonWhereFilter",
-      "graphqlGetSingleOperationName": "getPerson",
-      "graphqlGetListOperationName": "getPersons",
-      "graphqlGetConnectionOperationName": "getPersonsConnection",
+      "graphqlGetSingleOperationName": "person",
+      "graphqlGetListOperationName": "persons",
+      "graphqlGetConnectionOperationName": "personConnection",
       "graphqlDefaultOrderBy": "id_ASC",
       "graphqlDefaultFirst": 10,
       "graphqlDefaultOffset": 0,
@@ -18,22 +18,22 @@
         {
           "type": "scalarDatabaseColumn",
           "name": "id",
-          "sqlType": "uuid",
-          "sqlColumnName": "id",
+          "sqlType": "text",
+          "sqlColumnName": "id_col",
           "graphqlFieldName": "id",
-          "graphqlTypeName": "ID",
+          "graphqlTypeName": "String",
           "graphqlOrderByAsc": "id_ASC",
           "graphqlOrderByDesc": "id_DESC"
         },
         {
           "type": "scalarDatabaseColumn",
-          "name": "age",
-          "sqlType": "integer",
-          "sqlColumnName": "age",
-          "graphqlFieldName": "age",
-          "graphqlTypeName": "Int",
-          "graphqlOrderByAsc": "age_ASC",
-          "graphqlOrderByDesc": "age_DESC"
+          "name": "drone",
+          "sqlType": "text",
+          "sqlColumnName": "drone_col",
+          "graphqlFieldName": "drone",
+          "graphqlTypeName": "String",
+          "graphqlOrderByAsc": "drone_ASC",
+          "graphqlOrderByDesc": "drone_DESC"
         }
       ]
     }

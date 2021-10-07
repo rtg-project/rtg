@@ -14,9 +14,9 @@ mod tests {
   fn it_works() {
     let model = convert_graphql_string::convert_graphql_string(
       r#"
-      type toto @table(name:"toto_table") {
-        a: ID @id @db(type:"uuid")
-        b: int @default(value:"now()") @db(type:"bigint")
+      type Person {
+        id: ID @id
+        age: Int
       }
       "#,
     )
