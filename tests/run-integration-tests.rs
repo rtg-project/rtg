@@ -14,9 +14,7 @@ mod tests {
 
   #[test]
   fn run_integration_tests() {
-    for entry in
-      glob("./tests/integration-cases/*/model.json").expect("Failed to read glob for test cases")
-    {
+    for entry in glob("./tests/*/model.json").expect("Failed to read glob for test cases") {
       let path = entry.unwrap();
       let dir_path = path.parent().unwrap();
       // println!("{:?}", dir_path.display());
