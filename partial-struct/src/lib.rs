@@ -30,13 +30,22 @@ pub fn partial_struct(input: TokenStream) -> TokenStream {
 fn generate_partial_struct(ast: &syn::DeriveInput) -> Tokens {
   let data = parse_attributes(&ast);
 
-  if let syn::Body::Struct(ref variant_data) = ast.body {
-    if let &syn::VariantData::Struct(ref fields) = variant_data {
-      return create_struct(fields, data, &ast.generics);
+  match &ast.body {
+    syn::Body::Struct(ref variant_data) => match variant_data {
+      syn::VariantData::Struct(ref fields) => {
+        return create_struct(fields, data, &ast.generics);
+      }
+      syn::VariantData::Tuple(_) => {
+        panic!("PartialStruct does not support tuple variant in structs");
+      }
+      syn::VariantData::Unit => {
+        panic!("PartialStruct does not support unit variant in structs");
+      }
+    },
+    syn::Body::Enum(variants) => {
+      return create_enum(variants, data, &ast.generics);
     }
   }
-
-  panic!("PartialStruct only supports non-tuple structs for now");
 }
 
 struct Data {
@@ -167,6 +176,80 @@ fn parse_attributes(ast: &syn::DeriveInput) -> Data {
     partial_struct_name: struct_name,
     derives: derives,
     nested_names: create_nested_names_map(nested_original, nested_generated),
+  }
+}
+
+fn create_enum(variants: &std::vec::Vec<syn::Variant>, data: Data, generics: &Generics) -> Tokens {
+  // TODO: de-hardcode everything bellow
+  quote! {
+    enum PartialConfig {
+      Simple {
+        foo: Option<u32>,
+        bar: Option<String>,
+        percentage: Option<f32>,
+      },
+      Basic {
+        delay: Option<u32>,
+        path: Option<String>,
+        percentage: Option<f32>,
+      },
+    }
+    impl Config {
+      pub fn apply_partials(&mut self, partial_struct: PartialConfig) {
+        match partial_struct {
+          PartialConfig::Simple {
+            foo: partial_foo,
+            bar: partial_bar,
+            percentage: partial_percentage,
+          } => {
+            if let Config::Simple {
+              foo: ref mut self_foo,
+              bar: ref mut self_bar,
+              percentage: ref mut self_percentage,
+            } = self
+            {
+              if let Some(field) = partial_foo {
+                *self_foo = Some(field);
+              }
+              if let Some(field) = partial_bar {
+                *self_bar = field;
+              }
+              if let Some(field) = partial_percentage {
+                *self_percentage = field;
+              }
+              return;
+            } else {
+              panic!("Unexpected enum variant");
+            }
+          }
+          PartialConfig::Basic {
+            delay: partial_delay,
+            path: partial_path,
+            percentage: partial_percentage,
+          } => {
+            if let Config::Basic {
+              delay: ref mut self_delay,
+              path: ref mut self_path,
+              percentage: ref mut self_percentage,
+            } = self
+            {
+              if let Some(field) = partial_delay {
+                *self_delay = field;
+              }
+              if let Some(field) = partial_path {
+                *self_path = Some(field);
+              }
+              if let Some(field) = partial_percentage {
+                *self_percentage = field;
+              }
+              return;
+            } else {
+              panic!("Unexpected enum variant");
+            }
+          }
+        };
+      }
+    }
   }
 }
 
