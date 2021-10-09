@@ -5,7 +5,7 @@ Forked from optional_struct, adding support for enum structs
 To test:
 
 ```sh
-cargo watch -x 'test'
+cargo watch -x 'test && say "ok" || say "ko"'
 ```
 
 To view the result of macro expansion:

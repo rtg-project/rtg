@@ -62,6 +62,13 @@ struct EnumAttributesData {
   nested_names: HashMap<String, String>,
 }
 
+struct VariantAttributesData {
+  original_struct_name: Ident,
+  partial_struct_name: Ident,
+  derives: Tokens,
+  nested_names: HashMap<String, String>,
+}
+
 fn nested_meta_item_to_ident(nested_item: &NestedMetaItem) -> &Ident {
   match nested_item {
     &NestedMetaItem::MetaItem(ref item) => match item {
@@ -215,6 +222,46 @@ fn parse_enum_attributes(ast: &DeriveInput) -> EnumAttributesData {
   }
 }
 
+fn parse_variant_attributes(ast: &Variant) -> VariantAttributesData {
+  let original_struct_name = ast.ident.clone();
+  let mut struct_name = String::from("Partial");
+  struct_name.push_str(&ast.ident.to_string());
+  let mut struct_name = Ident::new(struct_name);
+  let mut derives = quote! {};
+  let mut nested_generated = Vec::new();
+  let mut nested_original = Vec::new();
+
+  for attribute in &ast.attrs {
+    match &attribute.value {
+      &MetaItem::Word(_) => panic!("No word attribute is supported"),
+      &MetaItem::NameValue(ref name, ref value) => {
+        handle_struct_attribute_name_value(name, value, &mut struct_name)
+      }
+      &MetaItem::List(ref name, ref values) => handle_struct_attribute_list(
+        name,
+        values,
+        &mut nested_original,
+        &mut nested_generated,
+        &mut derives,
+      ),
+    }
+  }
+
+  // prevent warnings if no derive is given
+  derives = if derives.to_string().is_empty() {
+    quote! {}
+  } else {
+    quote! { #[derive(#derives)] }
+  };
+
+  VariantAttributesData {
+    original_struct_name: original_struct_name,
+    partial_struct_name: struct_name,
+    derives: derives,
+    nested_names: create_nested_names_map(nested_original, nested_generated),
+  }
+}
+
 /// Generate data for fields of a struct
 fn create_fields(
   fields: &Vec<Field>,
@@ -263,15 +310,15 @@ fn create_fields(
 /// Generates code for simple structs
 fn create_variant_struct(
   fields: &Vec<Field>,
-  struct_attributes_data: StructAttributesData,
+  variant_attributes_data: VariantAttributesData,
   ident: Ident,
 ) -> Tokens {
-  let StructAttributesData {
+  let VariantAttributesData {
     original_struct_name,
     partial_struct_name,
     derives,
     nested_names,
-  } = struct_attributes_data;
+  } = variant_attributes_data;
   let (assigners, attributes, empty) = create_fields(&fields, nested_names);
 
   quote! {
@@ -293,9 +340,12 @@ fn create_variants(
   for variant in variants {
     match variant.data {
       VariantData::Struct(ref fields) => {
-        let a = create_variant_struct(fields, enum_attributes_data, variant.ident);
+        let variant_attributes_data = parse_variant_attributes(variant);
+        let variant_name = variant.ident.clone();
+        let variant = create_variant_struct(fields, variant_attributes_data, variant_name);
         attributes = quote! {
           #attributes
+          #variant
         }
       }
       VariantData::Tuple(_) => {
@@ -362,10 +412,10 @@ fn create_enum(
 
   // TODO: de-hardcode everything bellow
   quote! {
-    // #derives
-    // pub enum #partial_struct_name #generics {
-    //   #attributes
-    // }
+    #derives
+    pub enum #partial_struct_name #generics {
+      #attributes
+    }
   }
 }
 
