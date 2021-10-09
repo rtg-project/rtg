@@ -2,6 +2,12 @@
 
 Forked from optional_struct, adding support for enum structs
 
+To test macro expansion:
+
+```
+cargo watch -x 'expand --test 008-enum' 
+```
+
 ## Goal
 
 This crate allows the user to generate a structure containing the same fields as the original struct but wrapped in Option<T>.

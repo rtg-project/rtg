@@ -6,10 +6,10 @@ extern crate quote;
 use proc_macro::TokenStream;
 use quote::Tokens;
 use std::collections::HashMap;
-use syn::Field;
-use syn::Generics;
-use syn::Ident;
-use syn::Lit;
+use syn::{
+  parse_derive_input, Body, DeriveInput, Field, Generics, Ident, Lit, MetaItem, NestedMetaItem,
+  Variant, VariantData,
+};
 
 #[proc_macro_derive(
   PartialStruct,
@@ -22,40 +22,40 @@ use syn::Lit;
 )]
 pub fn partial_struct(input: TokenStream) -> TokenStream {
   let s = input.to_string();
-  let ast = syn::parse_derive_input(&s).unwrap();
+  let ast = parse_derive_input(&s).unwrap();
   let gen = generate_partial_struct(&ast);
   gen.parse().unwrap()
 }
 
-fn generate_partial_struct(ast: &syn::DeriveInput) -> Tokens {
-  let data = parse_attributes(&ast);
-
+fn generate_partial_struct(ast: &DeriveInput) -> Tokens {
   match &ast.body {
-    syn::Body::Struct(ref variant_data) => match variant_data {
-      syn::VariantData::Struct(ref fields) => {
+    Body::Struct(ref variant_data) => match variant_data {
+      VariantData::Struct(ref fields) => {
+        let data = parse_struct_attributes(&ast);
         return create_struct(fields, data, &ast.generics);
       }
-      syn::VariantData::Tuple(_) => {
+      VariantData::Tuple(_) => {
         panic!("PartialStruct does not support tuple variant in structs");
       }
-      syn::VariantData::Unit => {
+      VariantData::Unit => {
         panic!("PartialStruct does not support unit variant in structs");
       }
     },
-    syn::Body::Enum(variants) => {
+    Body::Enum(variants) => {
+      let data = parse_enum_attributes(&ast);
       return create_enum(variants, data, &ast.generics);
     }
   }
 }
 
-struct Data {
+struct StructAttributesData {
   original_struct_name: Ident,
   partial_struct_name: Ident,
   derives: Tokens,
   nested_names: HashMap<String, String>,
 }
 
-impl Data {
+impl StructAttributesData {
   fn explode(self) -> (Ident, Ident, Tokens, HashMap<String, String>) {
     (
       self.original_struct_name,
@@ -66,13 +66,20 @@ impl Data {
   }
 }
 
-fn nested_meta_item_to_ident(nested_item: &syn::NestedMetaItem) -> &Ident {
+struct EnumAttributesData {
+  original_struct_name: Ident,
+  partial_struct_name: Ident,
+  derives: Tokens,
+  nested_names: HashMap<String, String>,
+}
+
+fn nested_meta_item_to_ident(nested_item: &NestedMetaItem) -> &Ident {
   match nested_item {
-    &syn::NestedMetaItem::MetaItem(ref item) => match item {
-      &syn::MetaItem::Word(ref ident) => ident,
+    &NestedMetaItem::MetaItem(ref item) => match item {
+      &MetaItem::Word(ref ident) => ident,
       _ => panic!("Only traits name are supported inside partial_struct"),
     },
-    &syn::NestedMetaItem::Literal(_) => {
+    &NestedMetaItem::Literal(_) => {
       panic!("Only traits name are supported inside partial_struct")
     }
   }
@@ -96,7 +103,7 @@ fn create_nested_names_map(orig: Vec<Ident>, gen: Vec<Ident>) -> HashMap<String,
 
 fn handle_list(
   name: &Ident,
-  values: &Vec<syn::NestedMetaItem>,
+  values: &Vec<NestedMetaItem>,
   nested_original: &mut Vec<Ident>,
   nested_generated: &mut Vec<Ident>,
   derives: &mut Tokens,
@@ -139,7 +146,7 @@ fn handle_name_value(name: &Ident, value: &Lit, struct_name: &mut Ident) {
   }
 }
 
-fn parse_attributes(ast: &syn::DeriveInput) -> Data {
+fn parse_struct_attributes(ast: &DeriveInput) -> StructAttributesData {
   let original_struct_name = ast.ident.clone();
   let mut struct_name = String::from("Partial");
   struct_name.push_str(&ast.ident.to_string());
@@ -150,11 +157,9 @@ fn parse_attributes(ast: &syn::DeriveInput) -> Data {
 
   for attribute in &ast.attrs {
     match &attribute.value {
-      &syn::MetaItem::Word(_) => panic!("No word attribute is supported"),
-      &syn::MetaItem::NameValue(ref name, ref value) => {
-        handle_name_value(name, value, &mut struct_name)
-      }
-      &syn::MetaItem::List(ref name, ref values) => handle_list(
+      &MetaItem::Word(_) => panic!("No word attribute is supported"),
+      &MetaItem::NameValue(ref name, ref value) => handle_name_value(name, value, &mut struct_name),
+      &MetaItem::List(ref name, ref values) => handle_list(
         name,
         values,
         &mut nested_original,
@@ -171,7 +176,7 @@ fn parse_attributes(ast: &syn::DeriveInput) -> Data {
     quote! { #[derive(#derives)] }
   };
 
-  Data {
+  StructAttributesData {
     original_struct_name: original_struct_name,
     partial_struct_name: struct_name,
     derives: derives,
@@ -179,108 +184,45 @@ fn parse_attributes(ast: &syn::DeriveInput) -> Data {
   }
 }
 
-fn create_enum(variants: &std::vec::Vec<syn::Variant>, data: Data, generics: &Generics) -> Tokens {
-  // TODO: de-hardcode everything bellow
-  quote! {
-    enum PartialConfig {
-      Simple {
-        foo: Option<u32>,
-        bar: Option<String>,
-        percentage: Option<f32>,
-      },
-      Basic {
-        delay: Option<u32>,
-        path: Option<String>,
-        percentage: Option<f32>,
-      },
+fn parse_enum_attributes(ast: &DeriveInput) -> EnumAttributesData {
+  let original_struct_name = ast.ident.clone();
+  let mut struct_name = String::from("Partial");
+  struct_name.push_str(&ast.ident.to_string());
+  let mut struct_name = Ident::new(struct_name);
+  let mut derives = quote! {};
+  let mut nested_generated = Vec::new();
+  let mut nested_original = Vec::new();
+
+  for attribute in &ast.attrs {
+    match &attribute.value {
+      &MetaItem::Word(_) => panic!("No word attribute is supported"),
+      &MetaItem::NameValue(ref name, ref value) => handle_name_value(name, value, &mut struct_name),
+      &MetaItem::List(ref name, ref values) => handle_list(
+        name,
+        values,
+        &mut nested_original,
+        &mut nested_generated,
+        &mut derives,
+      ),
     }
-    impl Config {
-      pub fn apply_partials(&mut self, partial_struct: PartialConfig) {
-        match partial_struct {
-          PartialConfig::Simple {
-            foo: partial_foo,
-            bar: partial_bar,
-            percentage: partial_percentage,
-          } => {
-            if let Config::Simple {
-              foo: ref mut self_foo,
-              bar: ref mut self_bar,
-              percentage: ref mut self_percentage,
-            } = self
-            {
-              if let Some(field) = partial_foo {
-                *self_foo = Some(field);
-              }
-              if let Some(field) = partial_bar {
-                *self_bar = field;
-              }
-              if let Some(field) = partial_percentage {
-                *self_percentage = field;
-              }
-              return;
-            } else {
-              panic!("Unexpected enum variant");
-            }
-          }
-          PartialConfig::Basic {
-            delay: partial_delay,
-            path: partial_path,
-            percentage: partial_percentage,
-          } => {
-            if let Config::Basic {
-              delay: ref mut self_delay,
-              path: ref mut self_path,
-              percentage: ref mut self_percentage,
-            } = self
-            {
-              if let Some(field) = partial_delay {
-                *self_delay = field;
-              }
-              if let Some(field) = partial_path {
-                *self_path = Some(field);
-              }
-              if let Some(field) = partial_percentage {
-                *self_percentage = field;
-              }
-              return;
-            } else {
-              panic!("Unexpected enum variant");
-            }
-          }
-        };
-      }
-    }
+  }
+
+  // prevent warnings if no derive is given
+  derives = if derives.to_string().is_empty() {
+    quote! {}
+  } else {
+    quote! { #[derive(#derives)] }
+  };
+
+  EnumAttributesData {
+    original_struct_name: original_struct_name,
+    partial_struct_name: struct_name,
+    derives: derives,
+    nested_names: create_nested_names_map(nested_original, nested_generated),
   }
 }
 
-fn create_struct(fields: &Vec<Field>, data: Data, generics: &Generics) -> Tokens {
-  let (original_struct_name, partial_struct_name, derives, nested_names) = data.explode();
-  let (assigners, attributes, empty) = create_fields(&fields, nested_names);
-
-  let (_, generics_no_where, _) = generics.split_for_impl();
-
-  quote! {
-      #derives
-      pub struct #partial_struct_name #generics {
-          #attributes
-      }
-
-      impl #generics #original_struct_name #generics_no_where {
-          pub fn apply_partials(&mut self, partial_struct: #partial_struct_name #generics_no_where) {
-              #assigners
-          }
-      }
-
-      impl #generics #partial_struct_name #generics_no_where {
-          pub fn empty() -> #partial_struct_name #generics_no_where {
-              #partial_struct_name {
-                  #empty
-              }
-          }
-      }
-  }
-}
-
+/// Generate data for fields of a struct
 fn create_fields(
   fields: &Vec<Field>,
   nested_names: HashMap<String, String>,
@@ -323,4 +265,125 @@ fn create_fields(
   }
 
   (assigners, attributes, empty)
+}
+
+/// Generates code for simple structs
+fn create_variant_struct(fields: &Vec<Field>, data: StructAttributesData, ident: Ident) -> Tokens {
+  let (original_struct_name, partial_struct_name, derives, nested_names) = data.explode();
+  let (assigners, attributes, empty) = create_fields(&fields, nested_names);
+
+  quote! {
+    #ident {
+      #attributes
+    }
+  }
+}
+
+/// Generate data for the variants of an enum
+fn create_variants(
+  variants: &Vec<Variant>,
+  data: StructAttributesData,
+  nested_names: HashMap<String, String>,
+) -> (Tokens, Tokens, Tokens) {
+  let mut attributes = quote! {};
+  let mut assigners = quote! {};
+  let mut empty = quote! {};
+
+  // for variant in variants {
+  //   match variant.data {
+  //     VariantData::Struct(ref fields) => {
+  //       let a = create_variant_struct(fields, data, variant.ident);
+  //       attributes = quote! {
+  //         #attributes
+  //       }
+  //     }
+  //     VariantData::Tuple(_) => {
+  //       panic!("PartialStruct does not support tuple variant in structs");
+  //     }
+  //     VariantData::Unit => {
+  //       panic!("PartialStruct does not support unit variant in structs");
+  //     }
+  //   }
+  // }
+
+  //////////////////////////
+  // for field in fields {
+  //   let ref type_name = &field.ty;
+  //   let ref field_name = &field.ident.clone().unwrap();
+  //   let next_attribute;
+  //   let next_assigner;
+  //   let next_empty;
+
+  //   let type_name_string = quote! {#type_name}.to_string();
+  //   let type_name_string: String = type_name_string.chars().filter(|&c| c != ' ').collect();
+
+  //   if type_name_string.starts_with("Option<") {
+  //     next_attribute = quote! { pub #field_name: #type_name, };
+  //     next_assigner = quote! { self.#field_name = partial_struct.#field_name; };
+  //     next_empty = quote! { #field_name: None, };
+  //   } else if nested_names.contains_key(&type_name_string) {
+  //     let type_name = Ident::new(nested_names.get(&type_name_string).unwrap().as_str());
+  //     next_attribute = quote! { pub #field_name: #type_name, };
+  //     next_assigner = quote! { self.#field_name.apply_partials(partial_struct.#field_name); };
+  //     next_empty = quote! { #field_name: #type_name::empty(), };
+  //   } else {
+  //     next_attribute = quote! { pub #field_name: Option<#type_name>, };
+  //     next_assigner = quote! {
+  //         if let Some(attribute) = partial_struct.#field_name {
+  //             self.#field_name = attribute;
+  //         }
+  //     };
+  //     next_empty = quote! { #field_name: None, };
+  //   }
+
+  //   assigners = quote! { #assigners #next_assigner };
+  //   attributes = quote! { #attributes #next_attribute };
+  //   empty = quote! { #empty #next_empty }
+  // }
+
+  (assigners, attributes, empty)
+}
+
+/// Generates code for enum
+fn create_enum(variants: &Vec<Variant>, data: EnumAttributesData, generics: &Generics) -> Tokens {
+  // let (original_struct_name, partial_struct_name, derives, nested_names) = data.explode();
+  // let (assigners, attributes, empty) = create_variants(&variants, data, nested_names);
+  // let (_, generics_no_where, _) = generics.split_for_impl();
+
+  // TODO: de-hardcode everything bellow
+  quote! {
+    // #derives
+    // pub enum #partial_struct_name #generics {
+    //   #attributes
+    // }
+  }
+}
+
+/// Generates code for simple structs
+fn create_struct(fields: &Vec<Field>, data: StructAttributesData, generics: &Generics) -> Tokens {
+  let (original_struct_name, partial_struct_name, derives, nested_names) = data.explode();
+  let (assigners, attributes, empty) = create_fields(&fields, nested_names);
+
+  let (_, generics_no_where, _) = generics.split_for_impl();
+
+  quote! {
+    #derives
+    pub struct #partial_struct_name #generics {
+      #attributes
+    }
+
+    impl #generics #original_struct_name #generics_no_where {
+      pub fn apply_partials(&mut self, partial_struct: #partial_struct_name #generics_no_where) {
+        #assigners
+      }
+    }
+
+    impl #generics #partial_struct_name #generics_no_where {
+      pub fn empty() -> #partial_struct_name #generics_no_where {
+        #partial_struct_name {
+          #empty
+        }
+      }
+    }
+  }
 }
