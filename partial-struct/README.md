@@ -1,17 +1,21 @@
 # Partial Struct
 
-Forked from optional_struct, adding support for enum structs
+Similar to optional_struct, but with the following changes:
+
+- support for structs and enum structs
+- Simpler API: only 2 custom attributes: `#[partial_name(YourNameHere)]` and `#[partial(...)]` 
+- more generic way of applying attributes to the derived StructPartial, using the `#[partial(derive(Debug))]` syntax
 
 To test:
 
 ```sh
-cargo watch -x 'test && say "ok" || say "ko"'
+cargo watch --clear -x 'test && say "ok" || say "ko"'
 ```
 
 To view the result of macro expansion:
 
 ```sh
-cargo watch -x 'expand --test 008-enum' 
+cargo watch --clear -x 'expand --test 008-enum' 
 ```
 
 ## Goal
