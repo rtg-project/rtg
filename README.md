@@ -30,7 +30,9 @@
 
 rtg is a versatile relational (SQL) to graph (GraphQL) transformation tool in rust, for rust, javascript, typescript, and maybe python.
 
-![Overview](./overview.png)
+Here is the architecture of RTG, with the current area of focus in bold:
+
+![Overview](./website/public/img/architecture.svg)
 
 ### Built With
 
