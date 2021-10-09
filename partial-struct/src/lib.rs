@@ -31,8 +31,8 @@ fn generate_partial_struct(ast: &DeriveInput) -> Tokens {
   match &ast.body {
     Body::Struct(ref variant_data) => match variant_data {
       VariantData::Struct(ref fields) => {
-        let data = parse_struct_attributes(&ast);
-        return create_struct(fields, data, &ast.generics);
+        let struct_attribute_data = parse_struct_attributes(&ast);
+        return create_struct(fields, struct_attribute_data, &ast.generics);
       }
       VariantData::Tuple(_) => {
         panic!("PartialStruct does not support tuple variant in structs");
@@ -42,8 +42,8 @@ fn generate_partial_struct(ast: &DeriveInput) -> Tokens {
       }
     },
     Body::Enum(variants) => {
-      let data = parse_enum_attributes(&ast);
-      return create_enum(variants, data, &ast.generics);
+      let enum_attribute_data = parse_enum_attributes(&ast);
+      return create_enum(variants, enum_attribute_data, &ast.generics);
     }
   }
 }
@@ -53,17 +53,6 @@ struct StructAttributesData {
   partial_struct_name: Ident,
   derives: Tokens,
   nested_names: HashMap<String, String>,
-}
-
-impl StructAttributesData {
-  fn explode(self) -> (Ident, Ident, Tokens, HashMap<String, String>) {
-    (
-      self.original_struct_name,
-      self.partial_struct_name,
-      self.derives,
-      self.nested_names,
-    )
-  }
 }
 
 struct EnumAttributesData {
@@ -101,7 +90,7 @@ fn create_nested_names_map(orig: Vec<Ident>, gen: Vec<Ident>) -> HashMap<String,
   map
 }
 
-fn handle_list(
+fn handle_struct_attribute_list(
   name: &Ident,
   values: &Vec<NestedMetaItem>,
   nested_original: &mut Vec<Ident>,
@@ -133,7 +122,7 @@ fn handle_list(
   };
 }
 
-fn handle_name_value(name: &Ident, value: &Lit, struct_name: &mut Ident) {
+fn handle_struct_attribute_name_value(name: &Ident, value: &Lit, struct_name: &mut Ident) {
   match value {
     &Lit::Str(ref name_value, _) => {
       if name == "partial_name" {
@@ -158,8 +147,10 @@ fn parse_struct_attributes(ast: &DeriveInput) -> StructAttributesData {
   for attribute in &ast.attrs {
     match &attribute.value {
       &MetaItem::Word(_) => panic!("No word attribute is supported"),
-      &MetaItem::NameValue(ref name, ref value) => handle_name_value(name, value, &mut struct_name),
-      &MetaItem::List(ref name, ref values) => handle_list(
+      &MetaItem::NameValue(ref name, ref value) => {
+        handle_struct_attribute_name_value(name, value, &mut struct_name)
+      }
+      &MetaItem::List(ref name, ref values) => handle_struct_attribute_list(
         name,
         values,
         &mut nested_original,
@@ -196,8 +187,10 @@ fn parse_enum_attributes(ast: &DeriveInput) -> EnumAttributesData {
   for attribute in &ast.attrs {
     match &attribute.value {
       &MetaItem::Word(_) => panic!("No word attribute is supported"),
-      &MetaItem::NameValue(ref name, ref value) => handle_name_value(name, value, &mut struct_name),
-      &MetaItem::List(ref name, ref values) => handle_list(
+      &MetaItem::NameValue(ref name, ref value) => {
+        handle_struct_attribute_name_value(name, value, &mut struct_name)
+      }
+      &MetaItem::List(ref name, ref values) => handle_struct_attribute_list(
         name,
         values,
         &mut nested_original,
@@ -268,8 +261,17 @@ fn create_fields(
 }
 
 /// Generates code for simple structs
-fn create_variant_struct(fields: &Vec<Field>, data: StructAttributesData, ident: Ident) -> Tokens {
-  let (original_struct_name, partial_struct_name, derives, nested_names) = data.explode();
+fn create_variant_struct(
+  fields: &Vec<Field>,
+  struct_attributes_data: StructAttributesData,
+  ident: Ident,
+) -> Tokens {
+  let StructAttributesData {
+    original_struct_name,
+    partial_struct_name,
+    derives,
+    nested_names,
+  } = struct_attributes_data;
   let (assigners, attributes, empty) = create_fields(&fields, nested_names);
 
   quote! {
@@ -282,29 +284,28 @@ fn create_variant_struct(fields: &Vec<Field>, data: StructAttributesData, ident:
 /// Generate data for the variants of an enum
 fn create_variants(
   variants: &Vec<Variant>,
-  data: StructAttributesData,
   nested_names: HashMap<String, String>,
 ) -> (Tokens, Tokens, Tokens) {
   let mut attributes = quote! {};
   let mut assigners = quote! {};
   let mut empty = quote! {};
 
-  // for variant in variants {
-  //   match variant.data {
-  //     VariantData::Struct(ref fields) => {
-  //       let a = create_variant_struct(fields, data, variant.ident);
-  //       attributes = quote! {
-  //         #attributes
-  //       }
-  //     }
-  //     VariantData::Tuple(_) => {
-  //       panic!("PartialStruct does not support tuple variant in structs");
-  //     }
-  //     VariantData::Unit => {
-  //       panic!("PartialStruct does not support unit variant in structs");
-  //     }
-  //   }
-  // }
+  for variant in variants {
+    match variant.data {
+      VariantData::Struct(ref fields) => {
+        let a = create_variant_struct(fields, enum_attributes_data, variant.ident);
+        attributes = quote! {
+          #attributes
+        }
+      }
+      VariantData::Tuple(_) => {
+        panic!("PartialStruct does not support tuple variant in structs");
+      }
+      VariantData::Unit => {
+        panic!("PartialStruct does not support unit variant in structs");
+      }
+    }
+  }
 
   //////////////////////////
   // for field in fields {
@@ -345,9 +346,18 @@ fn create_variants(
 }
 
 /// Generates code for enum
-fn create_enum(variants: &Vec<Variant>, data: EnumAttributesData, generics: &Generics) -> Tokens {
-  // let (original_struct_name, partial_struct_name, derives, nested_names) = data.explode();
-  // let (assigners, attributes, empty) = create_variants(&variants, data, nested_names);
+fn create_enum(
+  variants: &Vec<Variant>,
+  enum_attributes_data: EnumAttributesData,
+  generics: &Generics,
+) -> Tokens {
+  let EnumAttributesData {
+    original_struct_name,
+    partial_struct_name,
+    derives,
+    nested_names,
+  } = enum_attributes_data;
+  let (assigners, attributes, empty) = create_variants(&variants, nested_names);
   // let (_, generics_no_where, _) = generics.split_for_impl();
 
   // TODO: de-hardcode everything bellow
@@ -360,8 +370,17 @@ fn create_enum(variants: &Vec<Variant>, data: EnumAttributesData, generics: &Gen
 }
 
 /// Generates code for simple structs
-fn create_struct(fields: &Vec<Field>, data: StructAttributesData, generics: &Generics) -> Tokens {
-  let (original_struct_name, partial_struct_name, derives, nested_names) = data.explode();
+fn create_struct(
+  fields: &Vec<Field>,
+  struct_attributes_data: StructAttributesData,
+  generics: &Generics,
+) -> Tokens {
+  let StructAttributesData {
+    original_struct_name,
+    partial_struct_name,
+    derives,
+    nested_names,
+  } = struct_attributes_data;
   let (assigners, attributes, empty) = create_fields(&fields, nested_names);
 
   let (_, generics_no_where, _) = generics.split_for_impl();

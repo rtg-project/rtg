@@ -2,9 +2,15 @@
 
 Forked from optional_struct, adding support for enum structs
 
-To test macro expansion:
+To test:
 
+```sh
+cargo watch -x 'test'
 ```
+
+To view the result of macro expansion:
+
+```sh
 cargo watch -x 'expand --test 008-enum' 
 ```
 
