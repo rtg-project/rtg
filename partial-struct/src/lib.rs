@@ -11,6 +11,7 @@ use syn::{
   NestedMetaItem, Variant, VariantData,
 };
 
+/// The entry point of this macro
 #[proc_macro_derive(PartialStruct, attributes(partial, partial_attribute))]
 pub fn partial_struct(input: TokenStream) -> TokenStream {
   let s = input.to_string();
@@ -33,6 +34,8 @@ pub fn partial_struct(input: TokenStream) -> TokenStream {
   return gen.parse().unwrap();
 }
 
+/// A struct that contains the information about the attributes
+/// of an object  (enum, struct, variant or field)
 struct AttributeData {
   name: Ident,
   completion: Option<String>,
@@ -41,6 +44,9 @@ struct AttributeData {
   attributes: Vec<Tokens>,
 }
 
+/// Parses the `partial` and `partial_attribute` attributes
+/// and returns an AttributeData struct that contains important info about the object.
+/// This applies to struct, enums and variants
 fn parse_attributes(name: &String, attrs: &Vec<Attribute>) -> AttributeData {
   let mut partial_name = name.clone();
   let mut partial_completion = None;
@@ -146,7 +152,7 @@ fn create_enum(ast: &DeriveInput, variants: &Vec<Variant>) -> Tokens {
     require,
     skip,
   } = parse_attributes(&format!("{}Partial", ast.ident), &ast.attrs);
-  let (assigners, attributes, empty) = create_variants(&variants);
+  let (assigners, variants_result, empty) = create_variants(&variants);
   // let original_struct_name = ast.ident.clone();
   let generics = ast.generics.clone();
   // let (_impl_generics, ty_generics, _where_clause) = generics.split_for_impl();
@@ -155,7 +161,7 @@ fn create_enum(ast: &DeriveInput, variants: &Vec<Variant>) -> Tokens {
   quote! {
     #attributes
     pub enum #name #generics {
-      #attributes
+      #variants_result
     }
   }
 }
@@ -274,10 +280,10 @@ fn create_variants(variants: &Vec<Variant>) -> (Tokens, Tokens, Tokens) {
         }
       }
       VariantData::Tuple(_) => {
-        panic!("PartialStruct does not support tuple variant in structs");
+        panic!("PartialStruct does not support tuple variant in structs so far");
       }
       VariantData::Unit => {
-        panic!("PartialStruct does not support unit variant in structs");
+        panic!("PartialStruct does not support unit variant in structs so far");
       }
     }
   }
