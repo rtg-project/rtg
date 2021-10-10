@@ -38,12 +38,15 @@ pub fn partial_struct(input: TokenStream) -> TokenStream {
   // panic!("{}", partial_declaration.parse::<String>().unwrap());
   let result = quote! {
     /// Partial declaration
+    #[automatically_derived]
     #partial_declaration
 
     /// Function to merge with a complete
+    #[automatically_derived]
     #merge_assigner
 
     /// Function to create an empty partial
+    #[automatically_derived]
     #empty_initializer
   };
   return result.parse().unwrap();
@@ -346,6 +349,19 @@ fn create_fields(fields: &Vec<Field>) -> ResultData {
   let mut merge_assigner_mut = quote! {};
   let mut empty_initializer_mut = quote! {};
   for field in fields {
+    let name_init = if field.ident.is_some() {
+      format!("{}", field.ident.clone().unwrap())
+    } else {
+      format!("")
+    };
+    let AttributeData {
+      attributes,
+      completion,
+      name,
+      require,
+      skip,
+    } = parse_attributes(&name_init, &field.attrs);
+
     let ref type_name = &field.ty;
     let ref field_name = &field.ident.clone().unwrap();
     let next_partial_declaration;
@@ -369,8 +385,8 @@ fn create_fields(fields: &Vec<Field>) -> ResultData {
       next_partial_declaration = quote! { #field_name: Option<#type_name>, };
       // next_partial_declaration = quote! { pub #field_name: Option<#type_name>, };
       next_merge_assigner = quote! {
-          if let Some(attribute) = partial_struct.#field_name {
-              self.#field_name = attribute;
+          if let Some(field_value) = partial_struct.#field_name {
+              self.#field_name = field_value;
           }
       };
       next_empty_initializer = quote! { #field_name: None, };
