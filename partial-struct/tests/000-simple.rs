@@ -16,7 +16,7 @@ fn test_apply_partials() {
     percentage: 3.12,
   };
 
-  let partial_config = PartialConfig {
+  let partial_config = ConfigPartial {
     delay: None,
     path: Some("/tmp/bar.log".to_owned()),
     percentage: Some(42.24),

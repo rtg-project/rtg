@@ -10,7 +10,7 @@ struct Config {
 
 #[test]
 fn test_apply_partials() {
-  let partial_config = PartialConfig::empty();
+  let partial_config = ConfigPartial::empty();
 
   assert_eq!(partial_config.delay, None);
   assert_eq!(partial_config.path, None);

@@ -36,18 +36,26 @@ pub fn partial_struct(input: TokenStream) -> TokenStream {
     },
   };
   // panic!("{}", partial_declaration.parse::<String>().unwrap());
+
+  // let result = quote! {
+  //   /// Partial declaration
+  //   #[automatically_derived]
+  //   #partial_declaration
+
+  //   /// Function to merge with a complete
+  //   #[automatically_derived]
+  //   #merge_assigner
+
+  //   /// Function to create an empty partial
+  //   #[automatically_derived]
+  //   #empty_initializer
+  // };
+
   let result = quote! {
     /// Partial declaration
     #[automatically_derived]
     #partial_declaration
 
-    /// Function to merge with a complete
-    #[automatically_derived]
-    #merge_assigner
-
-    /// Function to create an empty partial
-    #[automatically_derived]
-    #empty_initializer
   };
   return result.parse().unwrap();
 }
@@ -56,6 +64,7 @@ pub fn partial_struct(input: TokenStream) -> TokenStream {
 /// of an object  (enum, struct, variant or field)
 struct AttributeData {
   name: Ident,
+  nested_type: Option<Ident>,
   completion: Option<String>,
   require: bool,
   skip: bool,
@@ -74,9 +83,10 @@ struct ResultData {
 /// and returns an AttributeData struct that contains important info about the object.
 /// This applies to struct, enums and variants
 fn parse_attributes(name: &String, attrs: &Vec<Attribute>) -> AttributeData {
-  let mut partial_name = name.clone();
+  let mut partial_name = Ident::new((*name).clone());
   let mut partial_completion = None;
-  let mut attributes = quote! {};
+  let mut partial_nested_type = None;
+  let mut partial_attributes = quote! {};
   let mut skip = false;
   let mut require = false;
   for attribute in &*attrs {
@@ -122,8 +132,16 @@ fn parse_attributes(name: &String, attrs: &Vec<Attribute>) -> AttributeData {
                   }
                   MetaItem::NameValue(ref name2, ref lit2) => match name2.to_string().as_str() {
                     "name" => match lit2 {
-                      &Lit::Str(ref name_value, _) => partial_name = format!("{}", name_value),
+                      &Lit::Str(ref name_value, _) => {
+                        partial_name = Ident::new(format!("{}", name_value))
+                      }
                       _ => panic!("partial name should be a string"),
+                    },
+                    "nested_type" => match lit2 {
+                      &Lit::Str(ref name_value, _) => {
+                        partial_nested_type = Some(Ident::new(format!("{}", name_value)))
+                      }
+                      _ => panic!("partial nested name should be a string"),
                     },
                     "completion" => match lit2 {
                       &Lit::Str(ref name_value, _) => {
@@ -152,8 +170,8 @@ fn parse_attributes(name: &String, attrs: &Vec<Attribute>) -> AttributeData {
             for value in values {
               let mut tokens = quote::Tokens::default();
               quote::ToTokens::to_tokens(value, &mut tokens);
-              attributes = quote! {
-                #attributes
+              partial_attributes = quote! {
+                #partial_attributes
                 #[#tokens]
               };
             }
@@ -164,17 +182,19 @@ fn parse_attributes(name: &String, attrs: &Vec<Attribute>) -> AttributeData {
     }
   }
   AttributeData {
-    name: Ident::new(partial_name),
+    name: partial_name,
     completion: partial_completion,
+    nested_type: partial_nested_type,
     require,
     skip,
-    attributes,
+    attributes: partial_attributes,
   }
 }
 
 /// Generates code for enum
 fn create_enum(ast: &DeriveInput, variants: &Vec<Variant>) -> ResultData {
   let AttributeData {
+    nested_type,
     attributes,
     completion,
     name,
@@ -245,6 +265,7 @@ fn create_variant(variant: &Variant) -> ResultData {
   let mut empty_initializer_mut = quote! {};
 
   let AttributeData {
+    nested_type,
     name,
     completion,
     skip,
@@ -303,6 +324,7 @@ fn create_variant(variant: &Variant) -> ResultData {
 
 fn create_struct(ast: &DeriveInput, fields: &Vec<Field>) -> ResultData {
   let AttributeData {
+    nested_type,
     attributes,
     completion,
     name,
@@ -355,6 +377,7 @@ fn create_fields(fields: &Vec<Field>) -> ResultData {
       format!("")
     };
     let AttributeData {
+      nested_type,
       attributes,
       completion,
       name,
@@ -376,11 +399,13 @@ fn create_fields(fields: &Vec<Field>) -> ResultData {
       // next_partial_declaration = quote! { pub #field_name: #type_name, };
       next_merge_assigner = quote! { self.#field_name = partial_struct.#field_name; };
       next_empty_initializer = quote! { #field_name: None, };
-    // } else if nested_names.contains_key(&type_name_string) {
-    //   let type_name = Ident::new(nested_names.get(&type_name_string).unwrap().as_str());
-    //   next_partial_declaration = quote! { pub #field_name: #type_name, };
-    //   next_merge_assigner = quote! { self.#field_name.apply_partials(partial_struct.#field_name); };
-    //   next_empty_initializer = quote! { #field_name: #type_name::empty(), };
+    } else if nested_type.is_some() {
+      let nest_type_name = nested_type.unwrap();
+      next_partial_declaration = quote! { #field_name: Option<#nest_type_name>, };
+      // next_partial_declaration = quote! { pub #field_name: #nest_type_name, };
+      next_merge_assigner =
+        quote! { self.#field_name.apply_partials(partial_struct.#field_name.unwrap()); };
+      next_empty_initializer = quote! { #field_name: Some(#nest_type_name::empty()), };
     } else {
       next_partial_declaration = quote! { #field_name: Option<#type_name>, };
       // next_partial_declaration = quote! { pub #field_name: Option<#type_name>, };

@@ -9,13 +9,17 @@ Similar to optional_struct, but with the following changes:
 To test:
 
 ```sh
-cargo watch --clear -x 'test && say "ok" || say "ko"'
+cargo watch --clear -x 'test -- 008 && say "o-k" || say "k-o"'
 ```
 
 To view the result of macro expansion:
 
 ```sh
 cargo watch --clear -x 'expand --test 008-enum' 
+
+# or
+
+cargo watch --clear -x 'test -- -Z macro-backtrace && say "o-k" || say "k-o"'
 ```
 
 ## Goal

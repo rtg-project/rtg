@@ -5,7 +5,8 @@ use serde::{Deserialize, Serialize};
 // #[derive(Debug, Deserialize, Serialize)]
 #[derive(PartialStruct)]
 // #[serde(tag = "type", rename_all = "camelCase")]
-#[partial(name = "ConfigOption", completion = "complete_config")]
+// #[partial(name = "ConfigOption", completion = "complete_config")]
+#[partial(name = "ConfigOption")]
 #[partial_attribute(derive(Debug))]
 // #[partial_attribute(serde(tag = "type", rename_all = "camelCase"))]
 enum Config {

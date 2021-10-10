@@ -2,7 +2,7 @@
 extern crate partial_struct;
 
 #[derive(PartialStruct)]
-#[partial_derive(Debug, Clone, PartialEq)]
+#[partial_attribute(derive(Debug, Clone, PartialEq))]
 struct Config {
   delay: Option<u32>,
   path: String,
@@ -17,7 +17,7 @@ fn test_apply_partials() {
     percentage: 3.12,
   };
 
-  let partial_config = PartialConfig {
+  let partial_config = ConfigPartial {
     delay: None,
     path: Some("/tmp/bar.log".to_owned()),
     percentage: Some(42.24),

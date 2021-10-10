@@ -14,7 +14,7 @@ fn test_apply_partials() {
     value_v: "foo",
   };
 
-  let partial_config = PartialGenericConfig {
+  let partial_config = GenericConfigPartial {
     value_t: None,
     value_v: Some("bar"),
   };

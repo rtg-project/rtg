@@ -2,7 +2,7 @@
 extern crate partial_struct;
 
 #[derive(PartialStruct)]
-#[partial_name = "Woof"]
+#[partial(name = "Woof")]
 struct Config {
   delay: Option<u32>,
   path: String,

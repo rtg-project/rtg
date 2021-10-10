@@ -2,10 +2,11 @@
 extern crate partial_struct;
 
 #[derive(PartialStruct)]
-#[partial_nested_original(LogConfig)]
-#[partial_nested_generated(PartialLogConfig)]
+// #[partial_nested_original(LogConfig)]
+// #[partial_nested_generated(PartialLogConfig)]
 struct Config {
   timeout: Option<u32>,
+  #[partial(nested_type = "LogConfigPartial")]
   log_config: LogConfig,
 }
 
@@ -25,12 +26,12 @@ fn test_apply_partials() {
     },
   };
 
-  let partial_config = PartialConfig {
+  let partial_config = ConfigPartial {
     timeout: None,
-    log_config: PartialLogConfig {
+    log_config: Some(LogConfigPartial {
       log_file: Some("/tmp/bar.log".to_owned()),
       log_level: None,
-    },
+    }),
   };
 
   config.apply_partials(partial_config);
