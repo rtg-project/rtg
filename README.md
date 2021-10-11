@@ -119,7 +119,7 @@ cargo test --workspace -- --color always --nocapture
 To run all tests in watch mode, run:
 
 ```bash
-cargo watch -x 'test --workspace -- --color always --nocapture' 
+cargo watch --clear -x 'test --workspace -- --color always --nocapture' 
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>

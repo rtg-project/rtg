@@ -6,6 +6,7 @@ pub mod sql_type;
 
 pub use entity::ExplicitEntity;
 pub use field::ExplicitField;
+pub use json_schema::generate_json_schema;
 pub use model::ExplicitModel;
 pub use sql_type::Type;
 

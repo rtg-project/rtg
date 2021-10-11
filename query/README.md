@@ -8,7 +8,7 @@ Given a rtg model cache, this module translates GraphQL queries to Postgres SQL 
 To run in TDD mode:
 
 ```bash
-cargo watch -x test
+cargo watch --clear -x test
 ```
 
 ## Example

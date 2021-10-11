@@ -21,7 +21,7 @@ This module contains everything about the Model object
 To run in TDD mode:
 
 ```bash
-cargo watch -x test
+cargo watch --clear -x test
 ```
 
 ## Example
