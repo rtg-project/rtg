@@ -1,9 +1,9 @@
 use super::conversion_error::ConversionError;
 use super::convert_document::convert_document;
-use crate::explicit_model::ExplicitModel;
 use crate::graphql_model::parse_schema;
+use crate::implicit_model::ImplicitModel;
 
-pub fn convert_graphql_string<'a>(string: &'a str) -> Result<ExplicitModel, ConversionError> {
+pub fn convert_graphql_string<'a>(string: &'a str) -> Result<ImplicitModel, ConversionError> {
   let document = parse_schema::<'a, &'a str>(string)?;
   return convert_document(&document);
 }

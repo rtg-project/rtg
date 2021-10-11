@@ -1,5 +1,6 @@
 pub mod conversion_error;
 pub mod convert_document;
+pub mod convert_field;
 pub mod convert_graphql_string;
 pub mod convert_type_definition;
 

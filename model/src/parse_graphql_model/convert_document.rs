@@ -1,6 +1,6 @@
 use super::conversion_error::ConversionError;
 use super::convert_type_definition::convert_type_definition;
-use crate::explicit_model::{ExplicitEntity, ExplicitModel};
+use crate::implicit_model::{ImplicitEntity, ImplicitModel};
 use graphql_parser::schema::{Definition, Document, Text};
 
 // use rustc_hash::FxHashMap;
@@ -8,7 +8,7 @@ use std::rc::Rc;
 
 pub fn convert_document<'a, T: Text<'a>>(
   document: &Document<'a, T>,
-) -> Result<ExplicitModel, ConversionError> {
+) -> Result<ImplicitModel, ConversionError> {
   // let mut relations_by_name = FxHashMap::default();
 
   // relations_by_name.insert("s", "s");
@@ -39,13 +39,15 @@ pub fn convert_document<'a, T: Text<'a>>(
         ))
       }
     })
-    .collect::<Result<Vec<Rc<ExplicitEntity>>, ConversionError>>()
+    .collect::<Result<Vec<Rc<ImplicitEntity>>, ConversionError>>()
   {
     Ok(entities) => entities,
     Err(err) => return Err(err),
   };
 
-  return Ok(ExplicitModel::V1 { entities: entities });
+  return Ok(ImplicitModel::V1 {
+    entities: Some(entities),
+  });
 }
 
 // Tests

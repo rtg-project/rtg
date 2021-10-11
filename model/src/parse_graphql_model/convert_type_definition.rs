@@ -1,51 +1,55 @@
 use super::conversion_error::ConversionError;
+use super::convert_field::convert_field;
 use graphql_parser::schema::{Text, TypeDefinition};
-
 // use rustc_hash::FxHashMap;
-use crate::explicit_model::{ExplicitEntity, ExplicitField, Type};
+use crate::implicit_model::{ImplicitEntity, ImplicitField};
 use std::rc::Rc;
 
 pub fn convert_type_definition<'a, T: Text<'a>>(
   type_definition: &TypeDefinition<'a, T>,
-  // relations_by_name: &FxHashMap<String, Rc<ExplicitEntity>>,
-) -> Result<ExplicitEntity, ConversionError> {
+  // relations_by_name: &FxHashMap<String, Rc<ImplicitEntity>>,
+) -> Result<ImplicitEntity, ConversionError> {
   // relations_by_name.insert("s", "s");
 
   match type_definition {
     TypeDefinition::Scalar(_scalar_type) => {
       return Err(ConversionError::UnsupportedSyntax("Scalar".to_string()))
     }
-    TypeDefinition::Object(obj) => {
-      let fields = obj
-        .fields
-        .iter()
-        .map(|field| {
-          return Ok(Rc::new(ExplicitField::ScalarDatabaseColumn {
-            name: field.name.as_ref().to_string(),
-            sql_type: Type::Text,
-            sql_column_name: field.name.as_ref().to_string(),
-            graphql_field_name: field.name.as_ref().to_string(),
-            graphql_type_name: field.name.as_ref().to_string(),
-            graphql_order_by_asc: field.name.as_ref().to_string(),
-            graphql_order_by_desc: field.name.as_ref().to_string(),
-          }));
-        })
-        .collect::<Result<Vec<Rc<ExplicitField>>, ConversionError>>()
-        .unwrap();
+    TypeDefinition::Object(object) => {
+      let name = Some(object.name.as_ref().to_string());
+      let sql_schema_name = None;
+      let sql_table_name = None;
+      let graphql_entity_type_name = None;
+      let graphql_filter_type_name = None;
+      let graphql_get_single_operation_name = None;
+      let graphql_get_list_operation_name = None;
+      let graphql_get_connection_operation_name = None;
+      let graphql_default_order_by = None;
+      let graphql_default_first = None;
+      let graphql_default_offset = None;
 
-      return Ok(ExplicitEntity::DatabaseTable {
-        name: obj.name.as_ref().to_string(),
-        sql_schema_name: obj.name.as_ref().to_string(),
-        sql_table_name: obj.name.as_ref().to_string(),
-        graphql_entity_type_name: obj.name.as_ref().to_string(),
-        graphql_filter_type_name: obj.name.as_ref().to_string(),
-        graphql_get_single_operation_name: obj.name.as_ref().to_string(),
-        graphql_get_list_operation_name: obj.name.as_ref().to_string(),
-        graphql_get_connection_operation_name: obj.name.as_ref().to_string(),
-        graphql_default_order_by: obj.name.as_ref().to_string(),
-        graphql_default_first: 0,
-        graphql_default_offset: 10,
-        fields: fields,
+      let fields = Some(
+        object
+          .fields
+          .iter()
+          .map(|field| convert_field(field, object))
+          .collect::<Result<Vec<Rc<ImplicitField>>, ConversionError>>()
+          .unwrap(),
+      );
+
+      return Ok(ImplicitEntity::DatabaseTable {
+        name,
+        sql_schema_name,
+        sql_table_name,
+        graphql_entity_type_name,
+        graphql_filter_type_name,
+        graphql_get_single_operation_name,
+        graphql_get_list_operation_name,
+        graphql_get_connection_operation_name,
+        graphql_default_order_by,
+        graphql_default_first,
+        graphql_default_offset,
+        fields,
       });
     }
     TypeDefinition::Interface(_interface_type) => {
