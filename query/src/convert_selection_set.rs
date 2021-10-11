@@ -1,7 +1,7 @@
 use super::conversion_error::ConversionError;
 use super::convert_selection::convert_selection;
 use graphql_parser::query::{SelectionSet, Text};
-use rtg_model::explicit_model::{ExplicitEntity, ExplicitField};
+use rtg_model::explicit_model::ExplicitEntity;
 use rtg_model::model_cache::entity_cache::EntityCache;
 use std::ops::Deref;
 
