@@ -24,6 +24,7 @@ pub fn convert_field<'a, T: Text<'a>>(
       let graphql_order_by_desc = None;
       return Ok(Rc::new(ImplicitField::ScalarDatabaseColumn {
         name,
+        nullable: Some(true),
         sql_type,
         sql_column_name,
         graphql_field_name,
@@ -48,6 +49,7 @@ pub fn convert_field<'a, T: Text<'a>>(
         let graphql_order_by_desc = None;
         return Ok(Rc::new(ImplicitField::ScalarDatabaseColumn {
           name,
+          nullable: Some(false),
           sql_type,
           sql_column_name,
           graphql_field_name,

@@ -30,6 +30,7 @@ mod tests {
         fields: Some(vec![
           Rc::new(ImplicitField::ScalarDatabaseColumn {
             name: Some("id".to_string()),
+            nullable: Some(false),
             sql_type: Some(Type::Text),
             sql_column_name: Some("id_col".to_string()),
             graphql_field_name: Some("id".to_string()),
@@ -39,6 +40,7 @@ mod tests {
           }),
           Rc::new(ImplicitField::ScalarDatabaseColumn {
             name: Some("drone".to_string()),
+            nullable: Some(false),
             sql_type: Some(Type::Text),
             sql_column_name: Some("drone_col".to_string()),
             graphql_field_name: Some("drone".to_string()),

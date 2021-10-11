@@ -12,6 +12,7 @@ pub enum ExplicitField {
   #[serde(rename_all = "camelCase")]
   ScalarDatabaseColumn {
     name: String,
+    nullable: bool,
     #[serde(flatten)]
     sql_type: sql_type::Type,
     sql_column_name: String,
@@ -32,6 +33,7 @@ mod tests {
   fn serialize() {
     let value = ExplicitField::ScalarDatabaseColumn {
       name: "drone".to_string(),
+      nullable: false,
       sql_type: sql_type::Type::Text,
       sql_column_name: "drone_col".to_string(),
       graphql_field_name: "drone".to_string(),
@@ -64,6 +66,7 @@ mod tests {
   fn serialize_other() {
     let value = ExplicitField::ScalarDatabaseColumn {
       name: "drone".to_string(),
+      nullable: false,
       sql_type: sql_type::Type::Other {
         sql_type_name: "Yoo".to_string(),
       },
@@ -114,6 +117,7 @@ mod tests {
       Ok(field) => match field {
         ExplicitField::ScalarDatabaseColumn {
           name,
+          nullable,
           sql_type,
           sql_column_name,
           graphql_field_name: _,
@@ -150,6 +154,7 @@ mod tests {
       Ok(field) => match field {
         ExplicitField::ScalarDatabaseColumn {
           name,
+          nullable,
           sql_type,
           sql_column_name,
           graphql_field_name: _,

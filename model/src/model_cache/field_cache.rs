@@ -33,6 +33,7 @@ mod tests {
   fn constructor() {
     let value = Rc::new(ExplicitField::ScalarDatabaseColumn {
       name: "id".to_string(),
+      nullable: false,
       sql_type: sql_type::Type::Text,
       sql_column_name: "id_col".to_string(),
       graphql_field_name: "id".to_string(),
