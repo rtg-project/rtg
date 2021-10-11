@@ -35,8 +35,8 @@
     },
     {
       "type": "text",
-      "version": 483,
-      "versionNonce": 1206584220,
+      "version": 528,
+      "versionNonce": 844341486,
       "isDeleted": false,
       "id": "WLofF156qxbN_oTAkCNpq",
       "fillStyle": "hachure",
@@ -45,11 +45,11 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 781.8067865241064,
+      "x": 819.1725091803564,
       "y": 389.3686760680316,
       "strokeColor": "#343a40",
       "backgroundColor": "transparent",
-      "width": 188,
+      "width": 117,
       "height": 24,
       "seed": 1587302140,
       "groupIds": [],
@@ -60,7 +60,7 @@
       ],
       "fontSize": 20,
       "fontFamily": 3,
-      "text": "graphschema.json",
+      "text": "model.json",
       "baseline": 19,
       "textAlign": "left",
       "verticalAlign": "top"
@@ -209,6 +209,9 @@
         "focus": -0.01830933410355344,
         "gap": 9.345631141587887
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -218,10 +221,7 @@
           1.691327226068097,
           -139.08127507192103
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "arrow",
@@ -255,6 +255,9 @@
         "focus": 0.025764667793045044,
         "gap": 5.443796600365594
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -264,10 +267,7 @@
           -131.6306979500024,
           -154.0906862809146
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "rectangle",
@@ -411,6 +411,9 @@
         "focus": 0.02545068193403415,
         "gap": 11.851329351719528
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -420,10 +423,7 @@
           -0.8006306096303888,
           130.56914085638516
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "ellipse",
@@ -512,6 +512,9 @@
         "focus": -0.010457539107890787,
         "gap": 1
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -521,10 +524,7 @@
           -2.75300415275251,
           143.82587050443658
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "ellipse",
@@ -557,8 +557,8 @@
     },
     {
       "type": "text",
-      "version": 914,
-      "versionNonce": 1751736100,
+      "version": 953,
+      "versionNonce": 1861275822,
       "isDeleted": false,
       "id": "shnaLqpekgxvagMvkN6Vr",
       "fillStyle": "hachure",
@@ -567,11 +567,11 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 783.1529642740893,
+      "x": 807.6367594401049,
       "y": -90.67470144735535,
       "strokeColor": "#087f5b",
       "backgroundColor": "transparent",
-      "width": 199,
+      "width": 152,
       "height": 24,
       "seed": 1512857756,
       "groupIds": [],
@@ -581,7 +581,7 @@
       ],
       "fontSize": 20,
       "fontFamily": 3,
-      "text": "datamodel.graphql",
+      "text": "model.graphql",
       "baseline": 19,
       "textAlign": "left",
       "verticalAlign": "top"
@@ -674,6 +674,9 @@
         "focus": 0.011869093381057159,
         "gap": 17.422876036874868
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -683,10 +686,7 @@
           -96.87854929143396,
           127.85874088027214
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "ellipse",
@@ -834,6 +834,9 @@
         "focus": 0.07893849058350934,
         "gap": 8.980325254798117
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -843,10 +846,7 @@
           94.73014653946575,
           136.75548739309102
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "arrow",
@@ -880,6 +880,9 @@
         "focus": 0.02176314608125639,
         "gap": 8.73357978876691
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -889,10 +892,7 @@
           0.7983161245394967,
           151.25565141167226
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "arrow",
@@ -926,6 +926,9 @@
         "focus": 0.05524148526100139,
         "gap": 12.375971877604236
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -939,10 +942,7 @@
           101.70149529770492,
           -122.28993715334332
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "arrow",
@@ -976,6 +976,9 @@
         "focus": -0.3215796058536553,
         "gap": 10.600523613117048
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -989,15 +992,12 @@
           -114.82288731275196,
           118.77051638835349
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "arrow",
-      "version": 2037,
-      "versionNonce": 55207386,
+      "version": 2039,
+      "versionNonce": 754019310,
       "isDeleted": false,
       "id": "ztl-_80ZA4ew1v1s-BbUK",
       "fillStyle": "hachure",
@@ -1006,12 +1006,12 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 1343.3502317989364,
-      "y": 439.72801137431713,
+      "x": 1345.3098460838328,
+      "y": 435.95577241239477,
       "strokeColor": "#364fc7",
       "backgroundColor": "transparent",
-      "width": 146.10307346020477,
-      "height": 212.88367992226142,
+      "width": 144.1434591753084,
+      "height": 215.8377112410057,
       "seed": 651156004,
       "groupIds": [],
       "strokeSharpness": "round",
@@ -1026,19 +1026,19 @@
         "focus": -0.9052545622521604,
         "gap": 7.616717323866624
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
           0
         ],
         [
-          146.10307346020477,
-          212.88367992226142
+          144.1434591753084,
+          215.8377112410057
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "rectangle",
@@ -1215,6 +1215,9 @@
         "gap": 9.974365256307678
       },
       "endBinding": null,
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -1228,10 +1231,7 @@
           86.34683382193009,
           110.26202390384859
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "arrow",
@@ -1265,6 +1265,9 @@
         "focus": -0.11831091324959074,
         "gap": 8.149765014648452
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -1274,10 +1277,7 @@
           -120.85175034495171,
           161.50819150122373
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "arrow",
@@ -1307,6 +1307,9 @@
         "focus": -0.09860089402846765,
         "gap": 11.39976952971243
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -1320,10 +1323,7 @@
           -75.38990783691406,
           -125.20988012849071
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "arrow",
@@ -1357,6 +1357,9 @@
         "focus": -0.01484876807278683,
         "gap": 4.848052978515639
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -1366,10 +1369,7 @@
           108.85528419714547,
           -132.6115460159421
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "arrow",
@@ -1403,6 +1403,9 @@
         "focus": -0.18841109956237717,
         "gap": 9.973838536284354
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -1412,10 +1415,7 @@
           -103.21454029739334,
           -155.07070207798904
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "rectangle",
@@ -1508,6 +1508,9 @@
         "focus": -0.054746270507122975,
         "gap": 14.713920504273801
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -1517,10 +1520,7 @@
           0.5661327196983166,
           127.98876915467736
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "arrow",
@@ -1554,6 +1554,9 @@
         "focus": -0.5814924976661666,
         "gap": 14.253835526723378
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -1563,10 +1566,7 @@
           299.15538067208536,
           187.25761645578018
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "ellipse",
@@ -1655,6 +1655,9 @@
         "focus": -0.014400246915814468,
         "gap": 9.488074938452819
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -1664,10 +1667,7 @@
           1.1403480963795118,
           134.7862291568115
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "text",
@@ -1940,6 +1940,9 @@
         "focus": -0.01045753910789093,
         "gap": 1
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
@@ -1949,10 +1952,7 @@
           1.5397958197190746,
           -159.68238895138106
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "text",
@@ -2010,8 +2010,8 @@
     },
     {
       "type": "arrow",
-      "version": 1104,
-      "versionNonce": 460626586,
+      "version": 1106,
+      "versionNonce": 536460846,
       "isDeleted": false,
       "id": "3HPITPFjOAqHXINP5skXQ",
       "fillStyle": "hachure",
@@ -2020,12 +2020,12 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 1333.3568515219658,
-      "y": 355.82098647677907,
+      "x": 1336.281870304987,
+      "y": 351.8027525437754,
       "strokeColor": "#e67700",
       "backgroundColor": "transparent",
-      "width": 166.2691768914624,
-      "height": 177.99930217211028,
+      "width": 163.3441581084412,
+      "height": 174.1533167214556,
       "seed": 109827740,
       "groupIds": [],
       "strokeSharpness": "round",
@@ -2040,19 +2040,19 @@
         "focus": 0.7766853488252807,
         "gap": 9.473901396142082
       },
+      "lastCommittedPoint": null,
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
       "points": [
         [
           0,
           0
         ],
         [
-          166.2691768914624,
-          -177.99930217211028
+          163.3441581084412,
+          -174.1533167214556
         ]
-      ],
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow"
+      ]
     },
     {
       "type": "ellipse",
@@ -2571,8 +2571,8 @@
     },
     {
       "type": "ellipse",
-      "version": 597,
-      "versionNonce": 1890763270,
+      "version": 598,
+      "versionNonce": 1287377326,
       "isDeleted": false,
       "id": "aOLGTt7Ggznh4J21RJinv",
       "fillStyle": "hachure",
@@ -2581,8 +2581,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 1147.6800722958305,
-      "y": 358.02146218024086,
+      "x": 1150.404071319268,
+      "y": 353.93569252692055,
       "strokeColor": "#343a40",
       "backgroundColor": "transparent",
       "width": 221.08623505476595,
@@ -2601,8 +2601,8 @@
     },
     {
       "type": "text",
-      "version": 581,
-      "versionNonce": 2007725062,
+      "version": 617,
+      "versionNonce": 2130068530,
       "isDeleted": false,
       "id": "4qB3Q8dd6X7s-bU7Q74Jv",
       "fillStyle": "hachure",
@@ -2611,12 +2611,12 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 1173.113097660127,
-      "y": 372.240246789019,
+      "x": 1167.0538020058302,
+      "y": 384.9763002558159,
       "strokeColor": "#343a40",
       "backgroundColor": "transparent",
-      "width": 164,
-      "height": 48,
+      "width": 188,
+      "height": 24,
       "seed": 511556698,
       "groupIds": [],
       "strokeSharpness": "sharp",
@@ -2626,44 +2626,33 @@
       ],
       "fontSize": 20,
       "fontFamily": 3,
-      "text": "indexed\ngraphschema.js",
-      "baseline": 43,
+      "text": "model-cache.json",
+      "baseline": 19,
       "textAlign": "center",
       "verticalAlign": "top"
     },
     {
-      "id": "WzPbJlbTkJkuk1y8TaH0w",
       "type": "arrow",
-      "x": 1003.831466190401,
-      "y": 400.4608278437063,
-      "width": 137.537841796875,
-      "height": 0,
-      "angle": 0,
-      "strokeColor": "#343a40",
-      "backgroundColor": "#868e96",
+      "version": 48,
+      "versionNonce": 717080686,
+      "isDeleted": false,
+      "id": "WzPbJlbTkJkuk1y8TaH0w",
       "fillStyle": "solid",
       "strokeWidth": 1,
       "strokeStyle": "solid",
       "roughness": 1,
       "opacity": 100,
+      "angle": 0,
+      "x": 1003.8270741277814,
+      "y": 400.4608278437063,
+      "strokeColor": "#343a40",
+      "backgroundColor": "#868e96",
+      "width": 140.48856189052333,
+      "height": 2.2317727311312296,
+      "seed": 459998022,
       "groupIds": [],
       "strokeSharpness": "round",
-      "seed": 459998022,
-      "version": 46,
-      "versionNonce": 978766170,
-      "isDeleted": false,
-      "boundElementIds": null,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          137.537841796875,
-          0
-        ]
-      ],
-      "lastCommittedPoint": null,
+      "boundElementIds": [],
       "startBinding": {
         "elementId": "hFf3B72N419_f79LhVvYq",
         "focus": -0.02769513595548923,
@@ -2674,8 +2663,19 @@
         "focus": -0.03232403292281922,
         "gap": 6.351579480254898
       },
+      "lastCommittedPoint": null,
       "startArrowhead": null,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          140.48856189052333,
+          -2.2317727311312296
+        ]
+      ]
     }
   ],
   "appState": {
