@@ -2,12 +2,19 @@
 
 This module contains everything about the Model object
 
-- Generate the JSON Schema for Models
-- Serialization Model to JSON
-- Deserialization Model from JSON
-- Optional Models = Models where all fields are optional (useful for simplifying config)
-  - Serialize Optional Model to JSON
-  - Deserialization Optional Model from JSON
+- `Models`: Models where all fields are optional: Useful for making it easy for humans
+  - Generate the JSON Schema for Models
+  - Serialize Model to JSON
+  - Deserialization Model from JSON
+  - `Models` structs and enums are derived automatically from `Explicit Models`, using the `partial-struct` crate
+- `Explicit Models`: Models where all fields are required: Useful pivotal object in rtg
+  - Generate the JSON Schema for Explicit Models
+  - Serialize Explicit Model to JSON
+  - Deserialize Explicit Model from JSON
+- `Model Cache`: Models that are indexed by various properties: Useful during execution
+  - Generate Model Cache from Explicit Models
+  - Serialize Model Cache to JSON
+  - Deserialize Model Cache from JSON
 
 ## Contribute
 

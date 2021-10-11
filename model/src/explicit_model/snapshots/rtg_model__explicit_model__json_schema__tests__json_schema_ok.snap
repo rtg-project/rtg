@@ -1,5 +1,5 @@
 ---
-source: model/src/json_schema.rs
+source: model/src/explicit_model/json_schema.rs
 expression: "serde_json::to_string_pretty(&schema).unwrap()"
 
 ---

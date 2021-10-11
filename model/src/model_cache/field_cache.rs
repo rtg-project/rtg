@@ -1,4 +1,4 @@
-use rtg_model::field::Field;
+use crate::explicit_model::field::Field;
 use serde::{Deserialize, Serialize};
 use std::rc::Rc;
 
@@ -26,8 +26,8 @@ impl FieldCache {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use crate::explicit_model::sql_type;
   use insta::{assert_debug_snapshot, assert_json_snapshot};
-  use rtg_model::sql_type;
 
   #[test]
   fn constructor() {

@@ -27,7 +27,7 @@ pub enum Entity {
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::sql_type;
+  use crate::explicit_model::sql_type;
   use similar_asserts::assert_eq;
 
   #[test]

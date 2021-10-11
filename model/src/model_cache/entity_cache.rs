@@ -1,6 +1,6 @@
 use super::field_cache::FieldCache;
-use rtg_model::entity::Entity;
-use rtg_model::field::Field;
+use crate::explicit_model::entity::Entity;
+use crate::explicit_model::field::Field;
 use rustc_hash::FxHashMap;
 use serde::{Deserialize, Serialize};
 use std::rc::Rc;
@@ -51,8 +51,8 @@ impl EntityCache {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use crate::explicit_model::sql_type;
   use insta::{assert_debug_snapshot, assert_json_snapshot};
-  use rtg_model::sql_type;
 
   #[test]
   fn constructor() {

@@ -1,5 +1,5 @@
 ---
-source: model-cache/src/model_cache.rs
+source: model/src/model_cache/model_cache.rs
 expression: "ModelCache::new(Rc::clone(&value))"
 
 ---

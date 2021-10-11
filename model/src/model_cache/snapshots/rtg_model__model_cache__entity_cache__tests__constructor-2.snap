@@ -1,5 +1,5 @@
 ---
-source: model-cache/src/entity_cache.rs
+source: model/src/model_cache/entity_cache.rs
 expression: "serde_json::to_string_pretty(&EntityCache::new(Rc::clone(&value))).unwrap()"
 
 ---

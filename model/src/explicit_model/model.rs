@@ -14,8 +14,8 @@ pub enum Model {
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::field::Field;
-  use crate::sql_type;
+  use crate::explicit_model::field::Field;
+  use crate::explicit_model::sql_type;
   use insta::assert_json_snapshot;
 
   #[test]

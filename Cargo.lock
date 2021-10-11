@@ -1237,7 +1237,6 @@ dependencies = [
  "rtg_gql_sdl_to_model",
  "rtg_gql_to_pgsql",
  "rtg_model",
- "rtg_model_cache",
  "rtg_server",
  "rtg_wasm",
  "rustc-hash",
@@ -1270,7 +1269,6 @@ version = "0.1.0"
 dependencies = [
  "graphql-parser",
  "rtg_model",
- "rtg_model_cache",
  "rustc-hash",
  "scooby",
  "serde",
@@ -1285,18 +1283,6 @@ version = "0.1.0"
 dependencies = [
  "Inflector",
  "insta",
- "schemars",
- "serde",
- "serde_json",
- "similar-asserts",
-]
-
-[[package]]
-name = "rtg_model_cache"
-version = "0.1.0"
-dependencies = [
- "insta",
- "rtg_model",
  "rustc-hash",
  "schemars",
  "serde",

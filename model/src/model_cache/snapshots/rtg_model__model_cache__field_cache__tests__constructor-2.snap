@@ -1,5 +1,5 @@
 ---
-source: model-cache/src/field_cache.rs
+source: model/src/model_cache/field_cache.rs
 expression: "serde_json::to_string_pretty(&FieldCache::new(Rc::clone(&value))).unwrap()"
 
 ---
