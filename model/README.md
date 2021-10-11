@@ -1,17 +1,21 @@
 # rtg Model
 
-This module contains everything about the Model object
+This module contains everything about the Model objects:
 
-- `Models`: Models where all fields are optional: Useful for making it easy for humans
+- `graphql_model`: Models expressed  in GraphQL SDL.
+  - Generate the JSON Schema for Models
+  - Serialize Model to JSON
+  - Deserialization Model from JSON
+- `implicit_model`: Models where all fields are optional: Useful to make them easy for humans
   - Generate the JSON Schema for Models
   - Serialize Model to JSON
   - Deserialization Model from JSON
   - `Models` structs and enums are derived automatically from `Explicit Models`, using the `partial-struct` crate
-- `Explicit Models`: Models where all fields are required: Useful pivotal object in rtg
+- `explicit_model`: Models where all fields are required: Useful pivotal object in rtg
   - Generate the JSON Schema for Explicit Models
   - Serialize Explicit Model to JSON
   - Deserialize Explicit Model from JSON
-- `Model Cache`: Models that are indexed by various properties: Useful during execution
+- `model_cache`: Models that are indexed by various properties: Useful during execution
   - Generate Model Cache from Explicit Models
   - Serialize Model Cache to JSON
   - Deserialize Model Cache from JSON

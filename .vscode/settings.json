@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["Deserialization", "rtg"],
+  "cSpell.words": ["Deserialization"],
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -22,5 +22,7 @@
   "rust-client.revealOutputChannelOn": "warn",
   "rust-client.logToFile": true,
   "editor.formatOnSave": true,
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "spellright.language": ["en"],
+  "spellright.documentTypes": ["latex", "plaintext", "markdown"]
 }

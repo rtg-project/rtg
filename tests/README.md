@@ -2,7 +2,6 @@
 
 Test rtg on a suite of test cases
 
-
 ## Contribute
 
 To run in TDD mode:
