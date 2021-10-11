@@ -1,5 +1,5 @@
 ---
-source: gql-sdl-to-model/src/lib.rs
+source: model/src/graphql_model/mod.rs
 expression: model
 
 ---

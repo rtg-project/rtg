@@ -10,11 +10,13 @@ crate-type = ["lib"]
 
 [dependencies]
 Inflector = {version = "0.11.4"}
+graphql-parser = {version = "0.3.0"}
 partial_struct = {version = "0.1.0", path = "../partial-struct"}
 rustc-hash = {version = "1.0"}
 schemars = {version = "0.8.6"}
 serde = {version = "1.0.130", features = ["derive", "rc"]}
 serde_json = {version = "1.0.68"}
+thiserror = {version = "1.0.29"}
 
 [dev-dependencies]
 insta = {version = "1.8.0"}

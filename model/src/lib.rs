@@ -1,4 +1,5 @@
 pub mod explicit_model;
+pub mod graphql_model;
 pub mod implicit_model;
 pub mod model_cache;
 
