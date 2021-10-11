@@ -1,4 +1,4 @@
-use super::field::{ExplicitField, PartialField};
+use super::field::{ExplicitField, ImplicitField};
 use partial_struct::PartialStruct;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -6,7 +6,7 @@ use std::rc::Rc;
 
 #[derive(PartialStruct, Serialize, Deserialize, Debug, JsonSchema)]
 #[serde(tag = "type", rename_all = "camelCase")]
-#[partial(name = "PartialEntity")]
+#[partial(name = "ImplicitEntity")]
 #[partial_attribute(derive(Serialize, Deserialize, Debug, JsonSchema))]
 #[partial_attribute(serde(tag = "type", rename_all = "camelCase"))]
 pub enum ExplicitEntity {
@@ -23,7 +23,7 @@ pub enum ExplicitEntity {
     graphql_default_order_by: String,
     graphql_default_first: i16,
     graphql_default_offset: i16,
-    #[partial(nested_type = "Vec<Rc<PartialField>>")]
+    #[partial(nested_type = "Vec<Rc<ImplicitField>>")]
     fields: Vec<Rc<ExplicitField>>,
   },
 }

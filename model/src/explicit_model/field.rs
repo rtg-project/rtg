@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(PartialStruct, Serialize, Deserialize, Debug, JsonSchema)]
 #[serde(tag = "type", rename_all = "camelCase")]
-#[partial(name = "PartialField")]
+#[partial(name = "ImplicitField")]
 #[partial_attribute(derive(Serialize, Deserialize, Debug, JsonSchema))]
 #[partial_attribute(serde(tag = "type", rename_all = "camelCase"))]
 pub enum ExplicitField {

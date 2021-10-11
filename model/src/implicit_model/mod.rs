@@ -1,6 +1,6 @@
-pub use crate::explicit_model::entity::PartialEntity;
-pub use crate::explicit_model::field::PartialField;
-pub use crate::explicit_model::model::PartialModel;
+pub use crate::explicit_model::entity::ImplicitEntity;
+pub use crate::explicit_model::field::ImplicitField;
+pub use crate::explicit_model::model::ImplicitModel;
 pub use crate::explicit_model::sql_type::Type;
 
 // Tests
@@ -12,8 +12,8 @@ mod tests {
 
   #[test]
   fn serialize() {
-    let value = PartialModel::V1 {
-      entities: Some(vec![Rc::new(PartialEntity::DatabaseTable {
+    let value = ImplicitModel::V1 {
+      entities: Some(vec![Rc::new(ImplicitEntity::DatabaseTable {
         name: Some("person".to_string()),
         sql_schema_name: Some("public".to_string()),
         sql_table_name: Some("person_table".to_string()),
@@ -26,7 +26,7 @@ mod tests {
         graphql_default_first: Some(10),
         graphql_default_offset: Some(0),
         fields: Some(vec![
-          Rc::new(PartialField::ScalarDatabaseColumn {
+          Rc::new(ImplicitField::ScalarDatabaseColumn {
             name: Some("id".to_string()),
             sql_type: Some(Type::Text),
             sql_column_name: Some("id_col".to_string()),
@@ -35,7 +35,7 @@ mod tests {
             graphql_order_by_asc: None,
             graphql_order_by_desc: None,
           }),
-          Rc::new(PartialField::ScalarDatabaseColumn {
+          Rc::new(ImplicitField::ScalarDatabaseColumn {
             name: Some("drone".to_string()),
             sql_type: Some(Type::Text),
             sql_column_name: Some("drone_col".to_string()),

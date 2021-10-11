@@ -1,4 +1,4 @@
-use super::entity::{ExplicitEntity, PartialEntity};
+use super::entity::{ExplicitEntity, ImplicitEntity};
 use partial_struct::PartialStruct;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -6,13 +6,13 @@ use std::rc::Rc;
 
 #[derive(PartialStruct, Serialize, Deserialize, Debug, JsonSchema)]
 #[serde(tag = "version", rename_all = "camelCase")]
-#[partial(name = "PartialModel")]
+#[partial(name = "ImplicitModel")]
 #[partial_attribute(derive(Serialize, Deserialize, Debug, JsonSchema))]
 #[partial_attribute(serde(tag = "version", rename_all = "camelCase"))]
 pub enum ExplicitModel {
   #[serde(rename_all = "camelCase")]
   V1 {
-    #[partial(nested_type = "Vec<Rc<PartialEntity>>")]
+    #[partial(nested_type = "Vec<Rc<ImplicitEntity>>")]
     entities: Vec<Rc<ExplicitEntity>>,
   },
 }

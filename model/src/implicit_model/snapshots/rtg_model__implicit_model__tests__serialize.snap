@@ -1,5 +1,5 @@
 ---
-source: model/src/partial_model/mod.rs
+source: model/src/implicit_model/mod.rs
 expression: "serde_json::to_string_pretty(&value).unwrap()"
 
 ---
