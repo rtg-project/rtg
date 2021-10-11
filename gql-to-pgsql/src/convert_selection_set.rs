@@ -1,8 +1,8 @@
 use super::conversion_error::ConversionError;
 use super::convert_selection::convert_selection;
 use graphql_parser::query::{SelectionSet, Text};
-use rtg_model::entity::Entity;
-use rtg_model_cache::entity_cache::EntityCache;
+use rtg_model::explicit_model::{ExplicitEntity, ExplicitField};
+use rtg_model::model_cache::entity_cache::EntityCache;
 use std::ops::Deref;
 
 pub fn convert_selection_set<'a, T: Text<'a>>(
@@ -15,7 +15,7 @@ pub fn convert_selection_set<'a, T: Text<'a>>(
 
   let sql_from_table_name = match &*context {
     EntityCache::DatabaseTable { entity, .. } => match entity.deref() {
-      Entity::DatabaseTable { sql_table_name, .. } => sql_table_name.to_string(),
+      ExplicitEntity::DatabaseTable { sql_table_name, .. } => sql_table_name.to_string(),
     },
   };
 

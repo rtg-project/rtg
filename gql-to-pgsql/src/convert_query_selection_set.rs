@@ -1,7 +1,7 @@
 use super::conversion_error::ConversionError;
 use super::convert_query_selection::convert_query_selection;
 use graphql_parser::query::{SelectionSet, Text};
-use rtg_model_cache::model_cache::ModelCache;
+use rtg_model::model_cache::model_cache::ModelCache;
 
 pub fn convert_query_selection_set<'a, T: Text<'a>>(
   query_selection_set: &SelectionSet<'a, T>,

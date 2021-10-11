@@ -1,8 +1,8 @@
 use super::conversion_error::ConversionError;
 use graphql_parser::query::{Selection, Text};
-use rtg_model::field::Field;
-use rtg_model_cache::entity_cache::EntityCache;
-use rtg_model_cache::field_cache::FieldCache;
+use rtg_model::explicit_model::ExplicitField;
+use rtg_model::model_cache::entity_cache::EntityCache;
+use rtg_model::model_cache::field_cache::FieldCache;
 use std::ops::Deref;
 
 pub fn convert_selection<'a, T: Text<'a>>(
@@ -25,7 +25,7 @@ pub fn convert_selection<'a, T: Text<'a>>(
           } => match (*fields_by_graphql_field_name).get(field.name.as_ref()) {
             Some(field_cache) => match (*field_cache).deref() {
               FieldCache::ScalarDatabaseColumn { field } => match &*field.deref() {
-                Field::ScalarDatabaseColumn {
+                ExplicitField::ScalarDatabaseColumn {
                   sql_column_name, ..
                 } => sql_column_name,
               },

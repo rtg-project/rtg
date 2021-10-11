@@ -1,7 +1,7 @@
 use super::conversion_error::ConversionError;
 use super::convert_query::convert_query;
 use graphql_parser::query::{Definition, Document, OperationDefinition, Text};
-use rtg_model_cache::model_cache::ModelCache;
+use rtg_model::model_cache::model_cache::ModelCache;
 
 pub fn convert_document<'a, T: Text<'a>>(
   document: &Document<'a, T>,

@@ -28,7 +28,7 @@
         {
           "type": "scalarDatabaseColumn",
           "name": "age",
-          "sqlType": "integer",
+          "sqlType": "int8",
           "sqlColumnName": "age",
           "graphqlFieldName": "age",
           "graphqlTypeName": "Int",

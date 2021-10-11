@@ -4,8 +4,8 @@ mod tests {
   // use super::*;
   use glob::glob;
   use rtg_gql_to_pgsql::convert_graphql_string::convert_graphql_string;
-  use rtg_model::model::Model;
-  use rtg_model_cache::model_cache::ModelCache;
+  use rtg_model::explicit_model::ExplicitModel;
+  use rtg_model::model_cache::model_cache::ModelCache;
   use similar_asserts::assert_eq;
   use std::fs;
   use std::fs::{File, OpenOptions};
@@ -25,7 +25,7 @@ mod tests {
       let model_path = dir_path.join("model.json");
       let model_file = File::open(model_path).unwrap();
       let model_reader = BufReader::new(model_file);
-      let model: Model = serde_json::from_reader(model_reader).unwrap();
+      let model: ExplicitModel = serde_json::from_reader(model_reader).unwrap();
 
       // Convert the model to a model cache
       let model_rc = Rc::new(model);

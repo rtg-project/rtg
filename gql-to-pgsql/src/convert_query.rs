@@ -2,7 +2,7 @@ use super::conversion_error::ConversionError;
 use super::convert_query_selection_set::convert_query_selection_set;
 
 use graphql_parser::query::{Query, Text};
-use rtg_model_cache::model_cache::ModelCache;
+use rtg_model::model_cache::model_cache::ModelCache;
 
 pub fn convert_query<'a, T: Text<'a>>(
   query: &Query<'a, T>,
