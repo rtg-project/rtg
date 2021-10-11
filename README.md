@@ -78,31 +78,31 @@ This is an example of how to list things you need to use the software and how to
 
 See the project road map on Github https://github.com/rtg-project/rtg/projects/1
 
-- [x] Generate SQL Data Manipulation Language (DML) queries from GraphQL:
-  - [x] Support Basic graphQL queries
-  - [ ] Support argument in queries (Limit, offset)
-  - [ ] Support GraphQL Mutations 
-  - [ ] Support Relations 
-  - [ ] Support Relations filters
-  - [ ] Support Aggregations 
-  - [ ] Support Aggregations filters
-- [ ] Generate GraphQL SDL Schema from Rtg Model:
-  - [ ] Generate GraphQL SDL introspection schema from Rtg Model
-  - [ ] Validate GraphQL queries against the generated GraphQL SDL introspection schema
-- [ ] Integrate Rtg Model and GraphQL Schema Definition Language (SDL):
-  - [ ] Generate Rtg Model from a GraphQL SDL
-  - [ ] Generate GraphQL SDL from a Rtg Model
-- [ ] Integrate Rtg Model and SQL Data Definition Language (DDL) schemas:
-  - [ ] Generate Rtg Model from a Database DDL schema
-  - [ ] Generate Database DDL schema from a Rtg Model
-- [ ] Automatically generate Typescript client SDK using [GraphQL codegen](graphql codegen)
-  - [ ] Generate basic client SDK
-  - [ ] Add features such as pagination streaming
-- [ ] Automatically generate Python client SDK using [Sgqlc](https://github.com/profusion/sgqlc)
-  - [ ] Generate basic client SDK
-  - [ ] Add features such as pagination streaming
-- [ ] Real time features
-  - [ ] Support GraphQL Subscriptions 
+* [x] Generate SQL Data Manipulation Language (DML) queries from GraphQL:
+  * [x] Support Basic graphQL queries
+  * [ ] Support argument in queries (Limit, offset)
+  * [ ] Support GraphQL Mutations 
+  * [ ] Support Relations 
+  * [ ] Support Relations filters
+  * [ ] Support Aggregations 
+  * [ ] Support Aggregations filters
+* [ ] Generate GraphQL SDL Schema from Rtg Model:
+  * [ ] Generate GraphQL SDL introspection schema from Rtg Model
+  * [ ] Validate GraphQL queries against the generated GraphQL SDL introspection schema
+* [ ] Integrate Rtg Model and GraphQL Schema Definition Language (SDL):
+  * [ ] Generate Rtg Model from a GraphQL SDL
+  * [ ] Generate GraphQL SDL from a Rtg Model
+* [ ] Integrate Rtg Model and SQL Data Definition Language (DDL) schemas:
+  * [ ] Generate Rtg Model from a Database DDL schema
+  * [ ] Generate Database DDL schema from a Rtg Model
+* [ ] Automatically generate Typescript client SDK using [GraphQL codegen](graphql codegen)
+  * [ ] Generate basic client SDK
+  * [ ] Add features such as pagination streaming
+* [ ] Automatically generate Python client SDK using [Sgqlc](https://github.com/profusion/sgqlc)
+  * [ ] Generate basic client SDK
+  * [ ] Add features such as pagination streaming
+* [ ] Real time features
+  * [ ] Support GraphQL Subscriptions 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
