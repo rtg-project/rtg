@@ -8,8 +8,8 @@ version = "0.1.0"
 
 [dependencies]
 partial_struct = {version = "0.1.0", path = "./partial-struct"}
-rtg_gql_to_pgsql = {version = "0.1.0", path = "./gql-to-pgsql"}
 rtg_model = {version = "0.1.0", path = "./model"}
+rtg_query = {version = "0.1.0", path = "./query"}
 rtg_server = {version = "0.1.0", path = "./server"}
 rtg_wasm = {version = "0.1.0", path = "./wasm"}
 
@@ -30,7 +30,7 @@ thiserror = {version = "1.0.29"}
 [workspace]
 members = [
   "partial-struct",
-  "gql-to-pgsql",
+  "query",
   "server",
   "model",
   "wasm",

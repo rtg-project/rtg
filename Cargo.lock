@@ -1234,8 +1234,8 @@ dependencies = [
  "glob",
  "graphql-parser",
  "partial_struct",
- "rtg_gql_to_pgsql",
  "rtg_model",
+ "rtg_query",
  "rtg_server",
  "rtg_wasm",
  "rustc-hash",
@@ -1243,20 +1243,6 @@ dependencies = [
  "serde",
  "serde_json",
  "similar 2.1.0",
- "similar-asserts",
- "thiserror",
-]
-
-[[package]]
-name = "rtg_gql_to_pgsql"
-version = "0.1.0"
-dependencies = [
- "graphql-parser",
- "rtg_model",
- "rustc-hash",
- "scooby",
- "serde",
- "serde_json",
  "similar-asserts",
  "thiserror",
 ]
@@ -1271,6 +1257,20 @@ dependencies = [
  "partial_struct",
  "rustc-hash",
  "schemars",
+ "serde",
+ "serde_json",
+ "similar-asserts",
+ "thiserror",
+]
+
+[[package]]
+name = "rtg_query"
+version = "0.1.0"
+dependencies = [
+ "graphql-parser",
+ "rtg_model",
+ "rustc-hash",
+ "scooby",
  "serde",
  "serde_json",
  "similar-asserts",

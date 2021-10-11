@@ -3,9 +3,9 @@
 mod tests {
   // use super::*;
   use glob::glob;
-  use rtg_gql_to_pgsql::convert_graphql_string::convert_graphql_string;
   use rtg_model::explicit_model::ExplicitModel;
   use rtg_model::model_cache::model_cache::ModelCache;
+  use rtg_query::convert_graphql_string::convert_graphql_string;
   use similar_asserts::assert_eq;
   use std::fs;
   use std::fs::{File, OpenOptions};
