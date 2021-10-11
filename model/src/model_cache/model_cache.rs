@@ -1,6 +1,6 @@
 use super::entity_cache::EntityCache;
 use crate::explicit_model::entity::ExplicitEntity;
-use crate::explicit_model::model::Model;
+use crate::explicit_model::model::ExplicitModel;
 use rustc_hash::FxHashMap;
 use serde::{Deserialize, Serialize};
 use std::rc::Rc;
@@ -25,16 +25,16 @@ pub struct EntityOperationCache {
 pub enum ModelCache {
   #[serde(rename_all = "camelCase")]
   V1 {
-    model: Rc<Model>,
+    model: Rc<ExplicitModel>,
     entities_by_operation_name: FxHashMap<String, EntityOperationCache>,
   },
 }
 
 impl ModelCache {
   // Another associated function, taking two arguments:
-  pub fn new(model: Rc<Model>) -> ModelCache {
+  pub fn new(model: Rc<ExplicitModel>) -> ModelCache {
     match &*model {
-      Model::V1 { entities, .. } => {
+      ExplicitModel::V1 { entities, .. } => {
         let mut entities_by_operation_name = FxHashMap::default();
         for entity in entities.iter() {
           match &**entity {
@@ -90,7 +90,7 @@ mod tests {
 
   #[test]
   fn constructor() {
-    let value = Rc::new(Model::V1 {
+    let value = Rc::new(ExplicitModel::V1 {
       entities: vec![Rc::new(ExplicitEntity::DatabaseTable {
         name: "person".to_string(),
         sql_schema_name: "public".to_string(),

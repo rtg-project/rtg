@@ -1,11 +1,15 @@
 use super::entity::ExplicitEntity;
+use partial_struct::PartialStruct;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use std::rc::Rc;
 
-#[derive(Serialize, Deserialize, Debug, JsonSchema)]
+#[derive(PartialStruct, Serialize, Deserialize, Debug, JsonSchema)]
 #[serde(tag = "version", rename_all = "camelCase")]
-pub enum Model {
+#[partial(name = "PartialModel")]
+#[partial_attribute(derive(Serialize, Deserialize, Debug, JsonSchema))]
+#[partial_attribute(serde(tag = "version", rename_all = "camelCase"))]
+pub enum ExplicitModel {
   #[serde(rename_all = "camelCase")]
   V1 { entities: Vec<Rc<ExplicitEntity>> },
 }
@@ -20,7 +24,7 @@ mod tests {
 
   #[test]
   fn serialize() {
-    let value = Model::V1 {
+    let value = ExplicitModel::V1 {
       entities: vec![Rc::new(ExplicitEntity::DatabaseTable {
         name: "person".to_string(),
         sql_schema_name: "public".to_string(),
