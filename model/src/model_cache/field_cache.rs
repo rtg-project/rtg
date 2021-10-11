@@ -1,4 +1,4 @@
-use crate::explicit_model::field::Field;
+use crate::explicit_model::field::ExplicitField;
 use serde::{Deserialize, Serialize};
 use std::rc::Rc;
 
@@ -6,14 +6,14 @@ use std::rc::Rc;
 #[serde(tag = "type", rename_all = "camelCase")]
 pub enum FieldCache {
   #[serde(rename_all = "camelCase")]
-  ScalarDatabaseColumn { field: Rc<Field> },
+  ScalarDatabaseColumn { field: Rc<ExplicitField> },
 }
 
 impl FieldCache {
   // Another associated function, taking two arguments:
-  pub fn new(field: Rc<Field>) -> FieldCache {
+  pub fn new(field: Rc<ExplicitField>) -> FieldCache {
     match *field {
-      Field::ScalarDatabaseColumn { .. } => {
+      ExplicitField::ScalarDatabaseColumn { .. } => {
         return FieldCache::ScalarDatabaseColumn {
           field: Rc::clone(&field),
         };
@@ -31,7 +31,7 @@ mod tests {
 
   #[test]
   fn constructor() {
-    let value = Rc::new(Field::ScalarDatabaseColumn {
+    let value = Rc::new(ExplicitField::ScalarDatabaseColumn {
       name: "id".to_string(),
       sql_type: sql_type::Type::Text,
       sql_column_name: "id_col".to_string(),

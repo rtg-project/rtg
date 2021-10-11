@@ -1,10 +1,14 @@
 use super::sql_type;
+use partial_struct::PartialStruct;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug, JsonSchema)]
+#[derive(PartialStruct, Serialize, Deserialize, Debug, JsonSchema)]
 #[serde(tag = "type", rename_all = "camelCase")]
-pub enum Field {
+#[partial(name = "ConfigOption")]
+#[partial_attribute(derive(Serialize, Deserialize, Debug, JsonSchema))]
+#[partial_attribute(serde(tag = "type", rename_all = "camelCase"))]
+pub enum ExplicitField {
   #[serde(rename_all = "camelCase")]
   ScalarDatabaseColumn {
     name: String,
@@ -26,7 +30,7 @@ mod tests {
 
   #[test]
   fn serialize() {
-    let value = Field::ScalarDatabaseColumn {
+    let value = ExplicitField::ScalarDatabaseColumn {
       name: "drone".to_string(),
       sql_type: sql_type::Type::Text,
       sql_column_name: "drone_col".to_string(),
@@ -58,7 +62,7 @@ mod tests {
 
   #[test]
   fn serialize_other() {
-    let value = Field::ScalarDatabaseColumn {
+    let value = ExplicitField::ScalarDatabaseColumn {
       name: "drone".to_string(),
       sql_type: sql_type::Type::Other {
         sql_type_name: "Yoo".to_string(),
@@ -108,7 +112,7 @@ mod tests {
 
     match serde_json::from_str(data) {
       Ok(field) => match field {
-        Field::ScalarDatabaseColumn {
+        ExplicitField::ScalarDatabaseColumn {
           name,
           sql_type,
           sql_column_name,
@@ -144,7 +148,7 @@ mod tests {
 
     match serde_json::from_str(data) {
       Ok(field) => match field {
-        Field::ScalarDatabaseColumn {
+        ExplicitField::ScalarDatabaseColumn {
           name,
           sql_type,
           sql_column_name,

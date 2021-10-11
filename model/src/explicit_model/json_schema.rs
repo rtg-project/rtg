@@ -1,8 +1,8 @@
-use super::field::Field;
+use super::field::ExplicitField;
 use schemars::{schema::RootSchema, schema_for};
 
 pub fn generate_json_schema() -> RootSchema {
-  return schema_for!(Field);
+  return schema_for!(ExplicitField);
 }
 
 // Tests

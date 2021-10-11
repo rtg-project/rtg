@@ -14,7 +14,7 @@ pub enum Model {
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::explicit_model::field::Field;
+  use crate::explicit_model::field::ExplicitField;
   use crate::explicit_model::sql_type;
   use insta::assert_json_snapshot;
 
@@ -34,7 +34,7 @@ mod tests {
         graphql_default_first: 10,
         graphql_default_offset: 0,
         fields: vec![
-          Rc::new(Field::ScalarDatabaseColumn {
+          Rc::new(ExplicitField::ScalarDatabaseColumn {
             name: "id".to_string(),
             sql_type: sql_type::Type::Text,
             sql_column_name: "id_col".to_string(),
@@ -43,7 +43,7 @@ mod tests {
             graphql_order_by_asc: "id_ASC".to_string(),
             graphql_order_by_desc: "id_DESC".to_string(),
           }),
-          Rc::new(Field::ScalarDatabaseColumn {
+          Rc::new(ExplicitField::ScalarDatabaseColumn {
             name: "drone".to_string(),
             sql_type: sql_type::Type::Text,
             sql_column_name: "drone_col".to_string(),

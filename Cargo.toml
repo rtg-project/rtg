@@ -30,6 +30,7 @@ thiserror = {version = "1.0.29"}
 
 [workspace]
 members = [
+  "partial-struct",
   "gql-sdl-to-model",
   "gql-to-pgsql",
   "server",
