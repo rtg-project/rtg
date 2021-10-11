@@ -3,40 +3,46 @@ source: model/src/graphql_model/mod.rs
 expression: model
 
 ---
-V1 {
-    entities: [
-        DatabaseTable {
-            name: "Person",
-            sql_schema_name: "Person",
-            sql_table_name: "Person",
-            graphql_entity_type_name: "Person",
-            graphql_filter_type_name: "Person",
-            graphql_get_single_operation_name: "Person",
-            graphql_get_list_operation_name: "Person",
-            graphql_get_connection_operation_name: "Person",
-            graphql_default_order_by: "Person",
-            graphql_default_first: 0,
-            graphql_default_offset: 10,
-            fields: [
-                ScalarDatabaseColumn {
-                    name: "id",
-                    sql_type: Text,
-                    sql_column_name: "id",
-                    graphql_field_name: "id",
-                    graphql_type_name: "id",
-                    graphql_order_by_asc: "id",
-                    graphql_order_by_desc: "id",
+Document {
+    definitions: [
+        TypeDefinition(
+            Object(
+                ObjectType {
+                    position: Pos(2:7),
+                    description: None,
+                    name: "Person",
+                    implements_interfaces: [],
+                    directives: [],
+                    fields: [
+                        Field {
+                            position: Pos(3:9),
+                            description: None,
+                            name: "id",
+                            arguments: [],
+                            field_type: NamedType(
+                                "ID",
+                            ),
+                            directives: [
+                                Directive {
+                                    position: Pos(3:16),
+                                    name: "id",
+                                    arguments: [],
+                                },
+                            ],
+                        },
+                        Field {
+                            position: Pos(4:9),
+                            description: None,
+                            name: "age",
+                            arguments: [],
+                            field_type: NamedType(
+                                "Int",
+                            ),
+                            directives: [],
+                        },
+                    ],
                 },
-                ScalarDatabaseColumn {
-                    name: "age",
-                    sql_type: Text,
-                    sql_column_name: "age",
-                    graphql_field_name: "age",
-                    graphql_type_name: "age",
-                    graphql_order_by_asc: "age",
-                    graphql_order_by_desc: "age",
-                },
-            ],
-        },
+            ),
+        ),
     ],
 }
