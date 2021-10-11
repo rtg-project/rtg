@@ -1,8 +1,8 @@
-use super::ExplicitModel;
+use super::ImplicitModel;
 use schemars::{schema::RootSchema, schema_for};
 
 pub fn generate_json_schema() -> RootSchema {
-  return schema_for!(ExplicitModel);
+  return schema_for!(ImplicitModel);
 }
 
 // Tests

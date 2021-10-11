@@ -4,6 +4,11 @@ pub mod json_schema;
 pub mod model;
 pub mod sql_type;
 
+pub use entity::ExplicitEntity;
+pub use field::ExplicitField;
+pub use model::ExplicitModel;
+pub use sql_type::Type;
+
 // Tests
 #[cfg(test)]
 mod tests {

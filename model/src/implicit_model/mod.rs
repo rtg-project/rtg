@@ -3,6 +3,8 @@ pub use crate::explicit_model::field::ImplicitField;
 pub use crate::explicit_model::model::ImplicitModel;
 pub use crate::explicit_model::sql_type::Type;
 
+pub mod json_schema;
+
 // Tests
 #[cfg(test)]
 mod tests {
