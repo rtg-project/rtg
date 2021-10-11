@@ -1,11 +1,15 @@
 use super::field::ExplicitField;
+use partial_struct::PartialStruct;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use std::rc::Rc;
 
-#[derive(Serialize, Deserialize, Debug, JsonSchema)]
+#[derive(PartialStruct, Serialize, Deserialize, Debug, JsonSchema)]
 #[serde(tag = "type", rename_all = "camelCase")]
-pub enum Entity {
+#[partial(name = "PartialEntity")]
+#[partial_attribute(derive(Serialize, Deserialize, Debug, JsonSchema))]
+#[partial_attribute(serde(tag = "type", rename_all = "camelCase"))]
+pub enum ExplicitEntity {
   #[serde(rename_all = "camelCase")]
   DatabaseTable {
     name: String,
@@ -32,7 +36,7 @@ mod tests {
 
   #[test]
   fn serialize() {
-    let value = Entity::DatabaseTable {
+    let value = ExplicitEntity::DatabaseTable {
       name: "person".to_string(),
       sql_schema_name: "public".to_string(),
       sql_table_name: "person_table".to_string(),

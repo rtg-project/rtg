@@ -1,4 +1,4 @@
-use super::entity::Entity;
+use super::entity::ExplicitEntity;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use std::rc::Rc;
@@ -7,7 +7,7 @@ use std::rc::Rc;
 #[serde(tag = "version", rename_all = "camelCase")]
 pub enum Model {
   #[serde(rename_all = "camelCase")]
-  V1 { entities: Vec<Rc<Entity>> },
+  V1 { entities: Vec<Rc<ExplicitEntity>> },
 }
 
 // Tests
@@ -21,7 +21,7 @@ mod tests {
   #[test]
   fn serialize() {
     let value = Model::V1 {
-      entities: vec![Rc::new(Entity::DatabaseTable {
+      entities: vec![Rc::new(ExplicitEntity::DatabaseTable {
         name: "person".to_string(),
         sql_schema_name: "public".to_string(),
         sql_table_name: "person_table".to_string(),

@@ -1,5 +1,5 @@
 use super::entity_cache::EntityCache;
-use crate::explicit_model::entity::Entity;
+use crate::explicit_model::entity::ExplicitEntity;
 use crate::explicit_model::model::Model;
 use rustc_hash::FxHashMap;
 use serde::{Deserialize, Serialize};
@@ -38,7 +38,7 @@ impl ModelCache {
         let mut entities_by_operation_name = FxHashMap::default();
         for entity in entities.iter() {
           match &**entity {
-            Entity::DatabaseTable {
+            ExplicitEntity::DatabaseTable {
               graphql_get_single_operation_name,
               graphql_get_list_operation_name,
               graphql_get_connection_operation_name,
@@ -82,7 +82,7 @@ impl ModelCache {
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::explicit_model::entity::Entity;
+  use crate::explicit_model::entity::ExplicitEntity;
   use crate::explicit_model::field::ExplicitField;
   use crate::explicit_model::sql_type;
   use insta::{assert_debug_snapshot, assert_json_snapshot};
@@ -91,7 +91,7 @@ mod tests {
   #[test]
   fn constructor() {
     let value = Rc::new(Model::V1 {
-      entities: vec![Rc::new(Entity::DatabaseTable {
+      entities: vec![Rc::new(ExplicitEntity::DatabaseTable {
         name: "person".to_string(),
         sql_schema_name: "public".to_string(),
         sql_table_name: "person_table".to_string(),
@@ -135,7 +135,7 @@ mod tests {
   #[test]
   fn serialize_entity_operation_cache() {
     let value = EntityOperationCache {
-      entity_cache: Rc::new(EntityCache::new(Rc::new(Entity::DatabaseTable {
+      entity_cache: Rc::new(EntityCache::new(Rc::new(ExplicitEntity::DatabaseTable {
         name: "person".to_string(),
         sql_schema_name: "public".to_string(),
         sql_table_name: "person_table".to_string(),

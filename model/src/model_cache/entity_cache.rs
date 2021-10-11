@@ -1,5 +1,5 @@
 use super::field_cache::FieldCache;
-use crate::explicit_model::entity::Entity;
+use crate::explicit_model::entity::ExplicitEntity;
 use crate::explicit_model::field::ExplicitField;
 use rustc_hash::FxHashMap;
 use serde::{Deserialize, Serialize};
@@ -10,7 +10,7 @@ use std::rc::Rc;
 pub enum EntityCache {
   #[serde(rename_all = "camelCase")]
   DatabaseTable {
-    entity: Rc<Entity>,
+    entity: Rc<ExplicitEntity>,
     fields_by_sql_column_name: FxHashMap<String, Rc<FieldCache>>,
     fields_by_graphql_field_name: FxHashMap<String, Rc<FieldCache>>,
   },
@@ -18,9 +18,9 @@ pub enum EntityCache {
 
 impl EntityCache {
   // Another associated function, taking two arguments:
-  pub fn new(entity: Rc<Entity>) -> EntityCache {
+  pub fn new(entity: Rc<ExplicitEntity>) -> EntityCache {
     match &*entity {
-      Entity::DatabaseTable { fields, .. } => {
+      ExplicitEntity::DatabaseTable { fields, .. } => {
         let mut fields_by_sql_column_name = FxHashMap::default();
         let mut fields_by_graphql_field_name = FxHashMap::default();
         for field in fields.iter() {
@@ -56,7 +56,7 @@ mod tests {
 
   #[test]
   fn constructor() {
-    let value = Rc::new(Entity::DatabaseTable {
+    let value = Rc::new(ExplicitEntity::DatabaseTable {
       name: "person".to_string(),
       sql_schema_name: "public".to_string(),
       sql_table_name: "person_table".to_string(),
