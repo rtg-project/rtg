@@ -1,4 +1,4 @@
-use super::entity::ExplicitEntity;
+use super::entity::{ExplicitEntity, PartialEntity};
 use partial_struct::PartialStruct;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -11,7 +11,10 @@ use std::rc::Rc;
 #[partial_attribute(serde(tag = "version", rename_all = "camelCase"))]
 pub enum ExplicitModel {
   #[serde(rename_all = "camelCase")]
-  V1 { entities: Vec<Rc<ExplicitEntity>> },
+  V1 {
+    #[partial(nested_type = "Vec<Rc<PartialEntity>>")]
+    entities: Vec<Rc<ExplicitEntity>>,
+  },
 }
 
 // Tests

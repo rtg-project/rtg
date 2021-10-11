@@ -1,4 +1,4 @@
-use super::field::ExplicitField;
+use super::field::{ExplicitField, PartialField};
 use partial_struct::PartialStruct;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -23,6 +23,7 @@ pub enum ExplicitEntity {
     graphql_default_order_by: String,
     graphql_default_first: i16,
     graphql_default_offset: i16,
+    #[partial(nested_type = "Vec<Rc<PartialField>>")]
     fields: Vec<Rc<ExplicitField>>,
   },
 }

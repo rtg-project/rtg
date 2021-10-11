@@ -1,6 +1,6 @@
 pub mod explicit_model;
-
 pub mod model_cache;
+pub mod partial_model;
 
 // Test the code in the readme file
 // See https://github.com/rust-lang/cargo/issues/383#issuecomment-720873790
