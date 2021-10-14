@@ -9,7 +9,7 @@
   <h3 align="center">RTG</h3>
 
   <p align="center">
-    Relational (SQL) to Graph (GraphQL) tranformation tool. Fast.
+    Relational (SQL) to Graph (GraphQL) transformation tool. Fast.
     <br />
     <a href="https://github.com/rtg-project/rtg"><strong>Explore the docs »</strong></a>
     <br />

@@ -22,6 +22,23 @@ pub fn convert_field<'a, T: Text<'a>>(
       let graphql_field_name = None;
       let graphql_order_by_asc = None;
       let graphql_order_by_desc = None;
+      for directive in field.directives.iter() {
+        match directive.name.as_ref() {
+          "sql" => {
+            for argument in directive.arguments.iter() {
+              match (*argument).0.as_ref() {
+                "type" => return Err(ConversionError::Unknown),
+                &_ => return Err(ConversionError::Unknown),
+              }
+            }
+          }
+          &_ => {
+            return Err(ConversionError::UnsupportedDirective(
+              directive.name.as_ref().to_string(),
+            ))
+          }
+        }
+      }
       return Ok(Rc::new(ImplicitField::ScalarDatabaseColumn {
         name,
         nullable: Some(true),

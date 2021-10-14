@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 // See https://github.com/sfackler/rust-postgres/blob/fc10985f9fdf0903893109bc951fb5891539bf97/postgres-types/src/type_gen.rs
 #[derive(Serialize, Deserialize, Debug, PartialEq, JsonSchema)]
-#[serde(tag = "sqlType", rename_all = "camelCase")]
+#[serde(rename_all = "camelCase")]
 pub enum Type {
   Bool,
   Bytea,
@@ -176,7 +176,40 @@ pub enum Type {
   Anycompatiblenonarray,
   AnycompatibleRange,
   #[serde(rename_all = "camelCase")]
-  Other {
-    sql_type_name: String,
-  },
+  Other(String),
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  use similar_asserts::assert_eq;
+
+  #[test]
+  fn serialize() {
+    let value = Type::Bit;
+
+    match serde_json::to_string_pretty(&value) {
+      Ok(string) => {
+        assert_eq!(string, r#""bit""#);
+      }
+      Err(e) => panic!("{}", e),
+    }
+  }
+
+  #[test]
+  fn serialize_other() {
+    let value = Type::Other("wow".to_string());
+
+    match serde_json::to_string_pretty(&value) {
+      Ok(string) => {
+        assert_eq!(
+          string,
+          r#"{
+  "other": "wow"
+}"#
+        );
+      }
+      Err(e) => panic!("{}", e),
+    }
+  }
 }

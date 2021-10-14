@@ -6,6 +6,7 @@ expression: "FieldCache::new(Rc::clone(&value))"
 ScalarDatabaseColumn {
     field: ScalarDatabaseColumn {
         name: "id",
+        nullable: false,
         sql_type: Text,
         sql_column_name: "id_col",
         graphql_field_name: "id",

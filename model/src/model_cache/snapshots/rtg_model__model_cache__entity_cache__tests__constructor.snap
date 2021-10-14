@@ -19,6 +19,7 @@ DatabaseTable {
         fields: [
             ScalarDatabaseColumn {
                 name: "id",
+                nullable: false,
                 sql_type: Text,
                 sql_column_name: "id_col",
                 graphql_field_name: "id",
@@ -28,6 +29,7 @@ DatabaseTable {
             },
             ScalarDatabaseColumn {
                 name: "drone",
+                nullable: false,
                 sql_type: Text,
                 sql_column_name: "drone_col",
                 graphql_field_name: "drone",
@@ -41,6 +43,7 @@ DatabaseTable {
         "id_col": ScalarDatabaseColumn {
             field: ScalarDatabaseColumn {
                 name: "id",
+                nullable: false,
                 sql_type: Text,
                 sql_column_name: "id_col",
                 graphql_field_name: "id",
@@ -52,6 +55,7 @@ DatabaseTable {
         "drone_col": ScalarDatabaseColumn {
             field: ScalarDatabaseColumn {
                 name: "drone",
+                nullable: false,
                 sql_type: Text,
                 sql_column_name: "drone_col",
                 graphql_field_name: "drone",
@@ -65,6 +69,7 @@ DatabaseTable {
         "drone": ScalarDatabaseColumn {
             field: ScalarDatabaseColumn {
                 name: "drone",
+                nullable: false,
                 sql_type: Text,
                 sql_column_name: "drone_col",
                 graphql_field_name: "drone",
@@ -76,6 +81,7 @@ DatabaseTable {
         "id": ScalarDatabaseColumn {
             field: ScalarDatabaseColumn {
                 name: "id",
+                nullable: false,
                 sql_type: Text,
                 sql_column_name: "id_col",
                 graphql_field_name: "id",

@@ -13,7 +13,7 @@ pub enum ExplicitField {
   ScalarDatabaseColumn {
     name: String,
     nullable: bool,
-    #[serde(flatten)]
+    // #[serde(flatten)]
     sql_type: sql_type::Type,
     sql_column_name: String,
     graphql_field_name: String,
@@ -49,6 +49,7 @@ mod tests {
           r#"{
   "type": "scalarDatabaseColumn",
   "name": "drone",
+  "nullable": false,
   "sqlType": "text",
   "sqlColumnName": "drone_col",
   "graphqlFieldName": "drone",
@@ -67,9 +68,7 @@ mod tests {
     let value = ExplicitField::ScalarDatabaseColumn {
       name: "drone".to_string(),
       nullable: false,
-      sql_type: sql_type::Type::Other {
-        sql_type_name: "Yoo".to_string(),
-      },
+      sql_type: sql_type::Type::Other("Yoo".to_string()),
       sql_column_name: "drone_col".to_string(),
       graphql_field_name: "drone".to_string(),
       graphql_type_name: "String".to_string(),
@@ -84,8 +83,10 @@ mod tests {
           r#"{
   "type": "scalarDatabaseColumn",
   "name": "drone",
-  "sqlType": "other",
-  "sqlTypeName": "Yoo",
+  "nullable": false,
+  "sqlType": {
+    "other": "Yoo"
+  },
   "sqlColumnName": "drone_col",
   "graphqlFieldName": "drone",
   "graphqlTypeName": "String",
@@ -103,6 +104,7 @@ mod tests {
     let data = r#"
       {
         "name": "id",
+        "nullable": false,
         "type": "scalarDatabaseColumn",
         "sqlType": "text",
         "sqlColumnName": "id",
@@ -126,6 +128,7 @@ mod tests {
           graphql_order_by_desc: _,
         } => {
           assert_eq!(name, "id");
+          assert_eq!(nullable, false);
           assert_eq!(sql_type, sql_type::Type::Text);
           assert_eq!(sql_column_name, "id");
         }
@@ -140,8 +143,10 @@ mod tests {
       {
         "name": "id",
         "type": "scalarDatabaseColumn",
-        "sqlType": "other",
-        "sqlTypeName": "Hii",
+        "nullable": true,
+        "sqlType": {
+          "other": "Hii"
+        },
         "sqlColumnName": "id",
         "graphqlFieldName": "id",
         "graphqlTypeName": "String",
@@ -163,12 +168,8 @@ mod tests {
           graphql_order_by_desc: _,
         } => {
           assert_eq!(name, "id");
-          assert_eq!(
-            sql_type,
-            sql_type::Type::Other {
-              sql_type_name: "Hii".to_string(),
-            }
-          );
+          assert_eq!(nullable, true);
+          assert_eq!(sql_type, sql_type::Type::Other("Hii".to_string()));
           assert_eq!(sql_column_name, "id");
         }
       },
