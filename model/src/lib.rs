@@ -3,6 +3,7 @@ pub mod graphql_model;
 pub mod implicit_model;
 pub mod model_cache;
 
+pub mod make_explicit_model;
 pub mod parse_graphql_model;
 
 // Test the code in the readme file

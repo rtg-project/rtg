@@ -3,7 +3,7 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 // See https://github.com/sfackler/rust-postgres/blob/fc10985f9fdf0903893109bc951fb5891539bf97/postgres-types/src/type_gen.rs
-#[derive(Serialize, Deserialize, Debug, PartialEq, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, JsonSchema, Clone)]
 #[serde(rename_all = "camelCase")]
 pub enum Type {
   Bool,

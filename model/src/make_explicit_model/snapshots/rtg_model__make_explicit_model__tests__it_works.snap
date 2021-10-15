@@ -1,0 +1,46 @@
+---
+source: model/src/make_explicit_model/mod.rs
+expression: "convert_model::convert_model(&value)"
+
+---
+Ok(
+    V1 {
+        entities: [
+            DatabaseTable {
+                name: "person",
+                sql_schema_name: "public",
+                sql_table_name: "person_table",
+                graphql_entity_type_name: "Person",
+                graphql_filter_type_name: "PersonWhereFilter",
+                graphql_get_single_operation_name: "person",
+                graphql_get_list_operation_name: "person",
+                graphql_get_connection_operation_name: "person",
+                graphql_default_order_by: "id_ASC",
+                graphql_default_first: 10,
+                graphql_default_offset: 0,
+                fields: [
+                    ScalarDatabaseColumn {
+                        name: "id",
+                        nullable: false,
+                        sql_type: Text,
+                        sql_column_name: "id_col",
+                        graphql_field_name: "id",
+                        graphql_type_name: "id",
+                        graphql_order_by_asc: "id",
+                        graphql_order_by_desc: "id",
+                    },
+                    ScalarDatabaseColumn {
+                        name: "drone",
+                        nullable: false,
+                        sql_type: Text,
+                        sql_column_name: "drone",
+                        graphql_field_name: "drone",
+                        graphql_type_name: "drone",
+                        graphql_order_by_asc: "drone_ASC",
+                        graphql_order_by_desc: "drone_DESC",
+                    },
+                ],
+            },
+        ],
+    },
+)
