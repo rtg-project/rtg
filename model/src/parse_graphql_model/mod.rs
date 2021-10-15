@@ -17,7 +17,7 @@ mod tests {
       r#"
       type Person {
         id: ID!
-        age: Integer @sql(name: "the_age", type: "int8")
+        age: Integer @sql(column: "the_age", type: "int8")
       }
       "#,
     )

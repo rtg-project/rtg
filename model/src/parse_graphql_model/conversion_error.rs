@@ -24,9 +24,9 @@ pub enum ConversionError {
   #[error("The `sql` directive `type` argument must be a string or an object")]
   SqlDirectiveTypeArgument,
   #[error(
-    "The `sql` directive `type` argument must be a valid sql type. `{0}` is not a valid sql type."
+    "The `sql` directive `type` argument must be a valid sql type. `{0}` is not a valid sql type. Error: {1}"
   )]
-  SqlDirectiveTypeArgumentValue(String),
+  SqlDirectiveTypeArgumentValue(String, String),
   #[error("The `sql` directive `name` argument must be a string")]
   SqlDirectiveNameArgument,
   #[error(

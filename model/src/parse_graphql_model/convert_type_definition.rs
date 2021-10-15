@@ -1,6 +1,6 @@
 use super::conversion_error::ConversionError;
 use super::convert_field::convert_field;
-use graphql_parser::schema::{Text, TypeDefinition};
+use graphql_parser::schema::{Text, TypeDefinition, Value};
 // use rustc_hash::FxHashMap;
 use crate::implicit_model::{ImplicitEntity, ImplicitField};
 use std::rc::Rc;
@@ -17,8 +17,8 @@ pub fn convert_type_definition<'a, T: Text<'a>>(
     }
     TypeDefinition::Object(object) => {
       let name = Some(object.name.as_ref().to_string());
-      let sql_schema_name = None;
-      let sql_table_name = None;
+      let mut sql_schema_name = None;
+      let mut sql_table_name = None;
       let graphql_entity_type_name = None;
       let graphql_filter_type_name = None;
       let graphql_get_single_operation_name = None;
@@ -36,6 +36,31 @@ pub fn convert_type_definition<'a, T: Text<'a>>(
           .collect::<Result<Vec<Rc<ImplicitField>>, ConversionError>>()
           .unwrap(),
       );
+
+      for directive in object.directives.iter() {
+        match directive.name.as_ref() {
+          "sql" => {
+            for argument in directive.arguments.iter() {
+              match (*argument).0.as_ref() {
+                "schema" => match &(*argument).1 {
+                  Value::String(s) => sql_schema_name = Some(s.to_string()),
+                  _ => return Err(ConversionError::SqlDirectiveNameArgument),
+                },
+                "table" => match &(*argument).1 {
+                  Value::String(s) => sql_table_name = Some(s.to_string()),
+                  _ => return Err(ConversionError::SqlDirectiveNameArgument),
+                },
+                argument_name => {
+                  return Err(ConversionError::SqlDirectiveArgument(
+                    argument_name.to_string(),
+                  ))
+                }
+              }
+            }
+          }
+          _ => return Err(ConversionError::Unknown),
+        }
+      }
 
       return Ok(ImplicitEntity::DatabaseTable {
         name,

@@ -31,16 +31,17 @@ pub fn convert_field<'a, T: Text<'a>>(
                   Value::String(s) => {
                     match serde_json::from_str::<ImplicitType>(format!("\"{}\"", s).as_str()) {
                       Ok(field) => sql_type = Some(field),
-                      Err(_e) => {
+                      Err(e) => {
                         return Err(ConversionError::SqlDirectiveTypeArgumentValue(
                           s.to_string(),
+                          e.to_string(),
                         ))
                       }
                     }
                   }
                   _ => return Err(ConversionError::SqlDirectiveTypeArgument),
                 },
-                "name" => match &(*argument).1 {
+                "column" => match &(*argument).1 {
                   Value::String(s) => sql_column_name = Some(s.to_string()),
                   _ => return Err(ConversionError::SqlDirectiveNameArgument),
                 },
@@ -95,16 +96,17 @@ pub fn convert_field<'a, T: Text<'a>>(
                     Value::String(s) => {
                       match serde_json::from_str::<ImplicitType>(format!("\"{}\"", s).as_str()) {
                         Ok(field) => sql_type = Some(field),
-                        Err(_e) => {
+                        Err(e) => {
                           return Err(ConversionError::SqlDirectiveTypeArgumentValue(
                             s.to_string(),
+                            e.to_string(),
                           ))
                         }
                       }
                     }
                     _ => return Err(ConversionError::SqlDirectiveTypeArgument),
                   },
-                  "name" => match &(*argument).1 {
+                  "column" => match &(*argument).1 {
                     Value::String(s) => sql_column_name = Some(s.to_string()),
                     _ => return Err(ConversionError::SqlDirectiveNameArgument),
                   },
