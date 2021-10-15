@@ -15,7 +15,7 @@ mod tests {
   fn it_works() {
     let model = convert_graphql_string::convert_graphql_string(
       r#"
-      type Person {
+      type Person @sql(schema: "public", table: "people"){
         id: ID!
         age: Integer @sql(column: "the_age", type: "int8")
       }

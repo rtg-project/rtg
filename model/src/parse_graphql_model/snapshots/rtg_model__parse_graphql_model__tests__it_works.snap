@@ -10,8 +10,12 @@ V1 {
                 name: Some(
                     "Person",
                 ),
-                sql_schema_name: None,
-                sql_table_name: None,
+                sql_schema_name: Some(
+                    "public",
+                ),
+                sql_table_name: Some(
+                    "people",
+                ),
                 graphql_entity_type_name: None,
                 graphql_filter_type_name: None,
                 graphql_get_single_operation_name: None,
