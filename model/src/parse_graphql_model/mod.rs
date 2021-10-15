@@ -16,7 +16,7 @@ mod tests {
     let model = convert_graphql_string::convert_graphql_string(
       r#"
       type Person {
-        id: ID @id
+        id: ID!
         age: Int
       }
       "#,

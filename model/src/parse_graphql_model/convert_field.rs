@@ -1,8 +1,8 @@
 use super::conversion_error::ConversionError;
-use graphql_parser::schema::{Field, ObjectType, Text, Type};
+use graphql_parser::schema::{Field, ObjectType, Text, Type, Value};
 
 // use rustc_hash::FxHashMap;
-use crate::implicit_model::ImplicitField;
+use crate::implicit_model::{ImplicitField, Type as ImplicitType};
 use std::rc::Rc;
 
 pub fn convert_field<'a, T: Text<'a>>(
@@ -17,8 +17,8 @@ pub fn convert_field<'a, T: Text<'a>>(
   match &field.field_type {
     Type::NamedType(type_name) => {
       let graphql_type_name = Some(type_name.as_ref().to_string());
-      let sql_type = None;
-      let sql_column_name = None;
+      let mut sql_type = None;
+      let mut sql_column_name = None;
       let graphql_field_name = None;
       let graphql_order_by_asc = None;
       let graphql_order_by_desc = None;
@@ -27,8 +27,27 @@ pub fn convert_field<'a, T: Text<'a>>(
           "sql" => {
             for argument in directive.arguments.iter() {
               match (*argument).0.as_ref() {
-                "type" => return Err(ConversionError::Unknown),
-                &_ => return Err(ConversionError::Unknown),
+                "type" => match &(*argument).1 {
+                  Value::Object(_) => return Err(ConversionError::SqlDirectiveTypeArgument),
+                  Value::String(s) => match serde_json::from_str::<ImplicitType>(s) {
+                    Ok(field) => sql_type = Some(field),
+                    Err(e) => {
+                      return Err(ConversionError::SqlDirectiveTypeArgumentValue(
+                        s.to_string(),
+                      ))
+                    }
+                  },
+                  _ => return Err(ConversionError::SqlDirectiveTypeArgument),
+                },
+                "name" => match &(*argument).1 {
+                  Value::String(s) => sql_column_name = Some(s.to_string()),
+                  _ => return Err(ConversionError::SqlDirectiveNameArgument),
+                },
+                argument_name => {
+                  return Err(ConversionError::SqlDirectiveArgument(
+                    argument_name.to_string(),
+                  ))
+                }
               }
             }
           }
@@ -59,11 +78,47 @@ pub fn convert_field<'a, T: Text<'a>>(
     Type::NonNullType(item_type) => match &**item_type {
       Type::NamedType(type_name) => {
         let graphql_type_name = Some(type_name.as_ref().to_string());
-        let sql_type = None;
-        let sql_column_name = None;
+        let mut sql_type = None;
+        let mut sql_column_name = None;
         let graphql_field_name = None;
         let graphql_order_by_asc = None;
         let graphql_order_by_desc = None;
+        for directive in field.directives.iter() {
+          match directive.name.as_ref() {
+            "sql" => {
+              for argument in directive.arguments.iter() {
+                match (*argument).0.as_ref() {
+                  "type" => match &(*argument).1 {
+                    Value::Object(_) => return Err(ConversionError::SqlDirectiveTypeArgument),
+                    Value::String(s) => match serde_json::from_str::<ImplicitType>(s) {
+                      Ok(field) => sql_type = Some(field),
+                      Err(e) => {
+                        return Err(ConversionError::SqlDirectiveTypeArgumentValue(
+                          s.to_string(),
+                        ))
+                      }
+                    },
+                    _ => return Err(ConversionError::SqlDirectiveTypeArgument),
+                  },
+                  "name" => match &(*argument).1 {
+                    Value::String(s) => sql_column_name = Some(s.to_string()),
+                    _ => return Err(ConversionError::SqlDirectiveNameArgument),
+                  },
+                  argument_name => {
+                    return Err(ConversionError::SqlDirectiveArgument(
+                      argument_name.to_string(),
+                    ))
+                  }
+                }
+              }
+            }
+            &_ => {
+              return Err(ConversionError::UnsupportedDirective(
+                directive.name.as_ref().to_string(),
+              ))
+            }
+          }
+        }
         return Ok(Rc::new(ImplicitField::ScalarDatabaseColumn {
           name,
           nullable: Some(false),

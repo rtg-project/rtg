@@ -26,6 +26,9 @@ V1 {
                             name: Some(
                                 "id",
                             ),
+                            nullable: Some(
+                                false,
+                            ),
                             sql_type: None,
                             sql_column_name: None,
                             graphql_field_name: None,
@@ -38,6 +41,9 @@ V1 {
                         ScalarDatabaseColumn {
                             name: Some(
                                 "age",
+                            ),
+                            nullable: Some(
+                                true,
                             ),
                             sql_type: None,
                             sql_column_name: None,

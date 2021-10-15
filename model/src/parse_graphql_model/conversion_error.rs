@@ -19,6 +19,20 @@ pub enum ConversionError {
   NonSupportedArray(String, String),
   #[error("Field with GraphQL field name `{0} not found in model")]
   FieldNotFound(String),
+  #[error("The `sql` directive does not support the argument `{0}`.")]
+  SqlDirectiveArgument(String),
+  #[error("The `sql` directive `type` argument must be a string or an object")]
+  SqlDirectiveTypeArgument,
+  #[error(
+    "The `sql` directive `type` argument must be a valid sql type. `{0}` is not a valid sql type."
+  )]
+  SqlDirectiveTypeArgumentValue(String),
+  #[error("The `sql` directive `name` argument must be a string")]
+  SqlDirectiveNameArgument,
+  #[error(
+    "The `sql` directive `name` argument must be a valid sql identifier. `{0}` is not a valid sql identifier."
+  )]
+  SqlDirectiveNameArgumentValue(String),
   #[error("Generic error: `{0}`")]
   Generic(String),
   #[error("Unknown convert error")]
