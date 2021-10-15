@@ -12,10 +12,9 @@ pub fn convert_field<'a, T: Text<'a>>(
 ) -> Result<Rc<ImplicitField>, ConversionError> {
   // relations_by_name.insert("s", "s");
 
-  let name = Some(field.name.as_ref().to_string());
-
   match &field.field_type {
     Type::NamedType(type_name) => {
+      let name = Some(field.name.as_ref().to_string());
       let graphql_type_name = Some(type_name.as_ref().to_string());
       let mut sql_type = None;
       let mut sql_column_name = None;
@@ -29,14 +28,16 @@ pub fn convert_field<'a, T: Text<'a>>(
               match (*argument).0.as_ref() {
                 "type" => match &(*argument).1 {
                   Value::Object(_) => return Err(ConversionError::SqlDirectiveTypeArgument),
-                  Value::String(s) => match serde_json::from_str::<ImplicitType>(s) {
-                    Ok(field) => sql_type = Some(field),
-                    Err(e) => {
-                      return Err(ConversionError::SqlDirectiveTypeArgumentValue(
-                        s.to_string(),
-                      ))
+                  Value::String(s) => {
+                    match serde_json::from_str::<ImplicitType>(format!("\"{}\"", s).as_str()) {
+                      Ok(field) => sql_type = Some(field),
+                      Err(_e) => {
+                        return Err(ConversionError::SqlDirectiveTypeArgumentValue(
+                          s.to_string(),
+                        ))
+                      }
                     }
-                  },
+                  }
                   _ => return Err(ConversionError::SqlDirectiveTypeArgument),
                 },
                 "name" => match &(*argument).1 {
@@ -77,6 +78,7 @@ pub fn convert_field<'a, T: Text<'a>>(
     }
     Type::NonNullType(item_type) => match &**item_type {
       Type::NamedType(type_name) => {
+        let name = Some(field.name.as_ref().to_string());
         let graphql_type_name = Some(type_name.as_ref().to_string());
         let mut sql_type = None;
         let mut sql_column_name = None;
@@ -90,14 +92,16 @@ pub fn convert_field<'a, T: Text<'a>>(
                 match (*argument).0.as_ref() {
                   "type" => match &(*argument).1 {
                     Value::Object(_) => return Err(ConversionError::SqlDirectiveTypeArgument),
-                    Value::String(s) => match serde_json::from_str::<ImplicitType>(s) {
-                      Ok(field) => sql_type = Some(field),
-                      Err(e) => {
-                        return Err(ConversionError::SqlDirectiveTypeArgumentValue(
-                          s.to_string(),
-                        ))
+                    Value::String(s) => {
+                      match serde_json::from_str::<ImplicitType>(format!("\"{}\"", s).as_str()) {
+                        Ok(field) => sql_type = Some(field),
+                        Err(_e) => {
+                          return Err(ConversionError::SqlDirectiveTypeArgumentValue(
+                            s.to_string(),
+                          ))
+                        }
                       }
-                    },
+                    }
                     _ => return Err(ConversionError::SqlDirectiveTypeArgument),
                   },
                   "name" => match &(*argument).1 {

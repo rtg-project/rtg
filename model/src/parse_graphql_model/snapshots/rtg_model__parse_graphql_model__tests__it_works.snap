@@ -45,11 +45,15 @@ V1 {
                             nullable: Some(
                                 true,
                             ),
-                            sql_type: None,
-                            sql_column_name: None,
+                            sql_type: Some(
+                                Int8,
+                            ),
+                            sql_column_name: Some(
+                                "the_age",
+                            ),
                             graphql_field_name: None,
                             graphql_type_name: Some(
-                                "Int",
+                                "Integer",
                             ),
                             graphql_order_by_asc: None,
                             graphql_order_by_desc: None,

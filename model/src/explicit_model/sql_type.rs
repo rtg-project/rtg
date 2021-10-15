@@ -185,12 +185,24 @@ mod tests {
   use similar_asserts::assert_eq;
 
   #[test]
-  fn serialize() {
+  fn serialize1() {
     let value = Type::Bit;
 
     match serde_json::to_string_pretty(&value) {
       Ok(string) => {
         assert_eq!(string, r#""bit""#);
+      }
+      Err(e) => panic!("{}", e),
+    }
+  }
+
+  #[test]
+  fn serialize2() {
+    let value = Type::Int8;
+
+    match serde_json::to_string_pretty(&value) {
+      Ok(string) => {
+        assert_eq!(string, r#""int8""#);
       }
       Err(e) => panic!("{}", e),
     }
