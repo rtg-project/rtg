@@ -48,7 +48,7 @@ pub fn convert_entity(implicit_entity: &ImplicitEntity) -> Result<ExplicitEntity
         None => vec![],
       };
       let default_graphql_default_order_by = match fields.first() {
-        None => return Err(ConversionError::EntityHasNoField(explicit_name.to_string())),
+        None => return Err(ConversionError::EntityHasNoField(explicit_name.to_owned())),
         Some(field) => match field.as_ref() {
           ExplicitField::ScalarDatabaseColumn {
             graphql_order_by_asc,
@@ -58,41 +58,41 @@ pub fn convert_entity(implicit_entity: &ImplicitEntity) -> Result<ExplicitEntity
       };
 
       Ok(ExplicitEntity::DatabaseTable {
-        name: explicit_name.to_string(),
+        name: explicit_name.to_owned(),
         sql_schema_name: sql_schema_name
           .as_ref()
           .unwrap_or(&"public".to_owned())
-          .to_string(),
+          .to_owned(),
         sql_table_name: sql_table_name
           .as_ref()
           .unwrap_or(&entity::inflect_sql_table_name_from_name(
             explicit_name.as_ref(),
           ))
-          .to_string(),
+          .to_owned(),
         graphql_entity_type_name: graphql_entity_type_name
           .as_ref()
           .unwrap_or(&entity::inflect_graphql_entity_type_name_from_name(
             explicit_name.as_ref(),
           ))
-          .to_string(),
+          .to_owned(),
         graphql_filter_type_name: graphql_filter_type_name
           .as_ref()
           .unwrap_or(&entity::inflect_graphql_filter_type_name_from_name(
             explicit_name.as_ref(),
           ))
-          .to_string(),
+          .to_owned(),
         graphql_get_single_operation_name: graphql_get_single_operation_name
           .as_ref()
           .unwrap_or(
             &entity::inflect_graphql_get_single_operation_name_from_name(explicit_name.as_ref()),
           )
-          .to_string(),
+          .to_owned(),
         graphql_get_list_operation_name: graphql_get_list_operation_name
           .as_ref()
           .unwrap_or(&entity::inflect_graphql_get_list_operation_name_from_name(
             explicit_name.as_ref(),
           ))
-          .to_string(),
+          .to_owned(),
         graphql_get_connection_operation_name: graphql_get_connection_operation_name
           .as_ref()
           .unwrap_or(
@@ -100,11 +100,11 @@ pub fn convert_entity(implicit_entity: &ImplicitEntity) -> Result<ExplicitEntity
               explicit_name.as_ref(),
             ),
           )
-          .to_string(),
+          .to_owned(),
         graphql_default_order_by: graphql_default_order_by
           .as_ref()
           .unwrap_or(default_graphql_default_order_by)
-          .to_string(),
+          .to_owned(),
         graphql_default_first: graphql_default_first.unwrap_or(10),
         graphql_default_offset: graphql_default_offset.unwrap_or(0),
         fields: fields,

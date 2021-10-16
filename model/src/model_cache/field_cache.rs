@@ -32,14 +32,14 @@ mod tests {
   #[test]
   fn constructor() {
     let value = Rc::new(ExplicitField::ScalarDatabaseColumn {
-      name: "id".to_string(),
+      name: "id".to_owned(),
       nullable: false,
       sql_type: sql_type::Type::Text,
-      sql_column_name: "id_col".to_string(),
-      graphql_field_name: "id".to_string(),
-      graphql_type_name: "String".to_string(),
-      graphql_order_by_asc: "id_ASC".to_string(),
-      graphql_order_by_desc: "id_DESC".to_string(),
+      sql_column_name: "id_col".to_owned(),
+      graphql_field_name: "id".to_owned(),
+      graphql_type_name: "String".to_owned(),
+      graphql_order_by_asc: "id_ASC".to_owned(),
+      graphql_order_by_desc: "id_DESC".to_owned(),
     });
 
     assert_debug_snapshot!(FieldCache::new(Rc::clone(&value)));

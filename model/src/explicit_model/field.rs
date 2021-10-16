@@ -32,14 +32,14 @@ mod tests {
   #[test]
   fn serialize() {
     let value = ExplicitField::ScalarDatabaseColumn {
-      name: "drone".to_string(),
+      name: "drone".to_owned(),
       nullable: false,
       sql_type: sql_type::Type::Text,
-      sql_column_name: "drone_col".to_string(),
-      graphql_field_name: "drone".to_string(),
-      graphql_type_name: "String".to_string(),
-      graphql_order_by_asc: "drone_ASC".to_string(),
-      graphql_order_by_desc: "drone_DESC".to_string(),
+      sql_column_name: "drone_col".to_owned(),
+      graphql_field_name: "drone".to_owned(),
+      graphql_type_name: "String".to_owned(),
+      graphql_order_by_asc: "drone_ASC".to_owned(),
+      graphql_order_by_desc: "drone_DESC".to_owned(),
     };
 
     match serde_json::to_string_pretty(&value) {
@@ -66,14 +66,14 @@ mod tests {
   #[test]
   fn serialize_other() {
     let value = ExplicitField::ScalarDatabaseColumn {
-      name: "drone".to_string(),
+      name: "drone".to_owned(),
       nullable: false,
-      sql_type: sql_type::Type::Other("Yoo".to_string()),
-      sql_column_name: "drone_col".to_string(),
-      graphql_field_name: "drone".to_string(),
-      graphql_type_name: "String".to_string(),
-      graphql_order_by_asc: "drone_ASC".to_string(),
-      graphql_order_by_desc: "drone_DESC".to_string(),
+      sql_type: sql_type::Type::Other("Yoo".to_owned()),
+      sql_column_name: "drone_col".to_owned(),
+      graphql_field_name: "drone".to_owned(),
+      graphql_type_name: "String".to_owned(),
+      graphql_order_by_asc: "drone_ASC".to_owned(),
+      graphql_order_by_desc: "drone_DESC".to_owned(),
     };
 
     match serde_json::to_string_pretty(&value) {
@@ -169,7 +169,7 @@ mod tests {
         } => {
           assert_eq!(name, "id");
           assert_eq!(nullable, true);
-          assert_eq!(sql_type, sql_type::Type::Other("Hii".to_string()));
+          assert_eq!(sql_type, sql_type::Type::Other("Hii".to_owned()));
           assert_eq!(sql_column_name, "id");
         }
       },

@@ -14,8 +14,8 @@ pub fn convert_field<'a, T: Text<'a>>(
 
   match &field.field_type {
     Type::NamedType(type_name) => {
-      let name = Some(field.name.as_ref().to_string());
-      let graphql_type_name = Some(type_name.as_ref().to_string());
+      let name = Some(field.name.as_ref().to_owned());
+      let graphql_type_name = Some(type_name.as_ref().to_owned());
       let mut sql_type = None;
       let mut sql_column_name = None;
       let graphql_field_name = None;
@@ -42,12 +42,12 @@ pub fn convert_field<'a, T: Text<'a>>(
                   _ => return Err(ConversionError::SqlDirectiveTypeArgument),
                 },
                 "column" => match &(*argument).1 {
-                  Value::String(s) => sql_column_name = Some(s.to_string()),
+                  Value::String(s) => sql_column_name = Some(s.to_owned()),
                   _ => return Err(ConversionError::SqlDirectiveNameArgument),
                 },
                 argument_name => {
                   return Err(ConversionError::SqlDirectiveArgument(
-                    argument_name.to_string(),
+                    argument_name.to_owned(),
                   ))
                 }
               }
@@ -55,7 +55,7 @@ pub fn convert_field<'a, T: Text<'a>>(
           }
           &_ => {
             return Err(ConversionError::UnsupportedDirective(
-              directive.name.as_ref().to_string(),
+              directive.name.as_ref().to_owned(),
             ))
           }
         }
@@ -73,14 +73,14 @@ pub fn convert_field<'a, T: Text<'a>>(
     }
     Type::ListType(_item_type) => {
       return Err(ConversionError::NullableArrayFieldType(
-        object.name.as_ref().to_string(),
-        field.name.as_ref().to_string(),
+        object.name.as_ref().to_owned(),
+        field.name.as_ref().to_owned(),
       ));
     }
     Type::NonNullType(item_type) => match &**item_type {
       Type::NamedType(type_name) => {
-        let name = Some(field.name.as_ref().to_string());
-        let graphql_type_name = Some(type_name.as_ref().to_string());
+        let name = Some(field.name.as_ref().to_owned());
+        let graphql_type_name = Some(type_name.as_ref().to_owned());
         let mut sql_type = None;
         let mut sql_column_name = None;
         let graphql_field_name = None;
@@ -107,12 +107,12 @@ pub fn convert_field<'a, T: Text<'a>>(
                     _ => return Err(ConversionError::SqlDirectiveTypeArgument),
                   },
                   "column" => match &(*argument).1 {
-                    Value::String(s) => sql_column_name = Some(s.to_string()),
+                    Value::String(s) => sql_column_name = Some(s.to_owned()),
                     _ => return Err(ConversionError::SqlDirectiveNameArgument),
                   },
                   argument_name => {
                     return Err(ConversionError::SqlDirectiveArgument(
-                      argument_name.to_string(),
+                      argument_name.to_owned(),
                     ))
                   }
                 }
@@ -120,7 +120,7 @@ pub fn convert_field<'a, T: Text<'a>>(
             }
             &_ => {
               return Err(ConversionError::UnsupportedDirective(
-                directive.name.as_ref().to_string(),
+                directive.name.as_ref().to_owned(),
               ))
             }
           }
@@ -138,14 +138,14 @@ pub fn convert_field<'a, T: Text<'a>>(
       }
       Type::ListType(_item_type) => {
         return Err(ConversionError::NonSupportedArray(
-          object.name.as_ref().to_string(),
-          field.name.as_ref().to_string(),
+          object.name.as_ref().to_owned(),
+          field.name.as_ref().to_owned(),
         ));
       }
       Type::NonNullType(_item_type) => {
         return Err(ConversionError::MultipleNonNullFieldType(
-          object.name.as_ref().to_string(),
-          field.name.as_ref().to_string(),
+          object.name.as_ref().to_owned(),
+          field.name.as_ref().to_owned(),
         ));
       }
     },

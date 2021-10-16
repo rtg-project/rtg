@@ -210,7 +210,7 @@ mod tests {
 
   #[test]
   fn serialize_other() {
-    let value = Type::Other("wow".to_string());
+    let value = Type::Other("wow".to_owned());
 
     match serde_json::to_string_pretty(&value) {
       Ok(string) => {

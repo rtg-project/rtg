@@ -19,23 +19,23 @@ pub fn convert_document<'a, T: Text<'a>>(
     .map(|definition| match definition {
       Definition::DirectiveDefinition(ref _dd) => {
         return Err(ConversionError::UnsupportedSyntax(
-          "DirectiveDefinition".to_string(),
+          "DirectiveDefinition".to_owned(),
         ))
       }
       Definition::SchemaDefinition(ref _sd) => {
         return Err(ConversionError::UnsupportedSyntax(
-          "SchemaDefinition".to_string(),
+          "SchemaDefinition".to_owned(),
         ))
       }
       Definition::TypeDefinition(ref type_definition) => {
         return Ok(Rc::new(convert_type_definition(type_definition).unwrap()));
         // return Err(ConversionError::UnsupportedSyntax(
-        //   "TypeDefinition".to_string(),
+        //   "TypeDefinition".to_owned(),
         // ))
       }
       Definition::TypeExtension(ref _te) => {
         return Err(ConversionError::UnsupportedSyntax(
-          "TypeExtension".to_string(),
+          "TypeExtension".to_owned(),
         ))
       }
     })

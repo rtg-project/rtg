@@ -13,10 +13,10 @@ pub fn convert_type_definition<'a, T: Text<'a>>(
 
   match type_definition {
     TypeDefinition::Scalar(_scalar_type) => {
-      return Err(ConversionError::UnsupportedSyntax("Scalar".to_string()))
+      return Err(ConversionError::UnsupportedSyntax("Scalar".to_owned()))
     }
     TypeDefinition::Object(object) => {
-      let name = Some(object.name.as_ref().to_string());
+      let name = Some(object.name.as_ref().to_owned());
       let mut sql_schema_name = None;
       let mut sql_table_name = None;
       let graphql_entity_type_name = None;
@@ -43,16 +43,16 @@ pub fn convert_type_definition<'a, T: Text<'a>>(
             for argument in directive.arguments.iter() {
               match (*argument).0.as_ref() {
                 "schema" => match &(*argument).1 {
-                  Value::String(s) => sql_schema_name = Some(s.to_string()),
+                  Value::String(s) => sql_schema_name = Some(s.to_owned()),
                   _ => return Err(ConversionError::SqlDirectiveNameArgument),
                 },
                 "table" => match &(*argument).1 {
-                  Value::String(s) => sql_table_name = Some(s.to_string()),
+                  Value::String(s) => sql_table_name = Some(s.to_owned()),
                   _ => return Err(ConversionError::SqlDirectiveNameArgument),
                 },
                 argument_name => {
                   return Err(ConversionError::SqlDirectiveArgument(
-                    argument_name.to_string(),
+                    argument_name.to_owned(),
                   ))
                 }
               }
@@ -78,18 +78,16 @@ pub fn convert_type_definition<'a, T: Text<'a>>(
       });
     }
     TypeDefinition::Interface(_interface_type) => {
-      return Err(ConversionError::UnsupportedSyntax("Interface".to_string()))
+      return Err(ConversionError::UnsupportedSyntax("Interface".to_owned()))
     }
     TypeDefinition::Union(_union_type) => {
-      return Err(ConversionError::UnsupportedSyntax("Union".to_string()))
+      return Err(ConversionError::UnsupportedSyntax("Union".to_owned()))
     }
     TypeDefinition::Enum(_enum_type) => {
-      return Err(ConversionError::UnsupportedSyntax("Enum".to_string()))
+      return Err(ConversionError::UnsupportedSyntax("Enum".to_owned()))
     }
     TypeDefinition::InputObject(_input_object_type) => {
-      return Err(ConversionError::UnsupportedSyntax(
-        "InputObject".to_string(),
-      ))
+      return Err(ConversionError::UnsupportedSyntax("InputObject".to_owned()))
     }
   }
 }
