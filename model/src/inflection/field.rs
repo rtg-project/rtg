@@ -4,6 +4,10 @@ pub fn inflect_name_from_sql_column_name(name: &str) -> String {
   Inflector::to_camel_case(name)
 }
 
+pub fn inflect_name_from_graphql_field_name(name: &str) -> String {
+  Inflector::to_camel_case(name)
+}
+
 pub fn inflect_sql_column_name_from_name(name: &str) -> String {
   Inflector::to_snake_case(name)
 }
