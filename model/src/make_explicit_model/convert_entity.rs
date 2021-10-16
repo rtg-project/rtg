@@ -40,7 +40,6 @@ pub fn convert_entity(implicit_entity: &ImplicitEntity) -> Result<ExplicitEntity
               graphql_order_by_asc,
               ..
             } => graphql_order_by_asc,
-            _ => return Err(ConversionError::EntityHasNoField(name.to_string())),
           },
         };
 
