@@ -4,6 +4,10 @@ pub fn inflect_name_from_sql_table_name(name: &str) -> String {
   Inflector::to_class_case(name)
 }
 
+pub fn inflect_name_from_graphql_entity_type_name(name: &str) -> String {
+  Inflector::to_class_case(name)
+}
+
 pub fn inflect_sql_table_name_from_name(name: &str) -> String {
   Inflector::to_table_case(name)
 }
