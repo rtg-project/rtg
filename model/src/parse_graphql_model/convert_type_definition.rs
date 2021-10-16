@@ -16,7 +16,7 @@ pub fn convert_type_definition<'a, T: Text<'a>>(
       return Err(ConversionError::UnsupportedSyntax("Scalar".to_owned()))
     }
     TypeDefinition::Object(object) => {
-      let name = Some(object.name.as_ref().to_owned());
+      let name = Some(object.name.as_ref().to_string());
       let mut sql_schema_name = None;
       let mut sql_table_name = None;
       let graphql_entity_type_name = None;
