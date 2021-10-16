@@ -6,6 +6,8 @@ pub enum ConversionError {
   FieldNameMissing,
   #[error("Entity name is missing")]
   EntityNameMissing,
+  #[error("Entity `{0}` contains no field, Entities must have at least one field")]
+  EntityHasNoField(String),
   #[error("Generic error: `{0}`")]
   Generic(String),
   #[error("Unknown convert error")]

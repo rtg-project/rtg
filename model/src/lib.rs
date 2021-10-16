@@ -6,6 +6,8 @@ pub mod model_cache;
 pub mod make_explicit_model;
 pub mod parse_graphql_model;
 
+pub mod inflection;
+
 // Test the code in the readme file
 // See https://github.com/rust-lang/cargo/issues/383#issuecomment-720873790
 #[cfg(doctest)]
