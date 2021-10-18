@@ -36,14 +36,21 @@ mod tests {
 
   #[test]
   fn run_integration_tests() {
-    let entries = glob("./tests/only[0-9]*/model.graphql").or(glob("./tests/[0-9]*/model.graphql"));
+    let mut entries = glob("./tests/only[0-9]*/model.graphql");
+
+    entries = if entries.expect("Failed to read glob for test cases").count() > 0 {
+      glob("./tests/only[0-9]*/model.graphql")
+    } else {
+      glob("./tests/[0-9]*/model.graphql")
+    };
+    print!("===================Starting\n");
     for entry in entries.expect("Failed to read glob for test cases") {
       let entry_path = entry.unwrap();
+      print!("Ok ------------- {:?}", entry_path);
       let dir_path = entry_path.parent().unwrap();
 
       // Read the graphql model file
-      let graphql_model_path = dir_path.join("model.graphql");
-      let graphql_model_string = read_to_string(graphql_model_path).unwrap();
+      let graphql_model_string = read_to_string(dir_path.join("model.graphql")).unwrap();
 
       // Transforms into implicit model and check it
       let implicit_model = parse_graphql_model::convert_graphql_string::convert_graphql_string(
@@ -61,7 +68,7 @@ mod tests {
         make_explicit_model::convert_model::convert_model(&implicit_model).unwrap();
       let explicit_model_string = serde_json::to_string_pretty(&implicit_model).unwrap();
       assert_matches_file(
-        implicit_model_string.as_str(),
+        explicit_model_string.as_str(),
         dir_path.join("explicit-model.json").to_str().unwrap(),
       );
 

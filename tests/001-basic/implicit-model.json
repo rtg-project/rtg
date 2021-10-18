@@ -4,36 +4,38 @@
     {
       "type": "databaseTable",
       "name": "Person",
-      "sqlSchemaName": "public",
-      "sqlTableName": "person",
-      "graphqlEntityTypeName": "Person",
-      "graphqlFilterTypeName": "PersonWhereFilter",
-      "graphqlGetSingleOperationName": "getPerson",
-      "graphqlGetListOperationName": "getPersons",
-      "graphqlGetConnectionOperationName": "getPersonsConnection",
-      "graphqlDefaultOrderBy": "id_ASC",
-      "graphqlDefaultFirst": 10,
-      "graphqlDefaultOffset": 0,
+      "sql_schema_name": "public",
+      "sql_table_name": "people",
+      "graphql_entity_type_name": null,
+      "graphql_filter_type_name": null,
+      "graphql_get_single_operation_name": null,
+      "graphql_get_list_operation_name": null,
+      "graphql_get_connection_operation_name": null,
+      "graphql_default_order_by": null,
+      "graphql_default_first": null,
+      "graphql_default_offset": null,
       "fields": [
         {
           "type": "scalarDatabaseColumn",
           "name": "id",
-          "sqlType": "uuid",
-          "sqlColumnName": "id",
-          "graphqlFieldName": "id",
-          "graphqlTypeName": "ID",
-          "graphqlOrderByAsc": "id_ASC",
-          "graphqlOrderByDesc": "id_DESC"
+          "nullable": false,
+          "sql_type": null,
+          "sql_column_name": null,
+          "graphql_field_name": null,
+          "graphql_type_name": "Uuid",
+          "graphql_order_by_asc": null,
+          "graphql_order_by_desc": null
         },
         {
           "type": "scalarDatabaseColumn",
           "name": "age",
-          "sqlType": "int8",
-          "sqlColumnName": "age",
-          "graphqlFieldName": "age",
-          "graphqlTypeName": "Int",
-          "graphqlOrderByAsc": "age_ASC",
-          "graphqlOrderByDesc": "age_DESC"
+          "nullable": true,
+          "sql_type": "int8",
+          "sql_column_name": "the_age",
+          "graphql_field_name": null,
+          "graphql_type_name": "Integer",
+          "graphql_order_by_asc": null,
+          "graphql_order_by_desc": null
         }
       ]
     }
