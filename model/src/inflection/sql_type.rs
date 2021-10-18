@@ -7,6 +7,8 @@ pub fn inflect_sql_type_from_graphql_type(
 ) -> Result<Type, inflection_error::InflectionError> {
   match is_array {
     false => match graphql_type {
+      "ID" => Ok(Type::Uuid),
+      "Uuid" => Ok(Type::Uuid),
       "String" => Ok(Type::Text),
       "Boolean" => Ok(Type::Bool),
       "SmallInt" => Ok(Type::Int2),
@@ -23,6 +25,8 @@ pub fn inflect_sql_type_from_graphql_type(
       )),
     },
     true => match graphql_type {
+      "ID" => Ok(Type::UuidArray),
+      "Uuid" => Ok(Type::UuidArray),
       "String" => Ok(Type::TextArray),
       "Boolean" => Ok(Type::BoolArray),
       "SmallInt" => Ok(Type::Int2Array),
@@ -45,6 +49,7 @@ pub fn inflect_graphql_type_from_sql_type(
   sql_type: &Type,
 ) -> Result<(String, bool), inflection_error::InflectionError> {
   match sql_type {
+    Type::Uuid => Ok(("ID".to_string(), false)),
     Type::Text => Ok(("String".to_string(), false)),
     Type::Bool => Ok(("Boolean".to_string(), false)),
     Type::Int2 => Ok(("SmallInt".to_string(), false)),
@@ -57,6 +62,7 @@ pub fn inflect_graphql_type_from_sql_type(
     Type::Jsonb => Ok(("Json".to_string(), false)),
     Type::Json => Ok(("Json".to_string(), false)),
     Type::Bytea => Ok(("Bytes".to_string(), false)),
+    Type::UuidArray => Ok(("Uuid".to_string(), true)),
     Type::TextArray => Ok(("String".to_string(), true)),
     Type::BoolArray => Ok(("Boolean".to_string(), true)),
     Type::Int2Array => Ok(("SmallInt".to_string(), true)),

@@ -1,4 +1,4 @@
 type Person @sql(schema: "public", table: "people") {
-  id: Uuid!
-  age: Integer @sql(column: "the_age", type: "int8")
+  id: ID!
+  age: Int @sql(column: "the_age", type: "int4")
 }

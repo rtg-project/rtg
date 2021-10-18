@@ -1,0 +1,360 @@
+{
+  "version": "v1",
+  "model": {
+    "version": "v1",
+    "entities": [
+      {
+        "type": "databaseTable",
+        "name": "Person",
+        "sqlSchemaName": "public",
+        "sqlTableName": "people",
+        "graphqlEntityTypeName": "Person",
+        "graphqlFilterTypeName": "PersonWhereInput",
+        "graphqlGetSingleOperationName": "getPerson",
+        "graphqlGetListOperationName": "allPerson",
+        "graphqlGetConnectionOperationName": "allPersonConnection",
+        "graphqlDefaultOrderBy": "idAsc",
+        "graphqlDefaultFirst": 10,
+        "graphqlDefaultOffset": 0,
+        "fields": [
+          {
+            "type": "scalarDatabaseColumn",
+            "name": "id",
+            "nullable": false,
+            "sqlType": "uuid",
+            "sqlColumnName": "id",
+            "graphqlFieldName": "id",
+            "graphqlTypeName": "ID",
+            "graphqlOrderByAsc": "idAsc",
+            "graphqlOrderByDesc": "idDesc"
+          },
+          {
+            "type": "scalarDatabaseColumn",
+            "name": "age",
+            "nullable": true,
+            "sqlType": "int4",
+            "sqlColumnName": "the_age",
+            "graphqlFieldName": "age",
+            "graphqlTypeName": "Int",
+            "graphqlOrderByAsc": "ageAsc",
+            "graphqlOrderByDesc": "ageDesc"
+          }
+        ]
+      }
+    ]
+  },
+  "entitiesByOperationName": {
+    "allPerson": {
+      "entityCache": {
+        "type": "databaseTable",
+        "entity": {
+          "type": "databaseTable",
+          "name": "Person",
+          "sqlSchemaName": "public",
+          "sqlTableName": "people",
+          "graphqlEntityTypeName": "Person",
+          "graphqlFilterTypeName": "PersonWhereInput",
+          "graphqlGetSingleOperationName": "getPerson",
+          "graphqlGetListOperationName": "allPerson",
+          "graphqlGetConnectionOperationName": "allPersonConnection",
+          "graphqlDefaultOrderBy": "idAsc",
+          "graphqlDefaultFirst": 10,
+          "graphqlDefaultOffset": 0,
+          "fields": [
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "nullable": false,
+              "sqlType": "uuid",
+              "sqlColumnName": "id",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "ID",
+              "graphqlOrderByAsc": "idAsc",
+              "graphqlOrderByDesc": "idDesc"
+            },
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "age",
+              "nullable": true,
+              "sqlType": "int4",
+              "sqlColumnName": "the_age",
+              "graphqlFieldName": "age",
+              "graphqlTypeName": "Int",
+              "graphqlOrderByAsc": "ageAsc",
+              "graphqlOrderByDesc": "ageDesc"
+            }
+          ]
+        },
+        "fieldsBySqlColumnName": {
+          "the_age": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "age",
+              "nullable": true,
+              "sqlType": "int4",
+              "sqlColumnName": "the_age",
+              "graphqlFieldName": "age",
+              "graphqlTypeName": "Int",
+              "graphqlOrderByAsc": "ageAsc",
+              "graphqlOrderByDesc": "ageDesc"
+            }
+          },
+          "id": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "nullable": false,
+              "sqlType": "uuid",
+              "sqlColumnName": "id",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "ID",
+              "graphqlOrderByAsc": "idAsc",
+              "graphqlOrderByDesc": "idDesc"
+            }
+          }
+        },
+        "fieldsByGraphqlFieldName": {
+          "age": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "age",
+              "nullable": true,
+              "sqlType": "int4",
+              "sqlColumnName": "the_age",
+              "graphqlFieldName": "age",
+              "graphqlTypeName": "Int",
+              "graphqlOrderByAsc": "ageAsc",
+              "graphqlOrderByDesc": "ageDesc"
+            }
+          },
+          "id": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "nullable": false,
+              "sqlType": "uuid",
+              "sqlColumnName": "id",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "ID",
+              "graphqlOrderByAsc": "idAsc",
+              "graphqlOrderByDesc": "idDesc"
+            }
+          }
+        }
+      },
+      "operationKind": "getList"
+    },
+    "allPersonConnection": {
+      "entityCache": {
+        "type": "databaseTable",
+        "entity": {
+          "type": "databaseTable",
+          "name": "Person",
+          "sqlSchemaName": "public",
+          "sqlTableName": "people",
+          "graphqlEntityTypeName": "Person",
+          "graphqlFilterTypeName": "PersonWhereInput",
+          "graphqlGetSingleOperationName": "getPerson",
+          "graphqlGetListOperationName": "allPerson",
+          "graphqlGetConnectionOperationName": "allPersonConnection",
+          "graphqlDefaultOrderBy": "idAsc",
+          "graphqlDefaultFirst": 10,
+          "graphqlDefaultOffset": 0,
+          "fields": [
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "nullable": false,
+              "sqlType": "uuid",
+              "sqlColumnName": "id",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "ID",
+              "graphqlOrderByAsc": "idAsc",
+              "graphqlOrderByDesc": "idDesc"
+            },
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "age",
+              "nullable": true,
+              "sqlType": "int4",
+              "sqlColumnName": "the_age",
+              "graphqlFieldName": "age",
+              "graphqlTypeName": "Int",
+              "graphqlOrderByAsc": "ageAsc",
+              "graphqlOrderByDesc": "ageDesc"
+            }
+          ]
+        },
+        "fieldsBySqlColumnName": {
+          "the_age": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "age",
+              "nullable": true,
+              "sqlType": "int4",
+              "sqlColumnName": "the_age",
+              "graphqlFieldName": "age",
+              "graphqlTypeName": "Int",
+              "graphqlOrderByAsc": "ageAsc",
+              "graphqlOrderByDesc": "ageDesc"
+            }
+          },
+          "id": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "nullable": false,
+              "sqlType": "uuid",
+              "sqlColumnName": "id",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "ID",
+              "graphqlOrderByAsc": "idAsc",
+              "graphqlOrderByDesc": "idDesc"
+            }
+          }
+        },
+        "fieldsByGraphqlFieldName": {
+          "age": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "age",
+              "nullable": true,
+              "sqlType": "int4",
+              "sqlColumnName": "the_age",
+              "graphqlFieldName": "age",
+              "graphqlTypeName": "Int",
+              "graphqlOrderByAsc": "ageAsc",
+              "graphqlOrderByDesc": "ageDesc"
+            }
+          },
+          "id": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "nullable": false,
+              "sqlType": "uuid",
+              "sqlColumnName": "id",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "ID",
+              "graphqlOrderByAsc": "idAsc",
+              "graphqlOrderByDesc": "idDesc"
+            }
+          }
+        }
+      },
+      "operationKind": "getConnection"
+    },
+    "getPerson": {
+      "entityCache": {
+        "type": "databaseTable",
+        "entity": {
+          "type": "databaseTable",
+          "name": "Person",
+          "sqlSchemaName": "public",
+          "sqlTableName": "people",
+          "graphqlEntityTypeName": "Person",
+          "graphqlFilterTypeName": "PersonWhereInput",
+          "graphqlGetSingleOperationName": "getPerson",
+          "graphqlGetListOperationName": "allPerson",
+          "graphqlGetConnectionOperationName": "allPersonConnection",
+          "graphqlDefaultOrderBy": "idAsc",
+          "graphqlDefaultFirst": 10,
+          "graphqlDefaultOffset": 0,
+          "fields": [
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "nullable": false,
+              "sqlType": "uuid",
+              "sqlColumnName": "id",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "ID",
+              "graphqlOrderByAsc": "idAsc",
+              "graphqlOrderByDesc": "idDesc"
+            },
+            {
+              "type": "scalarDatabaseColumn",
+              "name": "age",
+              "nullable": true,
+              "sqlType": "int4",
+              "sqlColumnName": "the_age",
+              "graphqlFieldName": "age",
+              "graphqlTypeName": "Int",
+              "graphqlOrderByAsc": "ageAsc",
+              "graphqlOrderByDesc": "ageDesc"
+            }
+          ]
+        },
+        "fieldsBySqlColumnName": {
+          "the_age": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "age",
+              "nullable": true,
+              "sqlType": "int4",
+              "sqlColumnName": "the_age",
+              "graphqlFieldName": "age",
+              "graphqlTypeName": "Int",
+              "graphqlOrderByAsc": "ageAsc",
+              "graphqlOrderByDesc": "ageDesc"
+            }
+          },
+          "id": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "nullable": false,
+              "sqlType": "uuid",
+              "sqlColumnName": "id",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "ID",
+              "graphqlOrderByAsc": "idAsc",
+              "graphqlOrderByDesc": "idDesc"
+            }
+          }
+        },
+        "fieldsByGraphqlFieldName": {
+          "age": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "age",
+              "nullable": true,
+              "sqlType": "int4",
+              "sqlColumnName": "the_age",
+              "graphqlFieldName": "age",
+              "graphqlTypeName": "Int",
+              "graphqlOrderByAsc": "ageAsc",
+              "graphqlOrderByDesc": "ageDesc"
+            }
+          },
+          "id": {
+            "type": "scalarDatabaseColumn",
+            "field": {
+              "type": "scalarDatabaseColumn",
+              "name": "id",
+              "nullable": false,
+              "sqlType": "uuid",
+              "sqlColumnName": "id",
+              "graphqlFieldName": "id",
+              "graphqlTypeName": "ID",
+              "graphqlOrderByAsc": "idAsc",
+              "graphqlOrderByDesc": "idDesc"
+            }
+          }
+        }
+      },
+      "operationKind": "getSingle"
+    }
+  }
+}

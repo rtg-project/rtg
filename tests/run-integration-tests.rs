@@ -75,7 +75,7 @@ mod tests {
       // Transforms into model cache and check it
       let model_rc = Rc::new(explicit_model);
       let model_cache = ModelCache::new(Rc::clone(&model_rc));
-      let model_cache_string = serde_json::to_string(&model_cache).unwrap();
+      let model_cache_string = serde_json::to_string_pretty(&model_cache).unwrap();
       assert_matches_file(
         model_cache_string.as_str(),
         dir_path.join("model-cache.json").to_str().unwrap(),
