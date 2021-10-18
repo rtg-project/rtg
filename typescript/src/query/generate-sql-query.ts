@@ -49,10 +49,10 @@ export const generateQueryForField = <
 
       const orderByEntry =
         graphEntity.fieldsByGraphqlOrderBy[
-          ((args?.orderBy?.value as ListValueNode)
-            ?.values?.[0] as StringValueNode)?.value ??
-            // (args?.first?.value as VariableNode)?.name ?? // FIXME No support for variables yet
-            graphEntity.graphqlDefaultOrderBy
+        ((args?.orderBy?.value as ListValueNode)
+          ?.values?.[0] as StringValueNode)?.value ??
+        // (args?.first?.value as VariableNode)?.name ?? // FIXME No support for variables yet
+        graphEntity.graphqlDefaultOrderBy
         ];
 
       const orderBy = sql.fragment`${sql.identifier(
@@ -62,16 +62,16 @@ export const generateQueryForField = <
 
       const limitEntry = parseInt(
         (args?.first?.value as IntValueNode)?.value ??
-          // (args?.first?.value as VariableNode)?.name ?? // FIXME No support for variables yet
-          `${graphEntity.graphqlDefaultFirst}`
+        // (args?.first?.value as VariableNode)?.name ?? // FIXME No support for variables yet
+        `${graphEntity.graphqlDefaultFirst}`
       );
 
       const limit = sql.value(limitEntry);
 
       const offsetEntry = parseInt(
         (args?.offset?.value as IntValueNode)?.value ??
-          // (args?.first?.value as VariableNode)?.name ?? // FIXME No support for variables yet
-          `${graphEntity.graphqlDefaultOffset}`
+        // (args?.first?.value as VariableNode)?.name ?? // FIXME No support for variables yet
+        `${graphEntity.graphqlDefaultOffset}`
       );
 
       const offset = sql.value(offsetEntry);
@@ -105,14 +105,14 @@ export const generateQueryForField = <
             from (
               select ${sql.identifier(subSubQueryObjectName)}.*
               from "public"."organization" as ${sql.identifier(
-                subSubQueryObjectName
-              )}
+        subSubQueryObjectName
+      )}
               where (
                 ${sql.identifier(subSubQueryObjectName, "id")} in (
                   select "A"
                   from "public"."organization_users" as ${sql.identifier(
-                    relationQueryName
-                  )}
+        relationQueryName
+      )}
                   where ("B" = ${sql.identifier(subQueryName, "id")}) and (TRUE)
                 )
               ) and (TRUE)
@@ -170,10 +170,10 @@ export const generateQueryForListOperation = <
 
   const orderByEntry =
     graphEntity.fieldsByGraphqlOrderBy[
-      ((args?.orderBy?.value as ListValueNode)?.values?.[0] as StringValueNode)
-        ?.value ??
-        // (args?.first?.value as VariableNode)?.name ?? // FIXME No support for variables yet
-        graphEntity.graphqlDefaultOrderBy
+    ((args?.orderBy?.value as ListValueNode)?.values?.[0] as StringValueNode)
+      ?.value ??
+    // (args?.first?.value as VariableNode)?.name ?? // FIXME No support for variables yet
+    graphEntity.graphqlDefaultOrderBy
     ];
 
   const orderBy = sql.fragment`${sql.identifier(
@@ -183,16 +183,16 @@ export const generateQueryForListOperation = <
 
   const limitEntry = parseInt(
     (args?.first?.value as IntValueNode)?.value ??
-      // (args?.first?.value as VariableNode)?.name ?? // FIXME No support for variables yet
-      `${graphEntity.graphqlDefaultFirst}`
+    // (args?.first?.value as VariableNode)?.name ?? // FIXME No support for variables yet
+    `${graphEntity.graphqlDefaultFirst}`
   );
 
   const limit = sql.value(limitEntry);
 
   const offsetEntry = parseInt(
     (args?.offset?.value as IntValueNode)?.value ??
-      // (args?.first?.value as VariableNode)?.name ?? // FIXME No support for variables yet
-      `${graphEntity.graphqlDefaultOffset}`
+    // (args?.first?.value as VariableNode)?.name ?? // FIXME No support for variables yet
+    `${graphEntity.graphqlDefaultOffset}`
   );
 
   const offset = sql.value(offsetEntry);
@@ -240,9 +240,9 @@ export const generateSqlQueryForOperationDefinition = <
   const {
     operationKind,
     entity
-  } = indexedConfig.indexedGraphSchema.entitiesByOperationName[
+  } = indexedConfig.indexedGraphSchema.operationsByOperationName[
     selectionNode.name.value
-  ];
+    ];
 
   switch (operationKind) {
     case "getList": {

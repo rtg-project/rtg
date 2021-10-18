@@ -1628,7 +1628,7 @@
         "type": "databaseTable"
       }
     },
-    "entitiesByOperationName": {
+    "operations": {
       "address": {
         "entity": {
           "databaseSchemaName": "public",

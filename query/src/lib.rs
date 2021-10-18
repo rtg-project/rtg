@@ -39,6 +39,7 @@ mod tests {
             {
               "type": "scalarDatabaseColumn",
               "name": "id",
+              "nullable": false,
               "sqlType": "text",
               "sqlColumnName": "id_col",
               "graphqlFieldName": "id",
@@ -49,6 +50,7 @@ mod tests {
             {
               "type": "scalarDatabaseColumn",
               "name": "drone",
+              "nullable": true,
               "sqlType": "text",
               "sqlColumnName": "drone_col",
               "graphqlFieldName": "drone",

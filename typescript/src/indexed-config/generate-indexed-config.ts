@@ -118,13 +118,13 @@ export const generateIndexedConfig = <
           field.type === "scalarDatabaseColumn"
             ? [[field.graphqlFieldName, { operationKind: "getSingle", field }]]
             : field.type === "relationOne"
-            ? [
+              ? [
                 [
                   field.graphqlGetSingleFieldName,
                   { operationKind: "getSingle", field }
                 ]
               ]
-            : [
+              : [
                 [
                   field.graphqlGetSingleFieldName,
                   { operationKind: "getSingle", field }
@@ -155,9 +155,9 @@ export const generateIndexedConfig = <
         field =>
           field.type === "scalarDatabaseColumn"
             ? [
-                [field.graphqlOrderByAsc, { direction: "ASC", field }],
-                [field.graphqlOrderByDesc, { direction: "DESC", field }]
-              ]
+              [field.graphqlOrderByAsc, { direction: "ASC", field }],
+              [field.graphqlOrderByDesc, { direction: "DESC", field }]
+            ]
             : [],
         indexedFields
       )
@@ -179,7 +179,7 @@ export const generateIndexedConfig = <
     map(entity => [entity.name, entity], indexedEntities)
   );
   /////////////////////////////////////////////////////////////////////////////
-  const entitiesByOperationName = fromPairs(
+  const operationsByOperationName = fromPairs(
     flatMap(
       entity => [
         [
@@ -216,7 +216,7 @@ export const generateIndexedConfig = <
     },
     indexedGraphSchema: {
       entitiesByName,
-      entitiesByOperationName,
+      operationsByOperationName,
       relationsByName
     }
   };

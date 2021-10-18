@@ -41,7 +41,7 @@
       }
     ]
   },
-  "entitiesByOperationName": {
+  "operations": {
     "person": {
       "entityCache": {
         "type": "databaseTable",

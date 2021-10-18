@@ -22,7 +22,7 @@ Ok(
                     ScalarDatabaseColumn {
                         name: "id",
                         nullable: false,
-                        sql_type: Text,
+                        sql_type: Uuid,
                         sql_column_name: "id_col",
                         graphql_field_name: "id",
                         graphql_type_name: "ID",
@@ -35,7 +35,7 @@ Ok(
                         sql_type: Text,
                         sql_column_name: "drone",
                         graphql_field_name: "drone",
-                        graphql_type_name: "Integer",
+                        graphql_type_name: "String",
                         graphql_order_by_asc: "drone_ASC",
                         graphql_order_by_desc: "drone_DESC",
                     },

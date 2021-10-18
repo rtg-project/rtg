@@ -31,7 +31,7 @@ mod tests {
           Rc::new(ImplicitField::ScalarDatabaseColumn {
             name: Some("id".to_owned()),
             nullable: Some(false),
-            sql_type: Some(Type::Text),
+            sql_type: Some(Type::Uuid),
             sql_column_name: Some("id_col".to_owned()),
             graphql_field_name: Some("id".to_owned()),
             graphql_type_name: Some("ID".to_owned()),
@@ -44,7 +44,7 @@ mod tests {
             sql_type: Some(Type::Text),
             sql_column_name: None,
             graphql_field_name: None,
-            graphql_type_name: Some("Integer".to_owned()),
+            graphql_type_name: Some("String".to_owned()),
             graphql_order_by_asc: Some("drone_ASC".to_owned()),
             graphql_order_by_desc: Some("drone_DESC".to_owned()),
           }),
