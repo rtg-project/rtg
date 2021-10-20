@@ -39,7 +39,7 @@ pub fn convert_entity(
           position: Pos { line: 0, column: 0 },
           description: None,
           name: graphql_entity_type_name.to_owned(),
-          implements_interfaces: vec![],
+          implements_interfaces: vec!["Node".to_owned()],
           directives: vec![],
           fields: graphql_fields,
         })),

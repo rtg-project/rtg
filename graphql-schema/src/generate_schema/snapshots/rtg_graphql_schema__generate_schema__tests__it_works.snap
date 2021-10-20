@@ -3,7 +3,7 @@ source: graphql-schema/src/generate_schema/mod.rs
 expression: "format!(\"{}\", convert_model :: convert_model(& value).unwrap())"
 
 ---
-type Person {
+type Person implements Node {
   id: String
   drone: String
 }
