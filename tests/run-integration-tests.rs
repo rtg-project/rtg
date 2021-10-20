@@ -3,14 +3,12 @@
 mod tests {
   // use super::*;
   use glob::glob;
-  use rtg_model::explicit_model::ExplicitModel;
   // use rtg_model::graphql_model::parse_schema;
   use rtg_model::model_cache::model_cache::ModelCache;
   use rtg_model::{make_explicit_model, parse_graphql_model};
   use rtg_query::convert_graphql_string::convert_graphql_string;
   use similar_asserts::assert_eq;
-  use std::fs::{read_to_string, write, File, OpenOptions};
-  use std::io::{BufReader, BufWriter};
+  use std::fs::{read_to_string, write};
   use std::rc::Rc;
 
   fn assert_matches_file(input_content: &str, file_path: &str) {
@@ -20,7 +18,7 @@ mod tests {
         assert_eq!(file_content, input_content);
         return;
       }
-      Err(e) => {
+      Err(_e) => {
         let write_result = write(file_path, input_content);
         match write_result {
           Ok(_) => {
