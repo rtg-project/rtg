@@ -10,6 +10,7 @@ crate-type = ["lib"]
 
 [dependencies]
 graphql-parser = {version = "0.3.0"}
+itertools = {version = "0.10.1"}
 rtg_model = {version = "0.1.0", path = "../model"}
 thiserror = {version = "1.0.29"}
 

@@ -8,3 +8,9 @@ type Person {
   drone: String
 }
 
+type Query {
+  person: Person
+  persons: [Person!]!
+  personConnection: [Person!]!
+}
+
