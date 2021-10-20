@@ -8,6 +8,7 @@ version = "0.1.0"
 
 [dependencies]
 partial_struct = {version = "0.1.0", path = "./partial-struct"}
+rtg_graphql_schema = {version = "0.1.0", path = "./graphql-schema"}
 rtg_model = {version = "0.1.0", path = "./model"}
 rtg_query = {version = "0.1.0", path = "./query"}
 rtg_server = {version = "0.1.0", path = "./server"}

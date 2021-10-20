@@ -1,0 +1,10 @@
+---
+source: graphql-schema/src/generate_schema/mod.rs
+expression: "format!(\"{}\", convert_model :: convert_model(& value).unwrap())"
+
+---
+type Person {
+  id: String
+  drone: String
+}
+

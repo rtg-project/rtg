@@ -1253,6 +1253,7 @@ dependencies = [
  "glob",
  "graphql-parser",
  "partial_struct",
+ "rtg_graphql_schema",
  "rtg_model",
  "rtg_query",
  "rtg_server",
@@ -1263,6 +1264,17 @@ dependencies = [
  "serde",
  "serde_json",
  "similar 2.1.0",
+ "similar-asserts",
+ "thiserror",
+]
+
+[[package]]
+name = "rtg_graphql_schema"
+version = "0.1.0"
+dependencies = [
+ "graphql-parser",
+ "insta",
+ "rtg_model",
  "similar-asserts",
  "thiserror",
 ]
