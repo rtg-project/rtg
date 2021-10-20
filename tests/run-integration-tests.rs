@@ -4,6 +4,7 @@ mod tests {
   // use super::*;
   use glob::glob;
   // use rtg_model::graphql_model::parse_schema;
+  use rtg_graphql_schema::generate_schema;
   use rtg_model::model_cache::model_cache::ModelCache;
   use rtg_model::{make_explicit_model, parse_graphql_model};
   use rtg_query::convert_graphql_string::convert_graphql_string;
@@ -42,10 +43,8 @@ mod tests {
     } else {
       glob("./tests/[0-9]*/model.graphql")
     };
-    print!("===================Starting\n");
     for entry in entries.expect("Failed to read glob for test cases") {
       let entry_path = entry.unwrap();
-      print!("Ok ------------- {:?}", entry_path);
       let dir_path = entry_path.parent().unwrap();
 
       // Read the graphql model file
@@ -79,6 +78,14 @@ mod tests {
         dir_path.join("schema.sql").to_str().unwrap(),
       );
 
+      // Transforms into sql schema and check it
+      let graphql_schema_string =
+        generate_schema::convert_model::convert_model(&explicit_model).unwrap();
+      assert_matches_file(
+        format!("{}", graphql_schema_string).as_str(),
+        dir_path.join("schema.graphql").to_str().unwrap(),
+      );
+
       // Transforms into model cache and check it
       let model_rc = Rc::new(explicit_model);
       let model_cache = ModelCache::new(Rc::clone(&model_rc));
@@ -87,48 +94,6 @@ mod tests {
         model_cache_string.as_str(),
         dir_path.join("model-cache.json").to_str().unwrap(),
       );
-
-      // Read the model from file
-      // let implicit_model_path = dir_path.join("implicit-model.json");
-      // let implicit_model_string = read_to_string(implicit_model_path).unwrap();
-      // let implicit_model = serde_json::from_str(implicit_model_string.as_str());
-
-      // let model: ExplicitModel = serde_json::from_reader(model_reader).unwrap();
-
-      // // Convert the model to a model cache
-      // let model_rc = Rc::new(model);
-      // let model_cache = ModelCache::new(Rc::clone(&model_rc));
-
-      // // Serialize the model cache (inferred)
-      // let model_cache_inferred_string = serde_json::to_string(&model_cache_inferred).unwrap();
-
-      // // Retrieve the model cache (truth) from file (if it exists, else write it)
-      // let model_cache_truth_path = dir_path.join("model-cache.json");
-      // let model_cache_truth_file = File::open(model_cache_truth_path.clone());
-      // let model_cache_truth_string = match model_cache_truth_file {
-      //   Result::Ok(model_cache_truth_file) => {
-      //     // The model file exists already, read it for later comparison
-      //     let model_cache_truth_reader = BufReader::new(model_cache_truth_file);
-      //     let model_cache_truth: ModelCache =
-      //       serde_json::from_reader(model_cache_truth_reader).unwrap();
-      //     let model_cache_truth_string = serde_json::to_string(&model_cache_truth).unwrap();
-      //     model_cache_truth_string
-      //   }
-      //   Result::Err(_e) => {
-      //     // The model file does not exist, write it, the later comparison will be trivial
-      //     let model_cache_inferred_file = OpenOptions::new()
-      //       .append(true)
-      //       .create(true)
-      //       .open(model_cache_truth_path)
-      //       .unwrap();
-      //     let model_cache_inferred_writer = BufWriter::new(model_cache_inferred_file);
-      //     serde_json::to_writer_pretty(model_cache_inferred_writer, &model_cache_inferred).unwrap();
-      //     model_cache_inferred_string.clone()
-      //   }
-      // };
-
-      // Compare the model cache (inferred) to the model cache (truth)
-      // assert_eq!(model_cache_truth_string, model_cache_inferred_string);
 
       // Read and test all GraphQL queries on this model
       for entry in glob(dir_path.join("query-*.graphql").to_str().unwrap())

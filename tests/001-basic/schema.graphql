@@ -1,0 +1,10 @@
+type Person {
+  id: ID
+  age: Int
+}
+
+type Query {
+  getPerson: Person
+  allPersons: [Person!]!
+  allPersonsConnection: [Person!]!
+}
