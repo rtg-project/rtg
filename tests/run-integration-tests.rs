@@ -7,6 +7,7 @@ mod tests {
   use rtg_model::model_cache::model_cache::ModelCache;
   use rtg_model::{make_explicit_model, parse_graphql_model};
   use rtg_query::convert_graphql_string::convert_graphql_string;
+  use rtg_sql_schema::extrospect_schema;
   use similar_asserts::assert_eq;
   use std::fs::{read_to_string, write};
   use std::rc::Rc;
@@ -68,6 +69,14 @@ mod tests {
       assert_matches_file(
         explicit_model_string.as_str(),
         dir_path.join("explicit-model.json").to_str().unwrap(),
+      );
+
+      // Transforms into sql schema and check it
+      let sql_schema_string =
+        extrospect_schema::convert_model::convert_model(&explicit_model).unwrap();
+      assert_matches_file(
+        sql_schema_string.as_str(),
+        dir_path.join("schema.sql").to_str().unwrap(),
       );
 
       // Transforms into model cache and check it

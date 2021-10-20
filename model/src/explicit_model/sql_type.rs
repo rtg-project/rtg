@@ -7,343 +7,343 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, Debug, PartialEq, JsonSchema, Clone, Display)]
 #[serde(rename_all = "camelCase")]
 pub enum Type {
-  #[display(fmt = "Bool")]
+  #[display(fmt = "bool")]
   Bool,
-  #[display(fmt = "Bytea")]
+  #[display(fmt = "bytea")]
   Bytea,
-  #[display(fmt = "Char")]
+  #[display(fmt = "char")]
   Char,
-  #[display(fmt = "Name")]
+  #[display(fmt = "name")]
   Name,
-  #[display(fmt = "Int8")]
+  #[display(fmt = "int8")]
   Int8,
-  #[display(fmt = "Int2")]
+  #[display(fmt = "int2")]
   Int2,
-  #[display(fmt = "Int2Vector")]
+  #[display(fmt = "int2vector")]
   Int2Vector,
-  #[display(fmt = "Int4")]
+  #[display(fmt = "int4")]
   Int4,
-  #[display(fmt = "Regproc")]
+  #[display(fmt = "regproc")]
   Regproc,
-  #[display(fmt = "Text")]
+  #[display(fmt = "text")]
   Text,
-  #[display(fmt = "Oid")]
+  #[display(fmt = "oid")]
   Oid,
-  #[display(fmt = "Tid")]
+  #[display(fmt = "tid")]
   Tid,
-  #[display(fmt = "Xid")]
+  #[display(fmt = "xid")]
   Xid,
-  #[display(fmt = "Cid")]
+  #[display(fmt = "cid")]
   Cid,
-  #[display(fmt = "OidVector")]
+  #[display(fmt = "oidvector")]
   OidVector,
-  #[display(fmt = "PgDdlCommand")]
+  #[display(fmt = "pgddlcommand")]
   PgDdlCommand,
-  #[display(fmt = "Json")]
+  #[display(fmt = "json")]
   Json,
-  #[display(fmt = "Xml")]
+  #[display(fmt = "xml")]
   Xml,
-  #[display(fmt = "Xml[]")]
+  #[display(fmt = "xml[]")]
   XmlArray,
-  #[display(fmt = "PgNodeTree")]
+  #[display(fmt = "pgnodetree")]
   PgNodeTree,
-  #[display(fmt = "Json[]")]
+  #[display(fmt = "json[]")]
   JsonArray,
-  #[display(fmt = "TableAmHandler")]
+  #[display(fmt = "tableamhandler")]
   TableAmHandler,
-  #[display(fmt = "Xid8[]")]
+  #[display(fmt = "xid8[]")]
   Xid8Array,
-  #[display(fmt = "IndexAmHandler")]
+  #[display(fmt = "indexamhandler")]
   IndexAmHandler,
-  #[display(fmt = "Point")]
+  #[display(fmt = "point")]
   Point,
-  #[display(fmt = "Lseg")]
+  #[display(fmt = "lseg")]
   Lseg,
-  #[display(fmt = "Path")]
+  #[display(fmt = "path")]
   Path,
-  #[display(fmt = "Box")]
+  #[display(fmt = "box")]
   Box,
-  #[display(fmt = "Polygon")]
+  #[display(fmt = "polygon")]
   Polygon,
-  #[display(fmt = "Line")]
+  #[display(fmt = "line")]
   Line,
-  #[display(fmt = "Line[]")]
+  #[display(fmt = "line[]")]
   LineArray,
-  #[display(fmt = "Cidr")]
+  #[display(fmt = "cidr")]
   Cidr,
-  #[display(fmt = "Cidr[]")]
+  #[display(fmt = "cidr[]")]
   CidrArray,
-  #[display(fmt = "Float4")]
+  #[display(fmt = "float4")]
   Float4,
-  #[display(fmt = "Float8")]
+  #[display(fmt = "float8")]
   Float8,
-  #[display(fmt = "Unknown")]
+  #[display(fmt = "unknown")]
   Unknown,
-  #[display(fmt = "Circle")]
+  #[display(fmt = "circle")]
   Circle,
-  #[display(fmt = "Circle[]")]
+  #[display(fmt = "circle[]")]
   CircleArray,
-  #[display(fmt = "Macaddr8")]
+  #[display(fmt = "macaddr8")]
   Macaddr8,
-  #[display(fmt = "Macaddr8[]")]
+  #[display(fmt = "macaddr8[]")]
   Macaddr8Array,
-  #[display(fmt = "Money")]
+  #[display(fmt = "money")]
   Money,
-  #[display(fmt = "Money[]")]
+  #[display(fmt = "money[]")]
   MoneyArray,
-  #[display(fmt = "Macaddr")]
+  #[display(fmt = "macaddr")]
   Macaddr,
-  #[display(fmt = "Inet")]
+  #[display(fmt = "inet")]
   Inet,
-  #[display(fmt = "Bool[]")]
+  #[display(fmt = "bool[]")]
   BoolArray,
-  #[display(fmt = "Bytea[]")]
+  #[display(fmt = "bytea[]")]
   ByteaArray,
-  #[display(fmt = "Char[]")]
+  #[display(fmt = "char[]")]
   CharArray,
-  #[display(fmt = "Name[]")]
+  #[display(fmt = "name[]")]
   NameArray,
-  #[display(fmt = "Int2[]")]
+  #[display(fmt = "int2[]")]
   Int2Array,
-  #[display(fmt = "Int2Vector[]")]
+  #[display(fmt = "int2vector[]")]
   Int2VectorArray,
-  #[display(fmt = "Int4[]")]
+  #[display(fmt = "int4[]")]
   Int4Array,
-  #[display(fmt = "Regproc[]")]
+  #[display(fmt = "regproc[]")]
   RegprocArray,
-  #[display(fmt = "Text[]")]
+  #[display(fmt = "text[]")]
   TextArray,
-  #[display(fmt = "Tid[]")]
+  #[display(fmt = "tid[]")]
   TidArray,
-  #[display(fmt = "Xid[]")]
+  #[display(fmt = "xid[]")]
   XidArray,
-  #[display(fmt = "Cid[]")]
+  #[display(fmt = "cid[]")]
   CidArray,
-  #[display(fmt = "OidVector[]")]
+  #[display(fmt = "oidvector[]")]
   OidVectorArray,
-  #[display(fmt = "Bpchar[]")]
+  #[display(fmt = "bpchar[]")]
   BpcharArray,
-  #[display(fmt = "Varchar[]")]
+  #[display(fmt = "varchar[]")]
   VarcharArray,
-  #[display(fmt = "Int8[]")]
+  #[display(fmt = "int8[]")]
   Int8Array,
-  #[display(fmt = "Point[]")]
+  #[display(fmt = "point[]")]
   PointArray,
-  #[display(fmt = "Lseg[]")]
+  #[display(fmt = "lseg[]")]
   LsegArray,
-  #[display(fmt = "Path[]")]
+  #[display(fmt = "path[]")]
   PathArray,
-  #[display(fmt = "Box[]")]
+  #[display(fmt = "box[]")]
   BoxArray,
-  #[display(fmt = "Float4[]")]
+  #[display(fmt = "float4[]")]
   Float4Array,
-  #[display(fmt = "Float8[]")]
+  #[display(fmt = "float8[]")]
   Float8Array,
-  #[display(fmt = "Polygon[]")]
+  #[display(fmt = "polygon[]")]
   PolygonArray,
-  #[display(fmt = "Oid[]")]
+  #[display(fmt = "oid[]")]
   OidArray,
-  #[display(fmt = "Aclitem")]
+  #[display(fmt = "aclitem")]
   Aclitem,
-  #[display(fmt = "Aclitem[]")]
+  #[display(fmt = "aclitem[]")]
   AclitemArray,
-  #[display(fmt = "Macaddr[]")]
+  #[display(fmt = "macaddr[]")]
   MacaddrArray,
-  #[display(fmt = "Inet[]")]
+  #[display(fmt = "inet[]")]
   InetArray,
-  #[display(fmt = "Bpchar")]
+  #[display(fmt = "bpchar")]
   Bpchar,
-  #[display(fmt = "Varchar")]
+  #[display(fmt = "varchar")]
   Varchar,
-  #[display(fmt = "Date")]
+  #[display(fmt = "date")]
   Date,
-  #[display(fmt = "Time")]
+  #[display(fmt = "time")]
   Time,
-  #[display(fmt = "Timestamp")]
+  #[display(fmt = "timestamp")]
   Timestamp,
-  #[display(fmt = "Timestamp[]")]
+  #[display(fmt = "timestamp[]")]
   TimestampArray,
-  #[display(fmt = "Date[]")]
+  #[display(fmt = "date[]")]
   DateArray,
-  #[display(fmt = "Time[]")]
+  #[display(fmt = "time[]")]
   TimeArray,
-  #[display(fmt = "Timestamptz")]
+  #[display(fmt = "timestamptz")]
   Timestamptz,
-  #[display(fmt = "Timestamptz[]")]
+  #[display(fmt = "timestamptz[]")]
   TimestamptzArray,
-  #[display(fmt = "Interval")]
+  #[display(fmt = "interval")]
   Interval,
-  #[display(fmt = "Interval[]")]
+  #[display(fmt = "interval[]")]
   IntervalArray,
-  #[display(fmt = "Numeric[]")]
+  #[display(fmt = "numeric[]")]
   NumericArray,
-  #[display(fmt = "Cstring[]")]
+  #[display(fmt = "cstring[]")]
   CstringArray,
-  #[display(fmt = "Timetz")]
+  #[display(fmt = "timetz")]
   Timetz,
-  #[display(fmt = "Timetz[]")]
+  #[display(fmt = "timetz[]")]
   TimetzArray,
-  #[display(fmt = "Bit")]
+  #[display(fmt = "bit")]
   Bit,
-  #[display(fmt = "Bit[]")]
+  #[display(fmt = "bit[]")]
   BitArray,
-  #[display(fmt = "Varbit")]
+  #[display(fmt = "varbit")]
   Varbit,
-  #[display(fmt = "Varbit[]")]
+  #[display(fmt = "varbit[]")]
   VarbitArray,
-  #[display(fmt = "Numeric")]
+  #[display(fmt = "numeric")]
   Numeric,
-  #[display(fmt = "Refcursor")]
+  #[display(fmt = "refcursor")]
   Refcursor,
-  #[display(fmt = "Refcursor[]")]
+  #[display(fmt = "refcursor[]")]
   RefcursorArray,
-  #[display(fmt = "Regprocedure")]
+  #[display(fmt = "regprocedure")]
   Regprocedure,
-  #[display(fmt = "Regoper")]
+  #[display(fmt = "regoper")]
   Regoper,
-  #[display(fmt = "Regoperator")]
+  #[display(fmt = "regoperator")]
   Regoperator,
-  #[display(fmt = "Regclass")]
+  #[display(fmt = "regclass")]
   Regclass,
-  #[display(fmt = "Regtype")]
+  #[display(fmt = "regtype")]
   Regtype,
-  #[display(fmt = "Regprocedure[]")]
+  #[display(fmt = "regprocedure[]")]
   RegprocedureArray,
-  #[display(fmt = "Regoper[]")]
+  #[display(fmt = "regoper[]")]
   RegoperArray,
-  #[display(fmt = "Regoperator[]")]
+  #[display(fmt = "regoperator[]")]
   RegoperatorArray,
-  #[display(fmt = "Regclass[]")]
+  #[display(fmt = "regclass[]")]
   RegclassArray,
-  #[display(fmt = "Regtype[]")]
+  #[display(fmt = "regtype[]")]
   RegtypeArray,
-  #[display(fmt = "Record")]
+  #[display(fmt = "record")]
   Record,
-  #[display(fmt = "Cstring")]
+  #[display(fmt = "cstring")]
   Cstring,
-  #[display(fmt = "Any")]
+  #[display(fmt = "any")]
   Any,
-  #[display(fmt = "Anyarray")]
+  #[display(fmt = "anyarray")]
   Anyarray,
-  #[display(fmt = "Void")]
+  #[display(fmt = "void")]
   Void,
-  #[display(fmt = "Trigger")]
+  #[display(fmt = "trigger")]
   Trigger,
-  #[display(fmt = "LanguageHandler")]
+  #[display(fmt = "languagehandler")]
   LanguageHandler,
-  #[display(fmt = "Internal")]
+  #[display(fmt = "internal")]
   Internal,
-  #[display(fmt = "Anyelement")]
+  #[display(fmt = "anyelement")]
   Anyelement,
-  #[display(fmt = "Record[]")]
+  #[display(fmt = "record[]")]
   RecordArray,
-  #[display(fmt = "Anynonarray")]
+  #[display(fmt = "anynonarray")]
   Anynonarray,
-  #[display(fmt = "TxidSnapshot[]")]
+  #[display(fmt = "txidsnapshot[]")]
   TxidSnapshotArray,
-  #[display(fmt = "Uuid")]
+  #[display(fmt = "uuid")]
   Uuid,
-  #[display(fmt = "Uuid[]")]
+  #[display(fmt = "uuid[]")]
   UuidArray,
-  #[display(fmt = "TxidSnapshot")]
+  #[display(fmt = "txidsnapshot")]
   TxidSnapshot,
-  #[display(fmt = "FdwHandler")]
+  #[display(fmt = "fdwhandler")]
   FdwHandler,
-  #[display(fmt = "PgLsn")]
+  #[display(fmt = "pglsn")]
   PgLsn,
-  #[display(fmt = "PgLsn[]")]
+  #[display(fmt = "pglsn[]")]
   PgLsnArray,
-  #[display(fmt = "TsmHandler")]
+  #[display(fmt = "tsmhandler")]
   TsmHandler,
-  #[display(fmt = "PgNdistinct")]
+  #[display(fmt = "pgndistinct")]
   PgNdistinct,
-  #[display(fmt = "PgDependencies")]
+  #[display(fmt = "pgdependencies")]
   PgDependencies,
-  #[display(fmt = "Anyenum")]
+  #[display(fmt = "anyenum")]
   Anyenum,
-  #[display(fmt = "TsVector")]
+  #[display(fmt = "tsvector")]
   TsVector,
-  #[display(fmt = "Tsquery")]
+  #[display(fmt = "tsquery")]
   Tsquery,
-  #[display(fmt = "GtsVector")]
+  #[display(fmt = "gtsvector")]
   GtsVector,
-  #[display(fmt = "TsVector[]")]
+  #[display(fmt = "tsvector[]")]
   TsVectorArray,
-  #[display(fmt = "GtsVector[]")]
+  #[display(fmt = "gtsvector[]")]
   GtsVectorArray,
-  #[display(fmt = "Tsquery[]")]
+  #[display(fmt = "tsquery[]")]
   TsqueryArray,
-  #[display(fmt = "Regconfig")]
+  #[display(fmt = "regconfig")]
   Regconfig,
-  #[display(fmt = "Regconfig[]")]
+  #[display(fmt = "regconfig[]")]
   RegconfigArray,
-  #[display(fmt = "Regdictionary")]
+  #[display(fmt = "regdictionary")]
   Regdictionary,
-  #[display(fmt = "Regdictionary[]")]
+  #[display(fmt = "regdictionary[]")]
   RegdictionaryArray,
-  #[display(fmt = "Jsonb")]
+  #[display(fmt = "jsonb")]
   Jsonb,
-  #[display(fmt = "Jsonb[]")]
+  #[display(fmt = "jsonb[]")]
   JsonbArray,
-  #[display(fmt = "AnyRange")]
+  #[display(fmt = "anyrange")]
   AnyRange,
-  #[display(fmt = "EventTrigger")]
+  #[display(fmt = "eventtrigger")]
   EventTrigger,
-  #[display(fmt = "Int4Range")]
+  #[display(fmt = "int4range")]
   Int4Range,
-  #[display(fmt = "Int4Range[]")]
+  #[display(fmt = "int4range[]")]
   Int4RangeArray,
-  #[display(fmt = "NumRange")]
+  #[display(fmt = "numrange")]
   NumRange,
-  #[display(fmt = "NumRange[]")]
+  #[display(fmt = "numrange[]")]
   NumRangeArray,
-  #[display(fmt = "TsRange")]
+  #[display(fmt = "tsrange")]
   TsRange,
-  #[display(fmt = "TsRange[]")]
+  #[display(fmt = "tsrange[]")]
   TsRangeArray,
-  #[display(fmt = "TstzRange")]
+  #[display(fmt = "tstzrange")]
   TstzRange,
-  #[display(fmt = "TstzRange[]")]
+  #[display(fmt = "tstzrange[]")]
   TstzRangeArray,
-  #[display(fmt = "DateRange")]
+  #[display(fmt = "daterange")]
   DateRange,
-  #[display(fmt = "DateRange[]")]
+  #[display(fmt = "daterange[]")]
   DateRangeArray,
-  #[display(fmt = "Int8Range")]
+  #[display(fmt = "int8range")]
   Int8Range,
-  #[display(fmt = "Int8Range[]")]
+  #[display(fmt = "int8range[]")]
   Int8RangeArray,
-  #[display(fmt = "Jsonpath")]
+  #[display(fmt = "jsonpath")]
   Jsonpath,
-  #[display(fmt = "Jsonpath[]")]
+  #[display(fmt = "jsonpath[]")]
   JsonpathArray,
-  #[display(fmt = "Regnamespace")]
+  #[display(fmt = "regnamespace")]
   Regnamespace,
-  #[display(fmt = "Regnamespace[]")]
+  #[display(fmt = "regnamespace[]")]
   RegnamespaceArray,
-  #[display(fmt = "Regrole")]
+  #[display(fmt = "regrole")]
   Regrole,
-  #[display(fmt = "Regrole[]")]
+  #[display(fmt = "regrole[]")]
   RegroleArray,
-  #[display(fmt = "Regcollation")]
+  #[display(fmt = "regcollation")]
   Regcollation,
-  #[display(fmt = "Regcollation[]")]
+  #[display(fmt = "regcollation[]")]
   RegcollationArray,
-  #[display(fmt = "PgMcvList")]
+  #[display(fmt = "pgmcvlist")]
   PgMcvList,
-  #[display(fmt = "PgSnapshot")]
+  #[display(fmt = "pgsnapshot")]
   PgSnapshot,
-  #[display(fmt = "PgSnapshot[]")]
+  #[display(fmt = "pgsnapshot[]")]
   PgSnapshotArray,
-  #[display(fmt = "Xid8")]
+  #[display(fmt = "xid8")]
   Xid8,
-  #[display(fmt = "Anycompatible")]
+  #[display(fmt = "anycompatible")]
   Anycompatible,
-  #[display(fmt = "Anycompatiblearray")]
+  #[display(fmt = "anycompatiblearray")]
   Anycompatiblearray,
-  #[display(fmt = "Anycompatiblenonarray")]
+  #[display(fmt = "anycompatiblenonarray")]
   Anycompatiblenonarray,
-  #[display(fmt = "AnycompatibleRange")]
+  #[display(fmt = "anycompatiblerange")]
   AnycompatibleRange,
   #[serde(rename_all = "camelCase")]
   #[display(fmt = "{}", "_0")]
