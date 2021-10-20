@@ -1,0 +1,17 @@
+[package]
+edition = "2018"
+license = "Apache-2.0/MIT"
+name = "rtg_sql_schema"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+crate-type = ["lib"]
+
+[dependencies]
+rtg_model = {version = "0.1.0", path = "../model"}
+thiserror = {version = "1.0.29"}
+
+[dev-dependencies]
+insta = {version = "1.8.0"}
+similar-asserts = {version = "1.1.0"}

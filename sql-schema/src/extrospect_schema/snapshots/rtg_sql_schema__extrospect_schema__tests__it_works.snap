@@ -1,0 +1,9 @@
+---
+source: sql-schema/src/extrospect_schema/mod.rs
+expression: "convert_model::convert_model(&value).unwrap()"
+
+---
+create table "public"."person_table" (
+  "id_col" Text,
+  "drone_col" Text
+);

@@ -11,6 +11,7 @@ partial_struct = {version = "0.1.0", path = "./partial-struct"}
 rtg_model = {version = "0.1.0", path = "./model"}
 rtg_query = {version = "0.1.0", path = "./query"}
 rtg_server = {version = "0.1.0", path = "./server"}
+rtg_sql_schema = {version = "0.1.0", path = "./sql-schema"}
 rtg_wasm = {version = "0.1.0", path = "./wasm"}
 
 [dev-dependencies]
