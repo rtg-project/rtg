@@ -74,18 +74,35 @@ This is an example of how to list things you need to use the software and how to
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Features
+
+### SQL to GraphQL matching coverage
+
+| SQL Concept                                        | GraphQL Concept                                  | Model | Query | GraphQL Schema | SQL Schema |
+|----------------------------------------------------|--------------------------------------------------|-------|-------|----------------|------------|
+| Basic columns: `INT`, `TEXT`, etc.                 | Scalar fields: `Integer`, `String`, etc.         | 🟢     | 🟢     | 🟢              | 🟢          |
+| Non null columns `NON NULL`                        | Non null fields: `Integer!`, `String!`, etc.     | 🟢     | 🟢     | 🟢              | 🟢          |
+| Array columns: `INT[]`, `TEXT[]`, `INTARRAY`, etc. | Array fields: `[Integer!]!`,  `[String!]!`, etc. | 🟢     | 🟢     | 🟢              | 🟢          |
+| `SELECT`                                           | `allFoo` queries                                 | 🟢     | 🟢     | 🟢              | 🟢          |
+| `JOIN` and `FOREIGN KEY`                           | Relation Fields: `[Foo!]!`, `[Bar!]!`, etc.      | 🔴     | 🔴     | 🔴              | 🔴          |
+| `LIMIT` and `OFFSET`                               | `first`, `last`, `before`, `after` arguments     | 🔴     | 🔴     | 🔴              | 🔴          |
+| `CURSOR`                                           | `allFooConnection` queries                       | 🔴     | 🔴     | 🔴              | 🔴          |
+| `WHERE`                                            | `where: {}` argument, simple filter              | 🔴     | 🔴     | 🔴              | 🔴          |
+| `ORDER BY`                                         | `order: {}` argument                             | 🔴     | 🔴     | 🔴              | 🔴          |
+| `INSERT`                                           | `createFoo` mutations                            | 🔴     | 🔴     | 🔴              | 🔴          |
+| `UPDATE`                                           | `updateFoo` mutations                            | 🔴     | 🔴     | 🔴              | 🔴          |
+| `DELETE`                                           | `deleteFoo` mutations                            | 🔴     | 🔴     | 🔴              | 🔴          |
+| `WHERE` with `JOIN`                                | `where: {}` argument, relation filter            | 🔴     | 🔴     | 🔴              | 🔴          |
+| `GROUP BY`                                         | `aggregates` field on `allFooConnection` queries | 🔴     | 🔴     | 🔴              | 🔴          |
+| `HAVING`                                           | `where: {}` argument, aggregation filter         | 🔴     | 🔴     | 🔴              | 🔴          |
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ## Roadmap
 
 See the project road map on Github https://github.com/rtg-project/rtg/projects/1
 
 * [x] Generate SQL Data Manipulation Language (DML) queries from GraphQL:
-  * [x] Support Basic graphQL queries
-  * [ ] Support argument in queries (Limit, offset)
-  * [ ] Support GraphQL Mutations 
-  * [ ] Support Relations 
-  * [ ] Support Relations filters
-  * [ ] Support Aggregations 
-  * [ ] Support Aggregations filters
 * [ ] Generate GraphQL SDL Schema from Rtg Model:
   * [ ] Generate GraphQL SDL introspection schema from Rtg Model
   * [ ] Validate GraphQL queries against the generated GraphQL SDL introspection schema
