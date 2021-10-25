@@ -7,9 +7,10 @@ use rtg_model::model_cache::model_cache::ModelCache;
 pub fn convert_query<'a, T: Text<'a>>(
   query: &Query<'a, T>,
   context: &ModelCache,
+  parent_name: &str,
 ) -> Result<String, ConversionError> {
   let query_selection_set = &query.selection_set;
-  return convert_query_selection_set(&query_selection_set, context);
+  return convert_query_selection_set(&query_selection_set, context, parent_name);
 }
 
 // Tests

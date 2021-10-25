@@ -19,7 +19,7 @@ pub fn convert_document<'a, T: Text<'a>>(
             "SelectionSet".to_string(),
           ))
         }
-        OperationDefinition::Query(ref q) => return convert_query(q, context),
+        OperationDefinition::Query(ref q) => return convert_query(q, context, "__rtg_0"),
         OperationDefinition::Mutation(ref _mut) => {
           return Err(ConversionError::UnsupportedSyntax("Mutation".to_string()))
         }

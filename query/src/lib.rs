@@ -78,7 +78,7 @@ mod tests {
       &model_cache,
     )
     .unwrap();
-    assert_eq!(sql_query, "select json_build_object('yoyi',(select coalesce((select json_agg(__rtg_9__.\"__rtg_10__\") from (select json_build_object('a',__rtg_11__.\"id_col\",'b',__rtg_11__.\"drone_col\") as __rtg_10__ from \"person_table\" as __rtg_11__ limit 10) as __rtg_9__),'[]'::json))) as __rtg_0__");
+    assert_eq!(sql_query, "select json_build_object('yoyi',(select coalesce((select json_agg(__rtg_0_0_result.__rtg_0_0_column) from (select json_build_object('a',__rtg_0_0_column_main.\"id_col\",'b',__rtg_0_0_column_main.\"drone_col\") as __rtg_0_0_column from \"person_table\" as __rtg_0_0_column_main limit 10) as __rtg_0_0_result),'[]'::json))) as __rtg_0");
   }
 }
 

@@ -6,6 +6,7 @@ use rtg_model::model_cache::model_cache::{EntityOperationCache, ModelCache, Oper
 pub fn convert_query_selection<'a, T: Text<'a>>(
   selection: &Selection<'a, T>,
   context: &ModelCache,
+  parent_name: &str,
 ) -> Result<String, ConversionError> {
   match selection {
     Selection::Field(field) => {
@@ -25,15 +26,15 @@ pub fn convert_query_selection<'a, T: Text<'a>>(
               operation_kind,
             } => match operation_kind {
               OperationKind::GetList => {
-                let sql_local_result_name = "__rtg_9__".to_string();
-                let sql_local_result_name_field = "__rtg_10__".to_string();
+                let sql_local_result_name = format!("{}_result", parent_name);
+                let sql_local_result_name_field = format!("{}_column", parent_name);
                 match convert_selection_set(
                   &field.selection_set,
                   &entity_cache,
                   &sql_local_result_name_field,
                 ) {
                   Ok(sql_selection_set_query) => format!(
-                    "(select coalesce((select json_agg({sql_local_result_name}.\"{sql_local_result_name_field}\") from ({sql_selection_set_query}) as {sql_local_result_name}),'[]'::json))",
+                    "(select coalesce((select json_agg({sql_local_result_name}.{sql_local_result_name_field}) from ({sql_selection_set_query}) as {sql_local_result_name}),'[]'::json))",
                     sql_local_result_name=sql_local_result_name,
                     sql_local_result_name_field=sql_local_result_name_field,
                     sql_selection_set_query=sql_selection_set_query,
@@ -90,27 +91,6 @@ pub fn convert_query_selection<'a, T: Text<'a>>(
       ))
     }
   }
-
-  // match context {
-  //   ModelCache::V1 {
-  //     entities_by_operation_name,
-  //     ..
-  //   } => {
-  //     let mut query_string = String::new();
-  //     for operation in query.operations() {
-  //       let entity = entities_by_operation_name
-  //         .get(&operation.name.value)
-  //         .ok_or_else(|| ConversionError::UnknownOperation(operation.name.value.to_string()))?;
-  //       let selection = convert_selection(operation.selection, entity, context)?;
-  //       query_string.push_str(&format!("{} {}", operation.name.value, selection));
-  //     }
-  //     Ok(query_string)
-  //   }
-
-  //   }
-  // }
-
-  // return Err(ConversionError::UnsupportedSyntax("Query".to_string()));
 }
 
 // Tests

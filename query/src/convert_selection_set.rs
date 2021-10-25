@@ -8,9 +8,9 @@ use std::ops::Deref;
 pub fn convert_selection_set<'a, T: Text<'a>>(
   selection_set: &SelectionSet<'a, T>,
   context: &EntityCache,
-  sql_parent_name: &str,
+  parent_name: &str,
 ) -> Result<String, ConversionError> {
-  let sql_alias_main_table = "__rtg_11__".to_string();
+  let sql_alias_main_table = format!("{}_main", parent_name);
   let sql_limit = 10;
 
   let sql_from_table_name = match &*context {
@@ -34,7 +34,7 @@ pub fn convert_selection_set<'a, T: Text<'a>>(
       "select json_build_object({sql_field_sequence}) as {sql_parent_name} \
       from \"{sql_from_table_name}\" as {sql_alias_main_table} limit {sql_limit}",
       sql_field_sequence = sql_field_sequence,
-      sql_parent_name = sql_parent_name,
+      sql_parent_name = parent_name,
       sql_from_table_name = sql_from_table_name,
       sql_alias_main_table = sql_alias_main_table,
       sql_limit = sql_limit
