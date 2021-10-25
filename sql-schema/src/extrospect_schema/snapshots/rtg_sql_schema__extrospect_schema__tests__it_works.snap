@@ -4,6 +4,6 @@ expression: "convert_model::convert_model(&value).unwrap()"
 
 ---
 create table "public"."person_table" (
-  "id_col" text,
-  "drone_col" text
+  "id_col" text not null,
+  "drone_col" text not null
 );

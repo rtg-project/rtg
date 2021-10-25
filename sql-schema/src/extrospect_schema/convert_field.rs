@@ -6,8 +6,14 @@ pub fn convert_field(field: &ExplicitField) -> Result<String, ConversionError> {
     ExplicitField::ScalarDatabaseColumn {
       sql_type,
       sql_column_name,
+      nullable,
       ..
-    } => Ok(format!("  \"{}\" {}", sql_column_name, sql_type)),
+    } => Ok(format!(
+      "  \"{}\" {}{}",
+      sql_column_name,
+      sql_type,
+      if *nullable { "" } else { " not null" }
+    )),
   }
 }
 

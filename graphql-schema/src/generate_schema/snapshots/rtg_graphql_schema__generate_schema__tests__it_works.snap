@@ -4,8 +4,8 @@ expression: "format!(\"{}\", convert_model :: convert_model(& value).unwrap())"
 
 ---
 type Person implements Node {
-  id: String
-  drone: String
+  id: String!
+  drone: String!
 }
 
 type Query {

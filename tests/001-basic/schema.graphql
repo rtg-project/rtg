@@ -1,5 +1,5 @@
 type Person implements Node {
-  id: ID
+  id: ID!
   age: Int
 }
 

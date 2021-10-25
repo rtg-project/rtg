@@ -8,13 +8,18 @@ pub fn convert_field(field: &ExplicitField) -> Result<Field<String>, ConversionE
     ExplicitField::ScalarDatabaseColumn {
       graphql_field_name,
       graphql_type_name,
+      nullable,
       ..
     } => Ok(Field {
       position: Pos { line: 0, column: 0 },
       description: None,
       name: graphql_field_name.to_owned(),
       arguments: vec![],
-      field_type: Type::NamedType(graphql_type_name.to_owned()),
+      field_type: if *nullable {
+        Type::NamedType(graphql_type_name.to_owned())
+      } else {
+        Type::NonNullType(Box::new(Type::NamedType(graphql_type_name.to_owned())))
+      },
       directives: vec![],
     }),
   }
