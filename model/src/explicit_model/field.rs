@@ -13,7 +13,6 @@ pub enum ExplicitField {
   ScalarDatabaseColumn {
     name: String,
     nullable: bool,
-    // #[serde(flatten)]
     sql_type: sql_type::Type,
     sql_column_name: String,
     graphql_enabled: bool,
