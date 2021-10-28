@@ -9,6 +9,7 @@ ScalarDatabaseColumn {
         nullable: false,
         sql_type: Text,
         sql_column_name: "id_col",
+        graphql_enabled: true,
         graphql_field_name: "id",
         graphql_type_name: "String",
         graphql_order_by_asc: "id_ASC",

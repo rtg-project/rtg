@@ -3,25 +3,32 @@ use graphql_parser::schema::{Field, Type};
 use graphql_parser::Pos;
 use rtg_model::explicit_model::ExplicitField;
 
-pub fn convert_field(field: &ExplicitField) -> Result<Field<String>, ConversionError> {
+pub fn convert_field(field: &ExplicitField) -> Result<Option<Field<String>>, ConversionError> {
   match field {
     ExplicitField::ScalarDatabaseColumn {
+      graphql_enabled,
       graphql_field_name,
       graphql_type_name,
       nullable,
       ..
-    } => Ok(Field {
-      position: Pos { line: 0, column: 0 },
-      description: None,
-      name: graphql_field_name.to_owned(),
-      arguments: vec![],
-      field_type: if *nullable {
-        Type::NamedType(graphql_type_name.to_owned())
+    } => {
+      if !graphql_enabled {
+        return Ok(None);
       } else {
-        Type::NonNullType(Box::new(Type::NamedType(graphql_type_name.to_owned())))
-      },
-      directives: vec![],
-    }),
+        return Ok(Some(Field {
+          position: Pos { line: 0, column: 0 },
+          description: None,
+          name: graphql_field_name.to_owned(),
+          arguments: vec![],
+          field_type: if *nullable {
+            Type::NamedType(graphql_type_name.to_owned())
+          } else {
+            Type::NonNullType(Box::new(Type::NamedType(graphql_type_name.to_owned())))
+          },
+          directives: vec![],
+        }));
+      }
+    }
   }
 }
 

@@ -36,6 +36,7 @@ mod tests {
       nullable: false,
       sql_type: sql_type::Type::Text,
       sql_column_name: "id_col".to_owned(),
+      graphql_enabled: true,
       graphql_field_name: "id".to_owned(),
       graphql_type_name: "String".to_owned(),
       graphql_order_by_asc: "id_ASC".to_owned(),

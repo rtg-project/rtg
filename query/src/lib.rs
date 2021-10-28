@@ -17,7 +17,7 @@ mod tests {
   use std::rc::Rc;
 
   #[test]
-  fn it_works() {
+  fn basic_query_works() {
     let data = r#"
     {
       "version": "v1",
@@ -42,6 +42,7 @@ mod tests {
               "nullable": false,
               "sqlType": "text",
               "sqlColumnName": "id_col",
+              "graphqlEnabled": true,
               "graphqlFieldName": "id",
               "graphqlTypeName": "String",
               "graphqlOrderByAsc": "id_ASC",
@@ -53,6 +54,7 @@ mod tests {
               "nullable": true,
               "sqlType": "text",
               "sqlColumnName": "drone_col",
+              "graphqlEnabled": true,
               "graphqlFieldName": "drone",
               "graphqlTypeName": "String",
               "graphqlOrderByAsc": "drone_ASC",

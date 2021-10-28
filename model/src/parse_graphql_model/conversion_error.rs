@@ -33,6 +33,12 @@ pub enum ConversionError {
     "The `sql` directive `name` argument must be a valid sql identifier. `{0}` is not a valid sql identifier."
   )]
   SqlDirectiveNameArgumentValue(String),
+
+  #[error("The `graphql` directive does not support the argument `{0}`.")]
+  GraphqlDirectiveArgument(String),
+  #[error("The `graphql` directive `enabled` argument must be a boolean")]
+  GraphqlDirectiveEnabledArgument,
+
   #[error("Generic error: `{0}`")]
   Generic(String),
   #[error("Unknown convert error")]

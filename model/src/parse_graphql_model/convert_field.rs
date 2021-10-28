@@ -18,6 +18,7 @@ pub fn convert_field<'a, T: Text<'a>>(
       let graphql_type_name = Some(type_name.as_ref().to_owned());
       let mut sql_type = None;
       let mut sql_column_name = None;
+      let mut graphql_enabled = None;
       let graphql_field_name = None;
       let graphql_order_by_asc = None;
       let graphql_order_by_desc = None;
@@ -53,6 +54,21 @@ pub fn convert_field<'a, T: Text<'a>>(
               }
             }
           }
+          "graphql" => {
+            for argument in directive.arguments.iter() {
+              match (*argument).0.as_ref() {
+                "enabled" => match &(*argument).1 {
+                  Value::Boolean(b) => graphql_enabled = Some(*b),
+                  _ => return Err(ConversionError::GraphqlDirectiveEnabledArgument),
+                },
+                argument_name => {
+                  return Err(ConversionError::GraphqlDirectiveArgument(
+                    argument_name.to_owned(),
+                  ))
+                }
+              }
+            }
+          }
           &_ => {
             return Err(ConversionError::UnsupportedDirective(
               directive.name.as_ref().to_owned(),
@@ -65,6 +81,7 @@ pub fn convert_field<'a, T: Text<'a>>(
         nullable: Some(true),
         sql_type,
         sql_column_name,
+        graphql_enabled,
         graphql_field_name,
         graphql_type_name,
         graphql_order_by_asc,
@@ -83,6 +100,7 @@ pub fn convert_field<'a, T: Text<'a>>(
         let graphql_type_name = Some(type_name.as_ref().to_owned());
         let mut sql_type = None;
         let mut sql_column_name = None;
+        let mut graphql_enabled = None;
         let graphql_field_name = None;
         let graphql_order_by_asc = None;
         let graphql_order_by_desc = None;
@@ -118,6 +136,21 @@ pub fn convert_field<'a, T: Text<'a>>(
                 }
               }
             }
+            "graphql" => {
+              for argument in directive.arguments.iter() {
+                match (*argument).0.as_ref() {
+                  "enabled" => match &(*argument).1 {
+                    Value::Boolean(b) => graphql_enabled = Some(*b),
+                    _ => return Err(ConversionError::GraphqlDirectiveEnabledArgument),
+                  },
+                  argument_name => {
+                    return Err(ConversionError::GraphqlDirectiveArgument(
+                      argument_name.to_owned(),
+                    ))
+                  }
+                }
+              }
+            }
             &_ => {
               return Err(ConversionError::UnsupportedDirective(
                 directive.name.as_ref().to_owned(),
@@ -130,6 +163,7 @@ pub fn convert_field<'a, T: Text<'a>>(
           nullable: Some(false),
           sql_type,
           sql_column_name,
+          graphql_enabled,
           graphql_field_name,
           graphql_type_name,
           graphql_order_by_asc,

@@ -28,9 +28,12 @@ pub fn convert_entity(
       let graphql_fields = match fields
         .iter()
         .map(|field| convert_field(field))
-        .collect::<Result<Vec<Field<String>>, ConversionError>>()
+        .collect::<Result<Vec<Option<Field<String>>>, ConversionError>>()
       {
-        Ok(sql_column_items) => sql_column_items,
+        Ok(sql_column_items) => sql_column_items
+          .into_iter()
+          .filter_map(|item| item)
+          .collect::<Vec<Field<String>>>(),
         Err(err) => return Err(err),
       };
 

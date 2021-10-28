@@ -10,6 +10,7 @@ pub fn convert_field(implicit_field: &ImplicitField) -> Result<ExplicitField, Co
       nullable,
       sql_type,
       sql_column_name,
+      graphql_enabled,
       graphql_field_name,
       graphql_type_name,
       graphql_order_by_asc,
@@ -95,6 +96,7 @@ pub fn convert_field(implicit_field: &ImplicitField) -> Result<ExplicitField, Co
             &explicit_name,
           ))
           .to_owned(),
+        graphql_enabled: graphql_enabled.unwrap_or(true),
         graphql_field_name: graphql_field_name
           .as_ref()
           .unwrap_or(&inflection::field::inflect_graphql_field_name_from_name(
